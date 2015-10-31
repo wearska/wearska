@@ -4,10 +4,8 @@ bower_components/
 
 build/
 dist/
-angular.io/
 resources/
 test
 test/
 test/*
-dak/
 uploads/
