@@ -1,0 +1,149 @@
+#wsk-login {
+    height: 500px;
+    width: 400px;
+    position: absolute;
+    top: 0;
+    margin: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+}
+.login-box-actions {
+    position: absolute;
+    width: 100%;
+    &.md-icon {
+        
+        // color: #fff;
+    }
+}
+.login-box-wrapper {
+    position: relative;
+    width: 200%;
+    left: 0;
+    transition: left 0.14s ease-in-out;
+    &.at-pass {
+        left: -100%;
+    }
+    .login-email,
+    .login-pass {
+        margin: 0 16px;
+    }
+    .md-button.create-button {
+        min-width: 0;
+        &:hover {
+            text-decoration: underline;
+            background-color: initial;
+        }
+    }
+    .md-button {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+.create-box-wrapper {
+    position: absolute;
+    padding-top: 0;
+    padding-bottom: 0;
+    bottom: 15%;
+}
+.login-user-data {
+    height: 40%;
+    background-color: $brand-primary;
+    transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.27s;
+    &.at-create {
+        height: 0;
+        margin: 0;
+        padding: 0;
+    }
+    .login-user-photo,
+    .login-user-info {
+        margin: 16px;
+    }
+    .login-user-photo {
+        position: relative;
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+    .login-user-photo-placeholder,
+    .login-user-photo-real,
+    .login-user-photo-upload {
+        position: absolute;
+        left: 0;
+        width: 2.5*$increment-keyline;
+        height: 2.5*$increment-keyline;
+        border-radius: 50%;
+        transition: left ease-in-out 0.27s 0.5s, right ease-in-out 0.27s 0.5s, width ease-in-out 0.27s 0.5s, height ease-in-out 0.27s 0.5s, transform ease-in-out 0.27s 0.5s;
+        &.at-create {
+            left: 50%;
+            width: 3*$increment-keyline;
+            height: 3*$increment-keyline;
+            transform: translateY(30px) translateX(-50%);
+        }
+    }
+    .login-user-photo-upload {
+        cursor: pointer;
+        overflow: hidden;
+        input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 3*$increment-keyline;
+            margin: auto;
+            outline: none;
+            opacity: 0;
+            cursor: pointer;
+        }
+        md-icon {
+            position: absolute;
+            margin: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            opacity: 0;
+            will-change: opacity;
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+        &:hover {
+            .wsk-hoverlay {
+                opacity: 1;
+            }
+            md-icon {
+                opacity: 1;
+            }
+        }
+    }
+    .login-user-info {
+        color: #fff;
+        font-weight: 300;
+        margin-bottom: 0;
+        margin-top: 0;
+        margin-left: 16px;
+        .login-user-name {
+            font-size: 16px;
+        }
+        .login-user-email {
+            font-size: 13px;
+            line-height: 20px;
+        }
+    }
+}
+.login-logo-box {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 15%;
+    min-height: 75px;
+    .login-logo {
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}
