@@ -24,6 +24,14 @@
     }
 }
 
+.ar_3-1 {
+    @extend .ratio-wrapper;
+    &:after {
+        padding-top: 33.33%;
+        /* 2:1 ratio */
+    }
+}
+
 .ar_2-1 {
     @extend .ratio-wrapper;
     &:after {

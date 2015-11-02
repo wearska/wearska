@@ -2,34 +2,52 @@
     'use strict';
 
     angular.module('wearska')
-        .directive("wskScroll", function($window, $rootScope) {
+        .directive("wskScroll", function($window, $rootScope, wskScrollFactory) {
             return function(scope, element, attrs) {
-                var i = 0;
-                var wHeight = $window.outerHeight;
-                var page = angular.element(element).find('.page-content');
-                element.bind("scroll", function() {
-                    scope.scrollAmnt = angular.element(this)[0].scrollTop;
-                    var sHeight = page.outerHeight() + page[0].offsetTop + 96;
-                    if (($window.outerHeight + scope.scrollAmnt) >= sHeight && !$rootScope.scrolledBottom) {
-                        $rootScope.scrolledBottom = true;
-                        $rootScope.$broadcast('scroll:bottom', {});
-                    } else if (($window.outerHeight + scope.scrollAmnt) < sHeight && $rootScope.scrolledBottom) {
-                        $rootScope.scrolledBottom = false;
-                    }
-                    if (angular.element(this)[0].scrollTop >= 16) {
-                        i++
-                        if (i === 1) {
-                            $rootScope.mainScrolled = true;
-                        }
-                    } else {
-                        i = 0;
-                        $rootScope.mainScrolled = false;
+                var initSHeight = element[0].scrollHeight, // initial element scroll height
+                    initCHeight = element[0].clientHeight, // initial client height
+                    offsets = parseFloat(element.css('padding-top')) + parseFloat(element.css('padding-bottom')),
+                    initialPos = initSHeight - initCHeight - offsets;
+                console.log(initialPos);
+                if (initialPos <= 0) {
+                    wskScrollFactory.scrollTop = true;
+                    wskScrollFactory.scrollBottom = true;
+                    wskScrollFactory.scrolled = false;
+                    $rootScope.$broadcast('scroll: bottom', {});
+                }else if(initialPos > 0){
+                    wskScrollFactory.scrollBottom = false;
+                }
+                element.on("scroll", function() {
+                    var scrollTop = element[0].scrollTop, // scroll from top
+                        sHeight = element[0].scrollHeight, // element scroll height
+                        cHeight = element[0].clientHeight, // client height
+                        scrollPosition = sHeight - cHeight - scrollTop;
+                    console.log('cHeight = ' + cHeight);
+                    console.log('sHeight = ' + sHeight);
+                    console.log('scrollTop = ' + scrollTop);
+                    console.log('scrollPosition = ' + scrollPosition);
+                    wskScrollFactory.scroll = scrollTop;
+                    if (scrollTop === 0 && scrollPosition > 0) {
+                        wskScrollFactory.scrollTop = true;
+                        wskScrollFactory.scrolled = false;
+                        wskScrollFactory.scrollBottom = false;
+                        $rootScope.$broadcast('scroll: top', {});
+                    } else if(scrollTop !== 0 && scrollPosition > 0) {
+                        wskScrollFactory.scrolled = true;
+                        wskScrollFactory.scrollTop = false;
+                        wskScrollFactory.scrollBottom = false;
+                    };
+                    if (scrollPosition === 0) {
+                        wskScrollFactory.scrolled = true;
+                        wskScrollFactory.scrollTop = false;
+                        wskScrollFactory.scrollBottom = true;
+                        $rootScope.$broadcast('scroll: bottom', {});
                     }
                     scope.$apply();
                 });
-                scope.scrollToTop = function() {
-                    angular.element(element)[0].scrollTop = 0;
-                };
+                angular.element($window).on('resize', function(){
+                    element.scroll();
+                });
             };
         });
 
