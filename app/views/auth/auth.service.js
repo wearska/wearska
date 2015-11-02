@@ -3,21 +3,31 @@
 
     angular
         .module('wearska')
-        .factory('wskAuth', function($log, $q, $firebaseAuth, $firebaseArray, $firebaseObject, FIREBASE_URL, PLACEHOLDERS, $location) {
+        .factory('wskAuth', function($rootScope, $log, $q, $firebaseAuth, $firebaseArray, $firebaseObject, FIREBASE_URL, PLACEHOLDERS, $location) {
             var ref = new Firebase(FIREBASE_URL);
             var authObj = $firebaseAuth(ref);
             var users = ref.child('users');
             var usersObj = $firebaseArray(users);
             var usersList = [];
+            var userObj;
             var auth = {};
 
             usersObj.$loaded()
                 .then(function(users) {
                     usersList = users;
+                    $rootScope.$broadcast('users: loaded', {});
                 })
                 .catch(function(error) {
-                    console.log("Error:", error);
+                    console.log("iiiiError:", error);
                 });
+
+            authObj.$onAuth(function(authData) {
+                if (authData) {
+                    $rootScope.$broadcast('user: logged', {});
+                } else {
+                    $rootScope.$broadcast('user: notlogged', {});
+                }
+            });
 
             auth.userData = {
                 uid: '',
@@ -36,12 +46,10 @@
             };
 
             auth.bind = function(uid) {
-                return auth.getById(uid)
-                    .then(function(result) {
-                        var profileRef = users.child(result.$id);
-                        var userObj = $firebaseObject(profileRef);
-                        return userObj;
-                    });
+                var id = auth.getById(uid).$id;
+                var profileRef = users.child(id);
+                userObj = $firebaseObject(profileRef);
+                return userObj.$loaded();
             };
 
             auth.get = function(email) {
@@ -59,17 +67,14 @@
             };
 
             auth.getById = function(uid) {
-                var deferred = $q.defer();
+                var fetchedUser;
                 angular.forEach(usersList, function(user) {
                     if (user.uid === uid) {
                         auth.userData = angular.copy(user);
-                        deferred.resolve(user);
-                    } else {
-                        deferred.reject('no such user');
+                        fetchedUser = user;
                     };
                 });
-                // return fetchedUser;
-                return deferred.promise;
+                return fetchedUser;
             };
 
             auth.create = function(credentials) {
@@ -113,6 +118,10 @@
                 });
             };
 
+            auth.logout = function() {
+                userObj.$destroy();
+                return authObj.$unauth();
+            };
 
             return auth;
         });

@@ -23,7 +23,7 @@
             // .dark();
             
             $mdThemingProvider
-            .theme('dark')
+            .theme('light')
             .primaryPalette('grey',{
                 'default': '50'
             })

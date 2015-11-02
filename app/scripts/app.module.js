@@ -14,6 +14,7 @@
             'ui.router',
             'firebase',
             'ngColorThief',
-            'angularFileUpload'
+            'angularFileUpload',
+            'wskCart'
         ]);
 })();

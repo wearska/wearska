@@ -1,79 +1,81 @@
-<div class="paper md-whiteframe-18dp" id="wsk-login" md-theme="brand" ng-controller="WskAuthController">
-    <div class="login-box-actions fade wsk-delayed-transition" layout ng-show="atPass || atCreate">
-        <md-button aria-label="Back to email input" class="md-primary md-icon-button wsk-no-margin wsk-no-shadow" ng-class="{'md-raised': !atCreate}" ng-click="atPass = false;" ng-hide="atCreate" type="button">
-            <md-icon class="login-back-button" md-svg-src="assets/icons/ic_arrow_back_24px.svg"></md-icon>
-        </md-button>
-        <span flex></span>
-        <md-button aria-label="reset Form" class="md-primary md-icon-button wsk-no-margin wsk-no-shadow" ng-class="{'md-raised': !atCreate}" ng-click="cancelLogin(); cancelCreate()" type="button">
-            <md-icon class="login-cancel-button" md-svg-src="assets/icons/ic_close_24px.svg" md-theme="brand"></md-icon>
-        </md-button>
-    </div>
-    <div class="login-user-data content-padding" layout="column" ng-class="{'at-create' : atCreate}">
-        <span flex-order="2" flex=""></span>
-        <div class="login-user-info fade" flex-order="3" ng-show="atPass">
-            <span class="md-title login-user-name">{{wskAuth.userData.first_name}}</span>
-            <br>
-            <span class="md-subhead login-user-email" ng-hide="!atPass">{{wskAuth.userData.email}}</span>
+<div class="page-content c-max main-page">
+    <div class="paper md-whiteframe-18dp" id="wsk-login" md-theme="brand" ng-controller="WskAuthController">
+        <div class="login-box-actions fade wsk-delayed-transition" layout ng-show="atPass || atCreate">
+            <md-button aria-label="Back to email input" class="md-primary md-icon-button wsk-no-margin wsk-no-shadow" ng-class="{'md-raised': !atCreate}" ng-click="atPass = false;" ng-hide="atCreate" type="button">
+                <md-icon class="login-back-button" md-svg-src="assets/icons/ic_arrow_back_24px.svg"></md-icon>
+            </md-button>
+            <span flex></span>
+            <md-button aria-label="reset Form" class="md-primary md-icon-button wsk-no-margin wsk-no-shadow" ng-class="{'md-raised': !atCreate}" ng-click="cancelLogin(); cancelCreate()" type="button">
+                <md-icon class="login-cancel-button" md-svg-src="assets/icons/ic_close_24px.svg" md-theme="brand"></md-icon>
+            </md-button>
         </div>
-        <div class="login-user-photo" flex-order="1" flex="">
-            <div class="login-user-photo-placeholder bg-image" ng-class="{'at-create' : atCreate}" ng-cloak ng-show="PLACEHOLDERS.user_photo" style="background-image: url({{PLACEHOLDERS.user_photo}})"></div>
-            <div class="login-user-photo-real bg-image blow-fade" ng-class="{'at-create' : atCreate}" ng-cloak ng-show="wskAuth.userData.user_photo && atPass" style="background-image: url({{wskAuth.userData.user_photo}})"></div>
-            <div class="login-user-photo-upload bg-image" ng-class="{'at-create' : atCreate}" ng-cloak ng-show="atCreate" style="background-image: url({{PLACEHOLDERS.user_photo_upload}})">
-                <input nv-file-select type="file" uploader="uploader"/><br/>
-                <div class="user-temp-photo" ng-repeat="item in uploader.queue" ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 96 }"></div>
-                <div class="wsk-hoverlay"></div>
-                <md-icon md-svg-src="assets/icons/ic_photo_camera_24px.svg"></md-icon>
+        <div class="login-user-data content-padding" layout="column" ng-class="{'at-create' : atCreate}">
+            <span flex-order="2" flex=""></span>
+            <div class="login-user-info fade" flex-order="3" ng-show="atPass">
+                <span class="md-title login-user-name">{{wskAuth.userData.first_name}}</span>
+                <br>
+                <span class="md-subhead login-user-email" ng-hide="!atPass">{{wskAuth.userData.email}}</span>
+            </div>
+            <div class="login-user-photo" flex-order="1" flex="">
+                <div class="login-user-photo-placeholder bg-image" ng-class="{'at-create' : atCreate}" ng-cloak ng-show="PLACEHOLDERS.user_photo" style="background-image: url({{PLACEHOLDERS.user_photo}})"></div>
+                <div class="login-user-photo-real bg-image blow-fade" ng-class="{'at-create' : atCreate}" ng-cloak ng-show="wskAuth.userData.user_photo && atPass" style="background-image: url({{wskAuth.userData.user_photo}})"></div>
+                <div class="login-user-photo-upload bg-image" ng-class="{'at-create' : atCreate}" ng-cloak ng-show="atCreate" style="background-image: url({{PLACEHOLDERS.user_photo_upload}})">
+                    <input nv-file-select type="file" uploader="uploader"/><br/>
+                    <div class="user-temp-photo" ng-repeat="item in uploader.queue" ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 96 }"></div>
+                    <div class="wsk-hoverlay"></div>
+                    <md-icon md-svg-src="assets/icons/ic_photo_camera_24px.svg"></md-icon>
+                </div>
             </div>
         </div>
-    </div>
-    <form autocomplete="off" class="login-box-wrapper fade" layout="row" name="loginForm" ng-class="{'at-pass' : atPass}" ng-show="atLogin" ng-submit="login(credentials)">
-        <div class="login-email content-padding" flex="" layout="column">
-            <md-input-container>
-                <label>Enter your email</label>
-                <input autocomplete="off" autofocus ng-model="credentials.email" required type="email">
-            </md-input-container>
-            <div layout>
-                <md-button aria-label="Next step" class="md-primary md-raised" flex-order="3" ng-click="toPass(credentials.email)" type="button">Next</md-button>
-                <md-button aria-label="Create account" class="md-primary create-button" flex-order="1" md-no-ink ng-click="toCreate()" type="button">Create</md-button>
-                <span flex flex-order="2"></span>
-            </div>
-        </div>
-        <div class="login-pass content-padding" flex="" layout="column">
-            <md-input-container>
-                <label>Password</label>
-                <input autocomplete="off" ng-model="credentials.password" required type="password">
-            </md-input-container>
-            <div layout>
-                <md-button class="md-primary md-raised" flex-order="3" type="submit">Log in</md-button>
-                <md-button class="md-primary create-button wsk-lowercase" flex-order="1" md-no-ink type="button">Forgot password?</md-button>
-                <span flex flex-order="2"></span>
-            </div>
-        </div>
-    </form>
-    <form autocomplete="off" class="create-box-wrapper content-padding" name="createForm" ng-class="{'at-pass' : atPass}" ng-show="atCreate" ng-submit="create(credentials)" novalidate>
-        <div layout="column" style="margin: 16px">
-            <div layout="row">
-                <md-input-container flex>
-                    <label>First Name</label>
-                    <input autocomplete="off" autofocus ng-model="credentials.first_name" required type="text">
+        <form autocomplete="off" class="login-box-wrapper fade" layout="row" name="loginForm" ng-class="{'at-pass' : atPass}" ng-show="atLogin" ng-submit="login(credentials)">
+            <div class="login-email content-padding" flex="" layout="column">
+                <md-input-container>
+                    <label>Enter your email</label>
+                    <input autocomplete="off" autofocus ng-model="credentials.email" required type="email">
                 </md-input-container>
-                <md-input-container flex>
-                    <label>Last Name</label>
-                    <input autocomplete="off" ng-model="credentials.last_name" required type="text">
-                </md-input-container>
+                <div layout>
+                    <md-button aria-label="Next step" class="md-primary md-raised" flex-order="3" ng-click="toPass(credentials.email)" type="button">Next</md-button>
+                    <md-button aria-label="Create account" class="md-primary create-button" flex-order="1" md-no-ink ng-click="toCreate()" type="button">Create</md-button>
+                    <span flex flex-order="2"></span>
+                </div>
             </div>
-            <md-input-container>
-                <label>Enter your email</label>
-                <input autocomplete="off" autofocus ng-model="credentials.email" required type="email">
-            </md-input-container>
-            <md-input-container>
-                <label>Password</label>
-                <input autocomplete="off" ng-model="credentials.password" required type="password">
-            </md-input-container>
-            <md-button class="md-primary md-raised wsk-no-margin" type="submit">Create</md-button>
+            <div class="login-pass content-padding" flex="" layout="column">
+                <md-input-container>
+                    <label>Password</label>
+                    <input autocomplete="off" ng-model="credentials.password" required type="password">
+                </md-input-container>
+                <div layout>
+                    <md-button class="md-primary md-raised" flex-order="3" type="submit">Log in</md-button>
+                    <md-button class="md-primary create-button wsk-lowercase" flex-order="1" md-no-ink type="button">Forgot password?</md-button>
+                    <span flex flex-order="2"></span>
+                </div>
+            </div>
+        </form>
+        <form autocomplete="off" class="create-box-wrapper content-padding" name="createForm" ng-class="{'at-pass' : atPass}" ng-show="atCreate" ng-submit="create(credentials)" novalidate>
+            <div layout="column" style="margin: 16px">
+                <div layout="row">
+                    <md-input-container flex>
+                        <label>First Name</label>
+                        <input autocomplete="off" autofocus ng-model="credentials.first_name" required type="text">
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Last Name</label>
+                        <input autocomplete="off" ng-model="credentials.last_name" required type="text">
+                    </md-input-container>
+                </div>
+                <md-input-container>
+                    <label>Enter your email</label>
+                    <input autocomplete="off" autofocus ng-model="credentials.email" required type="email">
+                </md-input-container>
+                <md-input-container>
+                    <label>Password</label>
+                    <input autocomplete="off" ng-model="credentials.password" required type="password">
+                </md-input-container>
+                <md-button class="md-primary md-raised wsk-no-margin" type="submit">Create</md-button>
+            </div>
+        </form>
+        <div class="login-logo-box content-padding">
+            <div class="login-logo" style="background-image: url({{LOGOS.login_logo}})"></div>
         </div>
-    </form>
-    <div class="login-logo-box content-padding">
-        <div class="login-logo" style="background-image: url({{LOGOS.login_logo}})"></div>
     </div>
 </div>

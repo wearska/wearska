@@ -8,7 +8,6 @@
             $scope.PLACEHOLDERS = PLACEHOLDERS;
             $scope.LOGOS = LOGOS;
             $scope.wskAuth = wskAuth;
-
             $scope.credentials = {};
 
             $scope.atPass = false;
@@ -47,10 +46,33 @@
 
             $scope.create = function(credentials) {
                 if ($scope.createForm.$valid) {
+                    var origPhoto = $scope.credentials.user_photo;
+                    $scope.credentials.user_photo = 'uploads/user_photos/' + $scope.credentials.email + '/' + origPhoto;
+                    $scope.credentials.user_photo = $scope.credentials.user_photo.replace(/\s+/g, '_');
                     wskAuth.create(credentials)
                         .then(function(authData) {
                             $scope.uploadPhoto();
-                        })
+                            wskAuth.login(credentials)
+                                .then(function(authData) {
+                                    wskAuth.bind(authData.uid)
+                                        .then(function(user) {
+                                            user.$bindTo($scope, "userData")
+                                                .then(function() {
+                                                    $scope.$emit('user-data: bound', $scope.userData);
+                                                    $location.path('');
+                                                });
+                                        });
+                                }).catch(function(error) {
+                                    var errorStr = error.toString();
+                                    if (errorStr.indexOf('password') > -1) {
+                                        $scope.showPwdErrorToast();
+                                    } else if (errorStr.indexOf('user') > -1) {
+                                        $scope.showUsrErrorToast();
+                                    } else {
+                                        $scope.showErrorToast();
+                                    };
+                                });
+                        });
                 } else {
                     $scope.signupForm.submitted = true;
                 }
@@ -78,9 +100,6 @@
                 if ($scope.loginForm.$valid) {
                     wskAuth.login(credentials)
                         .then(function(authData) {
-                            // $location.path('/');
-                            // console.log(authData);
-                            // wskAuth.bind(authData.uid);
                             wskAuth.bind(authData.uid)
                                 .then(function(user) {
                                     user.$bindTo($scope, "userData")
@@ -150,15 +169,12 @@
             // uploader methods
             uploader.onAfterAddingAll = function(addedFileItems) {
                 $scope.credentials.user_photo = addedFileItems[0].file.name;
+                // $scope.credentials.user_photo = 'uploads/user_photo/' + $scope.credentials.email + '/' + uploader.queue[uploader.queue.length - 1].file.name;
+                // $scope.credentials.user_photo = $scope.credentials.user_photo.replace(/\s+/g, '_');
             };
             var i = 0;
-            uploader.onCompleteAll = function() {
-                $scope.credentials.user_photo = 'uploads/use_photo/' + $scope.credentials.email + '/' + uploader.queue[uploader.queue.length - 1].file.name;
-                $scope.credentials.user_photo = $scope.credentials.user_photo.replace(/\s+/g, '_');
-            };
-            uploader.onCompleteItem = function(fileItem, response, status, headers) {
-                // console.info('onCompleteItem', fileItem, response, status, headers);
-            };
+            uploader.onCompleteAll = function() {};
+            uploader.onCompleteItem = function(fileItem, response, status, headers) {};
             uploader.onBeforeUploadItem = function(item) {
                 item.formData = [];
                 uploader.formData = [{

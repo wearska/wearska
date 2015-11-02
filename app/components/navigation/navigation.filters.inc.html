@@ -1,0 +1,85 @@
+<a class="nav-item-container" md-ink-ripple href="/store" style="margin-bottom: 8px;">
+    <md-icon md-svg-src="assets/icons/ic_filter_list_24px.svg"></md-icon>Filter by</a>
+<div class="nav-section-title">Departments:</div>
+<!-- brand filter -->
+<div ng-controller="NavListCtrl as list">
+    <div class="nav-item-container" ng-class="{expanded : list.expanded}">
+        Brand
+        <md-icon class="reset-icon" md-svg-src="assets/icons/ic_close_24px.svg" ng-click="BrandFilter.reset()" ng-show="BrandFilter.selected.length" style="margin-left: 8px; width:16px;"></md-icon>
+        <md-icon class="right-icon l-right" md-svg-src="assets/icons/ic_keyboard_arrow_down_black_24px.svg" ng-click="list.expand();" style="width:20px;"></md-icon>
+    </div>
+    <div class="nav-items-list" style="max-height:{{results.length * list.size}}px;">
+        <md-checkbox ng-checked="BrandFilter.exists(brand)" ng-class="{selected : BrandFilter.exists(brand)}" ng-click="BrandFilter.toggle(brand)" ng-disabled="!Counter.count(brand, 'brands')" ng-repeat="brand in $root.brands | filter: q as results">
+            {{ brand}}
+            <span style="color: rgba(0,0,0,.54)">• ({{ Counter.count(brand, 'brands')}})</span>
+        </md-checkbox>
+    </div>
+</div>
+<!-- main filter -->
+<div ng-controller="NavListCtrl as list">
+    <div class="nav-item-container" ng-class="{expanded : list.expanded}">
+        Type
+        <md-icon class="reset-icon" md-svg-src="assets/icons/ic_close_24px.svg" ng-click="TypeFilter.reset()" ng-show="TypeFilter.selected.length" style="margin-left: 8px; width:16px;"></md-icon>
+        <md-icon class="right-icon l-right" md-svg-src="assets/icons/ic_keyboard_arrow_down_black_24px.svg" ng-click="list.expand();" style="width:20px;"></md-icon>
+    </div>
+    <div class="nav-items-list" style="max-height:{{results.length * list.size}}px;">
+        <md-checkbox ng-checked="TypeFilter.exists(type.type)" ng-class="{selected : TypeFilter.exists(type.type)}" ng-click="TypeFilter.toggle(type.type)" ng-disabled="!Counter.count(type.type, 'types')" ng-repeat="type in $root.types | filter: q as results">
+            {{ type.type }}
+            <span style="color: rgba(0,0,0,.54)">• ({{ Counter.count(type.type, 'types')}})</span>
+        </md-checkbox>
+    </div>
+</div>
+<!-- sub filter -->
+<div ng-controller="NavListCtrl as list">
+    <div class="nav-item-container" ng-class="{expanded : list.expanded}">
+        Kind
+        <md-icon class="reset-icon" md-svg-src="assets/icons/ic_close_24px.svg" ng-click="KindFilter.reset()" ng-show="KindFilter.selected.length" style="margin-left: 8px; width:16px;"></md-icon>
+        <md-icon class="right-icon l-right" md-svg-src="assets/icons/ic_keyboard_arrow_down_black_24px.svg" ng-click="list.expand();" style="width:20px;"></md-icon>
+    </div>
+    <div class="nav-items-list" style="max-height:{{results.length * list.size}}px;">
+        <md-checkbox ng-checked="KindFilter.exists(kind)" ng-class="{selected : KindFilter.exists(kind)}" ng-click="KindFilter.toggle(kind)" ng-disabled="!Counter.count(kind, 'kinds')" ng-repeat="kind in $root.kinds | filter: q as results">
+            {{ kind }}
+            <span style="color: rgba(0,0,0,.54)">• ({{ Counter.count(kind, 'kinds')}})</span>
+        </md-checkbox>
+    </div>
+</div>
+<div class="nav-section-divider"></div>
+<!-- price filter -->
+<div ng-controller="NavListCtrl as list">
+    <div class="nav-item-container" ng-class="{expanded : list.expanded}">
+        <span class="nav-section-title expander">Price & promo:</span>
+        <md-icon class="reset-icon" md-svg-src="assets/icons/ic_close_24px.svg" ng-click="PriceFilter.selected = null" ng-show="PriceFilter.selected != null" style="margin-left: 8px; width:16px;"></md-icon>
+        <md-icon class="right-icon l-right" md-svg-src="assets/icons/ic_keyboard_arrow_down_black_24px.svg" ng-click="list.expand();" style="width:20px;"></md-icon>
+    </div>
+    <div class="nav-items-list price-range" style="max-height:{{4 * list.size}}px; padding-left: 8px; padding-right: 16px;" layout="column">
+        <div flex="" layout>
+            <md-input-container flex>
+                <label>Min</label>
+                <input ng-model="PriceFilter.selected.min">
+            </md-input-container>
+            <span flex="5"></span>
+            <span style="text-align: center; font-size: 12px; font-weight: 400;color:  rgba(0,0,0,.54);line-height: 34px;margin-top: 18px;margin-bottom: 18px;position: relative;" flex="5">-</span>
+            <span flex="5"></span>
+            <md-input-container flex>
+                <label>Max</label>
+                <input ng-model="PriceFilter.selected.max">
+            </md-input-container>
+            <span style="text-align: center; font-size: 12px; font-weight: 400;color:  rgba(0,0,0,.54);line-height: 34px;margin-top: 18px;margin-bottom: 18px;position: relative;">RON</span>
+        </div>
+        <!-- promo filter -->
+        <div flex="" style="margin-left: -8px; margin-right: -16px; margin-top: -8px;">
+            <md-checkbox ng-model="PromoFilter.state" ng-true-value="1" ng-false-value="0" ng-class="{selected : PromoFilter.state}">
+                Promos
+                <span style="color: rgba(0,0,0,.54)">• ({{ Counter.count(1, 'promos')}})</span>
+            </md-checkbox>
+        </div>
+    </div>
+</div>
+<!-- fit filter -->
+<div class="nav-section-divider" ng-if="$root.logged"></div>
+<div ng-if="$root.logged">
+    <md-checkbox class="fit-check" ng-model="FitFilter.state" ng-true-value="1" ng-false-value="0" ng-class="{selected : FitFilter.state}">
+        Doar pentru mine
+        <span style="color: rgba(0,0,0,.54)">• ({{ Counter.count(1, 'fit')}})</span>
+    </md-checkbox>
+</div>

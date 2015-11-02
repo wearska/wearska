@@ -1,0 +1,171 @@
+// Frontpage
+#frontpage {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: block;
+    text-align: left;
+    outline: none;
+}
+.frontpage-content {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+#page {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 16px;
+    width: 100%;
+    height: 100%;
+}
+
+// Sidebar
+#sidebar {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    float: left;
+    transform: translateX(-100%);
+    background: #fff;
+    color: rgb(33, 33, 33);
+    width: 240px;
+    min-width: 0;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+    text-align: left;
+    user-select: none;
+    will-change: transform;
+    transition: transform 0.28s 0.1s ease-in-out;
+    &.open {
+        transform: translateX(0);
+    }
+}
+
+// Nav
+nav {
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+// Main
+#main {
+    position: absolute;
+    z-index: 1;
+    margin: 0;
+    min-height: initial !important;
+    height: 100%;
+    left: 0;
+    will-change: left;
+    right: 0;
+    width: auto;
+    transition: left 0.08s 0.1s ease-in-out;
+    &.narrow {
+        left: 0;
+    }
+}
+@media only screen and (min-width: 800px) {#main {&.narrow {
+            left: 240px;
+            .items-end {
+                left: 240px;
+                right: 32px;
+            }
+        }
+    }
+}
+
+// Header
+#main-header {
+    width: 100%;
+}
+
+// Hero
+#page-hero {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    background-color: #000;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    min-height: 50%;
+    &.left-positioned {
+        background-position: left;
+        &.narrow {
+            background-position: 200px 50%;
+        }
+    }
+}
+
+// Content
+.c-max {
+    max-width: 540px;
+    min-height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    box-sizing: border-box;
+
+    // display: block;
+}
+@media #{$small-and-up} {.c-max {
+        max-width: 540px;
+    }
+}
+@media #{$medium-and-up} {.c-max {
+        max-width: 640px;
+    }
+}
+@media only screen and (min-width: 1100px) and (max-width: 1199px) {.c-max {
+        max-width: 768px;
+    }
+}
+@media only screen and (min-width: 1200px) and (max-width: 1279px) {.c-max {
+        max-width: 864px;
+    }
+}
+@media #{$large-and-up} {.c-max {
+        max-width: 960px;
+    }
+}
+@media only screen and (min-width: 1600px) and (max-width: 1919px) {.c-max {
+        max-width: 1280px;
+    }
+}
+@media #{$xlarge-and-up} {.c-max {
+        max-width: 1366px;
+    }
+}
+
+// Header
+.site-header {
+    z-index: 60;
+}
+
+// Dialogs
+md-dialog {
+    max-height: 100%;
+}
+
+//Sidenav
+aside {
+
+}
+
+// Footer
+footer {
+
+}

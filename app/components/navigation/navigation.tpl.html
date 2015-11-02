@@ -1,0 +1,81 @@
+<!-- ACCOUNT SECTION START -->
+<section>
+
+    <div class="nav-section" ng-if="!wsk.logged">
+        <a class="nav-item-container" href="/auth" md-ink-ripple>
+            <md-icon md-svg-src="assets/icons/ic_account_circle_24px.svg"></md-icon>Log in</a>
+    </div>
+    <div class="nav-section-divider" ng-if="!wsk.logged"></div>
+
+    <div class="nav-section" ng-if="wsk.logged">
+        <div ng-controller="NavListCtrl as list">
+            <div class="nav-item-container" ng-class="{expanded : list.expanded}">
+                <div aria-label="View Account" class="account-photo" class="md-icon-button l-right" style="background-image: url({{wsk.account.user_photo}})"></div>{{wsk.account.email}}
+                <md-icon class="right-icon l-right" md-svg-src="assets/icons/ic_keyboard_arrow_down_black_24px.svg" ng-click="list.expand();" style="width:20px;"></md-icon>
+            </div>
+            <div class="nav-section-divider"></div>
+            <div class="nav-items-list" style="max-height:{{7 * list.size}}px;">
+                <!-- ADMIN SECTION START -->
+                <section ng-if="wsk.logged && wsk.account.admin">
+                    <div class="nav-section" ng-cloak ng-include="'app/components/navigation/navigation.admin.inc.html'"></div>
+                </section>
+                <!-- ADMIN SECTION END -->
+                <!-- USER SECTION START -->
+                <section ng-if="wsk.logged && !wsk.account.admin">
+                    <div class="nav-section" ng-cloak>
+                        <a class="nav-item-container" href="{{item.ref}}" md-ink-ripple ng-repeat="item in wskNav.accountItems">
+                            <md-icon md-svg-src="{{item.icon}}"></md-icon>{{item.title}}</a>
+                    </div>
+                </section>
+                <!-- USER SECTION END -->
+                <a class="nav-item-container sub" md-ink-ripple ng-click="nav.logout()" ng-show="wsk.logged">
+                    <md-icon md-svg-src=""></md-icon>Logout</a>
+
+                <div class="nav-section-divider" ng-if="wsk.logged"></div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- ACCOUNT SECTION END -->
+<!-- STORE SECTION START -->
+<section ng-if="state.current.name !== 'store'">
+    <div class="nav-section" ng-cloak>
+        <a class="nav-item-container" href="{{item.ref}}" md-ink-ripple ng-repeat="item in wskNav.menuItems">
+            <md-icon md-svg-src="{{item.icon}}"></md-icon>
+            <span class="badge" ng-if="item.ref == '/cart'" ng-show="wskShoppingCart.count() > 0">{{wskShoppingCart.count()}}</span>{{item.title}}</a>
+
+        <a class="nav-item-container button" data-type="sub" href="">
+            <md-button class=" md-primary md-raised" md-theme="brand">Newsletter</md-button>
+        </a>
+    </div>
+    <div class="nav-section-divider"></div>
+</section>
+<!-- STORE SECTION END -->
+<!-- FILTERS SECTION START -->
+<section ng-if="state.current.name === 'store'">
+    <div class="nav-section" ng-controller="NavSectionCtrl as section" ng-include="'app/components/navigation/navigation.filters.inc.html'"></div>
+    <div class="nav-section-divider"></div>
+</section>
+<!-- FILTERS SECTION END -->
+<br>
+<br>
+<br>
+<span flex></span>
+<!-- BOTTOM SECTION START -->
+<section>
+    <div class="nav-section-divider"></div>
+    <div class="nav-section" ng-cloak>
+        <a class="nav-item-container" href="{{item.ref}}" md-ink-ripple ng-repeat="item in wskNav.bottomItems">
+            <md-icon md-svg-src="{{item.icon}}"></md-icon>{{item.title}}</a>
+    </div>
+</section>
+<!-- BOTTOM SECTION END -->
+<section>
+    <div class="nav-section-divider"></div>
+    <div class="nav-section" ng-cloak>
+        <a class="nav-item-container" href="/help" md-ink-ripple>
+            <md-icon md-svg-src="assets/icons/ic_help_24px.svg"></md-icon>Help & feedback</a>
+    </div>
+    <br>
+</section>

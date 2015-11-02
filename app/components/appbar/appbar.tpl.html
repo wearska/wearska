@@ -1,0 +1,27 @@
+<md-toolbar class="wsk-appbar" md-theme="brand" layout layout-align="start center">
+    <div class="appbar-left" flex-gt-md="25" flex="60">
+        <div class="slide-left" ng-hide="wsk.sidebarOpen" layout="row" layout-align="start center">
+            <md-button aria-label="Toggle Menu" class="md-icon-button l-left" ng-click="wsk.toggleSidebar(); wsk.hideSearchBar()">
+                <md-icon md-svg-src="assets/icons/ic_menu_24px.svg"></md-icon>
+            </md-button>
+            <h1 class="appbar-logo-box" md-ink-ripple md-theme="brand" flex layout="row" layout-align="start center">
+                <a href="/" class="logo-wrapper" style="background-image: url({{LOGOS.appbar_logo}})" flex></a>
+            </h1>
+        </div>
+    </div>
+    <span flex></span>
+    <div class="appbar-right" layout="row" layout-align="start center">
+        <a aria-label="View facebook page" class="md-icon-button l-right" md-button ng-href="https://www.facebook.com/wearska" target="_blank">
+            <md-icon md-svg-src="assets/icons/social_facebook_24px.svg"></md-icon>
+        </a>
+        <a aria-label="View facebook page" class="md-icon-button l-right" md-button ng-href="https://www.google.com/+ionutachim23" target="_blank">
+            <md-icon md-svg-src="assets/icons/social_google_plus_24px.svg"></md-icon>
+        </a>
+        <md-button aria-label="Search" class="appbar-search-button md-icon-button l-right" ng-click="wsk.toggleSearchBar($event)">
+            <md-icon md-svg-src="assets/icons/ic_search_24px.svg"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+<div class="wsk-loader" ng-if="0">
+    <div class="wsk-loader-colours"></div>
+</div>

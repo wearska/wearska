@@ -1,14 +1,26 @@
 (function() {
-  'use strict';
+    'use strict';
 
-  angular
-    .module('wearska')
-    .run(runBlock);
+    angular
+        .module('wearska')
+        .run(runBlock);
 
-  /** @ngInject */
-  function runBlock($log) {
+    /** @ngInject */
+    function runBlock($log, $firebaseAuth, FIREBASE_URL, AUTHDATA) {
 
-    $log.debug('runBlock end');
-  }
+        var ref = new Firebase(FIREBASE_URL);
+        var authObj = $firebaseAuth(ref);
+
+        var authData = authObj.$getAuth();
+
+        if (authData) {
+            AUTHDATA.logged = true;
+            AUTHDATA.uid = authData.uid;
+        } else {
+            $log.debug("Logged out");
+        }
+
+        $log.debug('runBlock end');
+    }
 
 })();

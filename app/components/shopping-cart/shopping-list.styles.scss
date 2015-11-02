@@ -1,0 +1,53 @@
+#wsk-shopping-list {
+    display: block;
+    max-width: 960px;
+    position: relative;
+    margin: auto;
+    .wsk-shopping-list-item {
+        width: 100%;
+        padding: 16px;
+        position: relative;
+        [class *= 'list-item-'] {
+            // display: inline-block;
+            // vertical-align: middle;
+        }
+        .list-item-media {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            .hoverlay{
+                opacity: .5;
+            }
+        }
+        .list-item-info {
+            margin-left: 24px;
+            .item-name,
+            .item-subname {
+                line-height: 32px;
+                font-size: 20px;
+            }
+            .item-price {
+                color: $brand-primary;
+            }
+        }
+        .list-item-actions{
+            width: 128px;
+            padding-left: 24px;
+        }
+        .cancel-list-item{
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            color: rgba(0,0,0,.54);
+            cursor: pointer;
+            &:hover{
+                color: rgba(0,0,0,.87);
+            }
+        }
+    }
+}
