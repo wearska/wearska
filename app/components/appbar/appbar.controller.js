@@ -3,7 +3,7 @@
 
     angular
         .module('wearska')
-        .controller('AppBarCtrl', function($scope, LOGOS) {
+        .controller('AppBarCtrl', function($scope, LOGOS, wskScrollFactory) {
 
             $scope.LOGOS = LOGOS;
 
@@ -21,12 +21,29 @@
             // -----------------------
 
             $scope.hasHero = false;
-            $scope.$on('hero: on', function(){
-                $scope.hasHero = true;
+            $scope.$on('hero: on', function() {
+                if (wskScrollFactory.scrollTop) {
+                    $scope.hasHero = true;
+                } else {
+                    $scope.hasHero = false;
+                }
             });
-            $scope.$on('hero: off', function(){
+            $scope.$on('hero: off', function() {
                 $scope.hasHero = false;
             });
+            // $scope.$watch(
+            //     // This function returns the value being watched. It is called for each turn of the $digest loop
+            //     function() {
+            //         return wskScrollFactory.scrollTop;
+            //     },
+            //     // This is the change listener, called when the value returned from the above function changes
+            //     function(newValue, oldValue) {
+            //         if (newValue !== oldValue) {
+            //             // Only increment the counter if the value changed
+            //             $scope.hasHero = newValue;
+            //         }
+            //     }
+            // );
 
         });
 

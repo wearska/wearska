@@ -3,9 +3,10 @@
 
     angular
         .module('wearska')
-        .controller('WskController', function($scope, $mdMedia, AUTHDATA, LOGOS, wskAuth) {
+        .controller('WskController', function($scope, $mdMedia, AUTHDATA, LOGOS, wskAuth, wskScrollFactory) {
 
             $scope.wsk = {};
+            $scope.wskScroll = wskScrollFactory;
             var wsk = $scope.wsk;
 
 

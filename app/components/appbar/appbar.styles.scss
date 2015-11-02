@@ -1,7 +1,8 @@
 #frontpage .wsk-appbar {
     height: 56px;
     width: 100%;
-    &.transparent{
+    transition: background .27s ease-in-out;
+    &.transparent:not(.scrolled){
         background: transparent;
     }
     .appbar-left,

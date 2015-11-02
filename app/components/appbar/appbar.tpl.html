@@ -1,4 +1,4 @@
-<md-toolbar class="wsk-appbar" ng-class="{transparent : hasHero}" md-theme="brand" layout layout-align="start center">
+<md-toolbar class="wsk-appbar" ng-class="{transparent : hasHero, scrolled : !wskScroll.scrollTop}" md-theme="brand" layout layout-align="start center">
     <div class="appbar-left" flex-gt-md="25" flex="60">
         <div class="slide-left" ng-hide="wsk.sidebarOpen" layout="row" layout-align="start center">
             <md-button aria-label="Toggle Menu" class="md-icon-button l-left" ng-click="wsk.toggleSidebar(); wsk.hideSearchBar()">
