@@ -48,7 +48,7 @@
                    <nav id="nav" class="l-offset-nav" ng-include="'app/components/navigation/navigation.tpl.html'" ng-controller="NavCtrl as nav" layout="column"></nav>
                </div>
                <main id="main" class="l-offset-nav" ng-class="{narrow : wsk.sidebarOpen}" layout="column">
-                   <div id="page" gd-scroll ng-class="{min : boolChangeClass}" ui-view autoscroll="true" flex></div>
+                   <div id="page" wsk-scroll ng-class="{min : boolChangeClass}" ui-view autoscroll="true" flex></div>
                </main>
            </div>
         </div>
@@ -78,19 +78,22 @@
     <!-- inject:js -->
     <script src="app/scripts/app.module.js"></script>
     <script src="app/views/store/store.controller.js"></script>
-    <script src="app/views/main/main.controller.js"></script>
     <script src="app/views/auth/auth.service.js"></script>
     <script src="app/views/auth/auth.controller.js"></script>
+    <script src="app/views/main/main.controller.js"></script>
     <script src="app/components/shopping-cart/shopping-lists.module.js"></script>
     <script src="app/components/shopping-cart/shopping-lists.factory.js"></script>
     <script src="app/components/shopping-cart/shopping-list.directive.js"></script>
     <script src="app/components/shopping-cart/shopping-cart.factory.js"></script>
+    <script src="app/components/scroll/scroll.service.js"></script>
+    <script src="app/components/scroll/scroll.directive.js"></script>
     <script src="app/components/navigation/navigation.factory.js"></script>
     <script src="app/components/navigation/navigation.controller.js"></script>
+    <script src="app/components/hero/hero.directive.js"></script>
+    <script src="app/components/hero/hero.controller.js"></script>
     <script src="app/components/filters/filters.js"></script>
     <script src="app/components/filters/filters.factory.js"></script>
     <script src="app/components/filters/filters.controller.js"></script>
-    <script src="app/components/appbar/appbar.directive.js"></script>
     <script src="app/components/appbar/appbar.controller.js"></script>
     <script src="app/scripts/app.values.js"></script>
     <script src="app/scripts/app.run.js"></script>

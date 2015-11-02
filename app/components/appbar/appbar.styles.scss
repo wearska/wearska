@@ -1,6 +1,9 @@
-.wsk-appbar {
+#frontpage .wsk-appbar {
     height: 56px;
     width: 100%;
+    &.transparent{
+        background: transparent;
+    }
     .appbar-left,
     .appbar-center,
     .appbar-right {
@@ -28,7 +31,7 @@
     .wsk-appbar {
         height: 64px;
         min-height: 64px;
-        
+
         //padding: 0 1.5*$content-padding;
     }
 }
