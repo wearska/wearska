@@ -8,7 +8,7 @@
                 '500': '4285F4',
                 'contrastDefaultColor': 'light',    // whether, by default, text (contrast)
                                                     // on this palette should be dark or light
-                'contrastDarkColors': ['50', '100', //hues which contrast should be 'dark' by default
+                'contrastDarkColors': ['50', '100', // hues which contrast should be 'dark' by default
                  '200', '300', '400', 'A100'],
                 'contrastLightColors': undefined   // could also specify this if default was 'dark'
             });

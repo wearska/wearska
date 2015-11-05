@@ -11,23 +11,27 @@
                 .state('main', {
                     url: '/',
                     templateUrl: 'app/views/main/main.view.html',
-                    controller: 'MainController'
+                    controller: 'MainCtrl'
                 })
                 .state('store', {
                     url: '/store',
                     templateUrl: 'app/views/store/store.view.html',
-                    params: {
-                        brand: null,
-                        type: null,
-                        kind: null,
-                        promo: 0
-                    },
-                    controller: 'WskStoreController'
+                    controller: 'WskStoreCtrl'
                 })
                 .state('auth', {
                     url: '/auth',
                     templateUrl: 'app/views/auth/auth.view.html',
-                    controller: 'WskAuthController'
+                    controller: 'WskAuthCtrl'
+                })
+                .state('admin', {
+                    url: '/admin',
+                    templateUrl: 'app/views/admin/admin.view.html',
+                    controller: 'WskAdminCtrl'
+                })
+                .state('admin.add', {
+                    url: '/add',
+                    templateUrl: 'app/views/admin/admin.add.view.html',
+                    controller: 'WskAddCtrl'
                 });
             $locationProvider.html5Mode(true);
         });

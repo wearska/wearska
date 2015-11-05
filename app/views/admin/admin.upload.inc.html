@@ -1,0 +1,62 @@
+<div layout="column" layout-gt-sm="row" style="margin-top: 16px;">
+    <div flex class="ar_1-1 file-upload" style="background-image: url({{temp.photo1}}); margin-right: 8px; margin-bottom: 8px;">
+        <input nv-file-select="" type="file" uploader="uploader1"/>
+        <div class="hoverlay"></div>
+        <md-icon class="search-file">
+            <i class="material-icons">&#xE8B6;</i>
+        </md-icon>
+        <md-button type="button" class="md-icon-button remove-file" ng-click="uploader1.clearQueue(); uploader1.clearThumb();" ng-show="uploader1.queue.length > 0 || temp.photo1 != 'uploads/placeholder.png'">
+            <md-icon>
+                <i class="material-icons">&#xE5CD;</i>
+            </md-icon>
+        </md-button>
+    </div>
+    <div flex class="ar_1-1 file-upload" style="background-image: url({{temp.photo2}}); margin-right: 8px; margin-bottom: 8px;">
+        <input nv-file-select="" type="file" uploader="uploader2"/>
+        <div class="hoverlay"></div>
+        <md-icon class="search-file">
+            <i class="material-icons">&#xE8B6;</i>
+        </md-icon>
+        <md-button type="button" class="md-icon-button remove-file" ng-click="uploader2.clearQueue(); uploader2.clearThumb();" ng-show="uploader2.queue.length > 0">
+            <md-icon>
+                <i class="material-icons">&#xE5CD;</i>
+            </md-icon>
+        </md-button>
+    </div>
+    <div flex class="ar_1-1 file-upload" style="background-image: url({{temp.photo3}}); margin-right: 8px; margin-bottom: 8px;">
+        <input nv-file-select="" type="file" uploader="uploader3"/>
+        <div class="hoverlay"></div>
+        <md-icon class="search-file">
+            <i class="material-icons">&#xE8B6;</i>
+        </md-icon>
+        <md-button type="button" class="md-icon-button remove-file" ng-click="uploader3.clearQueue(); uploader3.clearThumb();" ng-show="uploader3.queue.length > 0">
+            <md-icon>
+                <i class="material-icons">&#xE5CD;</i>
+            </md-icon>
+        </md-button>
+    </div>
+    <div flex class="ar_1-1 file-upload" style="background-image: url({{temp.photo4}}); margin-right: 8px; margin-bottom: 8px;">
+        <input nv-file-select="" type="file" uploader="uploader4"/>
+        <div class="hoverlay"></div>
+        <md-icon class="search-file">
+            <i class="material-icons">&#xE8B6;</i>
+        </md-icon>
+        <md-button type="button" class="md-icon-button remove-file" ng-click="uploader4.clearQueue(); uploader4.clearThumb();" ng-show="uploader4.queue.length > 0">
+            <md-icon>
+                <i class="material-icons">&#xE5CD;</i>
+            </md-icon>
+        </md-button>
+    </div>
+    <div flex class="ar_1-1 file-upload" style="background-image: url({{temp.photo5}}); margin-bottom: 8px;">
+        <input nv-file-select="" type="file" uploader="uploader5"/>
+        <div class="hoverlay"></div>
+        <md-icon class="search-file">
+            <i class="material-icons">&#xE8B6;</i>
+        </md-icon>
+        <md-button type="button" class="md-icon-button remove-file" ng-click="uploader5.clearQueue(); uploader5.clearThumb();" ng-show="uploader5.queue.length > 0">
+            <md-icon>
+                <i class="material-icons">&#xE5CD;</i>
+            </md-icon>
+        </md-button>
+    </div>
+</div>

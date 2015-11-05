@@ -14,7 +14,7 @@
                 <md-icon class="right-icon l-right" md-svg-src="assets/icons/ic_keyboard_arrow_down_black_24px.svg" ng-click="list.expand();" style="width:20px;"></md-icon>
             </div>
             <div class="nav-section-divider"></div>
-            <div class="nav-items-list" style="max-height:{{7 * list.size}}px;">
+            <div class="nav-items-list" style="max-height:{{6 * list.size}}px;">
                 <!-- ADMIN SECTION START -->
                 <section ng-if="wsk.logged && wsk.account.admin">
                     <div class="nav-section" ng-cloak ng-include="'app/components/navigation/navigation.admin.inc.html'"></div>
@@ -41,10 +41,6 @@
 <!-- STORE SECTION START -->
 <section ng-if="state.current.name !== 'store'">
     <div class="nav-section" ng-cloak>
-        <a class="nav-item-container" href="{{item.ref}}" md-ink-ripple ng-repeat="item in wskNav.menuItems">
-            <md-icon md-svg-src="{{item.icon}}"></md-icon>
-            <span class="badge" ng-if="item.ref == '/cart'" ng-show="wskShoppingCart.count() > 0">{{wskShoppingCart.count()}}</span>{{item.title}}</a>
-
         <a class="nav-item-container button" data-type="sub" href="">
             <md-button class=" md-primary md-raised" md-theme="brand">Newsletter</md-button>
         </a>

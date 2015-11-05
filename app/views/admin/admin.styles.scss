@@ -1,0 +1,35 @@
+.add-item-form {
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    box-sizing: border-box;
+    font-weight: 400;
+    border-radius: 2px;
+    margin: 16px auto;
+    overflow: hidden;
+    position: relative;
+    .form-header {
+        height: 300px;
+        background-color: $brand-primary;
+        transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.27s;
+        .form-title {
+            font-weight: 200;
+        }
+    }
+    .form-content {
+        md-datepicker {
+            margin-top: 11px;
+            .md-datepicker-button {
+                width: 36px;
+            }
+        }
+        .tags-input {
+            input {
+                font-size: 13px;
+            }
+        }
+        .add-option-link{
+            
+        }
+    }
+}

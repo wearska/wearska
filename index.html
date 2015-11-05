@@ -24,7 +24,7 @@
     <!-- endbuild -->
 </head>
 
-<body ng-controller="WskController">
+<body ng-controller="WskCtrl as wsk">
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
       <![endif]-->
@@ -80,8 +80,11 @@
     <script src="app/scripts/app.module.js"></script>
     <script src="app/views/store/store.controller.js"></script>
     <script src="app/views/main/main.controller.js"></script>
+    <script src="app/views/items/items.factory.js"></script>
     <script src="app/views/auth/auth.service.js"></script>
     <script src="app/views/auth/auth.controller.js"></script>
+    <script src="app/views/admin/admin.controller.js"></script>
+    <script src="app/views/admin/admin.add.controller.js"></script>
     <script src="app/components/shopping-cart/shopping-lists.module.js"></script>
     <script src="app/components/shopping-cart/shopping-lists.factory.js"></script>
     <script src="app/components/shopping-cart/shopping-list.directive.js"></script>
@@ -95,6 +98,8 @@
     <script src="app/components/filters/filters.js"></script>
     <script src="app/components/filters/filters.factory.js"></script>
     <script src="app/components/filters/filters.controller.js"></script>
+    <script src="app/components/cards/card.directive.js"></script>
+    <script src="app/components/cards/card.controller.js"></script>
     <script src="app/components/appbar/appbar.controller.js"></script>
     <script src="app/scripts/app.values.js"></script>
     <script src="app/scripts/app.run.js"></script>

@@ -3,8 +3,10 @@
 
     angular
         .module('wearska')
-        .controller('MainController', function($scope, wskScrollFactory) {
+        .controller('MainCtrl', function($scope, wskScrollFactory, wskItems) {
             $scope.wskScroll = wskScrollFactory;
+            
+            $scope.wskItems = wskItems;
         });
 
 })();

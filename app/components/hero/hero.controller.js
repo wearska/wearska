@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('wearska')
-        .controller('WskHeroController', function($rootScope, $scope, wskScrollFactory) {
+        .controller('WskHeroCtrl', function($rootScope, $scope, wskScrollFactory) {
 
             $rootScope.$broadcast('hero: on', {});
             

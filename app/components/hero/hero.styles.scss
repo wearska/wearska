@@ -1,8 +1,10 @@
 .wsk-hero{
     position: absolute;
+    z-index: -1;
     width: 100%;
     top: 0;
     left: 0;
+    min-height: 480px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

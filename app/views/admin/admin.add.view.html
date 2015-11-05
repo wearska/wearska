@@ -1,0 +1,117 @@
+<div class="wrapper l-offset-nav">
+    <md-content class="paper resting add-item-form">
+        <form layout="column" md-theme="brand" name="addItemForm" ng-submit="submitItemForm()" novalidate>
+            <div class="form-header content-padding brand-bg dark" layout-gt-md="row" layout="column">
+                <div flex layout="column">
+                    <span flex></span>
+                    <h2 class="md-display-1 form-title">Add new item</h2>
+                    <span class="md-body-1 form-subtitle">Be sure to fill out every input</span>
+                </div>
+                <div class="form-card-preview l-right no-brand">
+                    <wsk-card card-resource="newitem" style="width:220px;"></wsk-card>
+                </div>
+            </div>
+            <div class="form-content content-padding">
+                <section>
+                    <h3 class="md-headline form-section-title brand-text">Item info</h3>
+                    <div layout-gt-md="row" layout="column">
+                        <md-input-container flex-gt-md="30">
+                            <label for="">Name</label>
+                            <input ng-model="newitem.name" type="text">
+                        </md-input-container>
+                        <span flex=""></span>
+                        <md-input-container flex-gt-md="30">
+                            <label for="">Subname</label>
+                            <input ng-model="newitem.subname" type="text">
+                        </md-input-container>
+                        <span flex=""></span>
+                        <md-input-container flex-gt-md="30">
+                            <label>Brand</label>
+                            <md-select ng-model="newitem.brand">
+                                <md-option ng-repeat="brand in wsk.brands" value="{{brand}}">{{brand}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-md="row" layout="column">
+                        <md-input-container flex-gt-md="30">
+                            <label>Department</label>
+                            <md-select ng-model="newitem.dep">
+                                <md-option ng-repeat="dep in wsk.deps" value="{{dep}}">{{dep}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                        <span flex=""></span>
+                        <md-input-container flex-gt-md="30">
+                            <label>Type</label>
+                            <md-select ng-model="newitem.type">
+                                <md-option ng-repeat="type in wsk.types" value="{{type}}">{{type}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                        <span flex=""></span>
+                        <md-input-container flex-gt-md="30">
+                            <label>Kind</label>
+                            <md-select ng-model="newitem.kind">
+                                <md-option ng-repeat="kind in wsk.kinds" value="{{kind}}">{{kind}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-md="row">
+                        <md-chips class="tags-input" delete-button-label="Remove Tag" delete-hint="Press delete to remove tag" flex ng-model="newitem.tags" placeholder="Enter a tag" secondary-placeholder="+Tag"></md-chips>
+                    </div>
+                    <br>
+                    <div layout-gt-md="row">
+                        <md-input-container flex>
+                            <label>Excerpt</label>
+                            <input md-maxlength="80" name="excerpt" ng-model="item.excerpt">
+                            <div multiple ng-messages="addItemForm.excerpt.$error" role="alert">
+                                <div class="my-message" ng-message="md-maxlength">
+                                    Don't use the long version silly...we don't need to be that specific...
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-md="row" layout="column">
+                        <md-input-container flex-gt-md="30">
+                            <label for="">Price</label>
+                            <input ng-model="newitem.price" type="number">
+                        </md-input-container>
+                        <span flex=""></span>
+                        <md-input-container flex-gt-md="30">
+                            <label for="">Stock count</label>
+                            <input ng-disabled="newitem.has_options" ng-model="newitem.stock" type="number">
+                        </md-input-container>
+                        <span flex=""></span>
+                        <md-datepicker md-placeholder="Enter date" ng-model="newitem.created"></md-datepicker>
+                    </div>
+                </section>
+                <br>
+                <br>
+                <br>
+                <section>
+                    <h3 class="md-headline form-section-title brand-text">Buy options</h3>
+                    <md-switch aria-label="Enable options" name="options" ng-change="getStock(); checkOptions();" ng-false-value="false" ng-model="newitem.has_options" ng-true-value="true"></md-switch>
+                    <div class="" layout="column">
+                        <div class="item-options" flex layout layout-align="start center" ng-repeat="option in newitem.options">
+                            <md-input-container flex="25" ng-class="{'md-input-invalid' : option.duplicate}">
+                                <label>Type</label>
+                                <input wsk-capitalize-first ng-disabled="!newitem.has_options" ng-model="option.type" type="text">
+                            </md-input-container>
+                            <md-input-container flex="25">
+                                <label>Name</label>
+                                <input wsk-capitalize ng-disabled="!newitem.has_options" ng-model="option.name" type="text">
+                            </md-input-container>
+                            <md-input-container flex="25">
+                                <label>Count</label>
+                                <input ng-disabled="!newitem.has_options" ng-model="option.count" type="number">
+                            </md-input-container>
+                            <span flex></span>
+                            <md-button class="md-icon-button" type="button" ng-click="removeOption($index)" ng-disabled="!newitem.has_options">
+                                <md-icon md-svg-src="assets/icons/ic_remove_circle_outline_24px.svg"></md-icon>
+                            </md-button>
+                        </div>
+                        <span class="add-option-link md-body-2 wsk-link brand-text" ng-class="{'disabled' : !newitem.has_options}" ng-click="addOption()">+ New</span>
+                    </div>
+                </section>
+            </div>
+        </form>
+    </md-content>
+</div>

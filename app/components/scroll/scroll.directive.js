@@ -8,7 +8,6 @@
                     initCHeight = element[0].clientHeight, // initial client height
                     offsets = parseFloat(element.css('padding-top')) + parseFloat(element.css('padding-bottom')),
                     initialPos = initSHeight - initCHeight - offsets;
-                console.log(initialPos);
                 if (initialPos <= 0) {
                     wskScrollFactory.scrollTop = true;
                     wskScrollFactory.scrollBottom = true;
@@ -22,10 +21,6 @@
                         sHeight = element[0].scrollHeight, // element scroll height
                         cHeight = element[0].clientHeight, // client height
                         scrollPosition = sHeight - cHeight - scrollTop;
-                    console.log('cHeight = ' + cHeight);
-                    console.log('sHeight = ' + sHeight);
-                    console.log('scrollTop = ' + scrollTop);
-                    console.log('scrollPosition = ' + scrollPosition);
                     wskScrollFactory.scroll = scrollTop;
                     if (scrollTop === 0 && scrollPosition > 0) {
                         wskScrollFactory.scrollTop = true;

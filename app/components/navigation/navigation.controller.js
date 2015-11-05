@@ -6,7 +6,7 @@
 
             // LOGOUT
             this.logout = function() {
-                wskAuth.logout();
+                wskAuth.$unauth();
                 $location.path('');
             };
 
@@ -19,7 +19,7 @@
             $scope.PriceFilter = PriceFilter;
             $scope.PromoFilter = PromoFilter;
             $scope.FitFilter = FitFilter;
-            
+
             $scope.state = $state;
             $scope.wskNav = wskNav;
 
@@ -30,7 +30,7 @@
         })
         .controller('NavListCtrl', function($rootScope, $scope, BrandFilter) {
             var scope = this;
-            
+
             scope.size = 0;
             scope.expanded = false;
             scope.expand = function() {

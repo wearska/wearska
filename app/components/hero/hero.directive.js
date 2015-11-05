@@ -5,7 +5,7 @@
     .directive('wskHero', function() {
       return {
         restrict: 'E',
-        controller: 'WskHeroController',
+        controller: 'WskHeroCtrl',
         replace: true,
         templateUrl: 'app/components/hero/hero.tpl.html',
         link: function(scope, el, attr) {

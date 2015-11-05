@@ -1,0 +1,18 @@
+<md-bottom-sheet class="md-list md-has-header">
+  <md-subheader>Comment Actions</md-subheader>
+  <md-input-container class="item-count" flex flex-gt-md="10">
+      <label>Cantitate</label>
+      <input name="itemCount" ng-model="order.quantity" step="any" type="number">
+      <div ng-messages="productForm.promoprice.$error" ng-show="orderForm.itemCount.$invalid && orderForm.itemCount.$dirty">
+          <div ng-message="number">Doar cifrele sunt permise</div>
+      </div>
+  </md-input-container>
+  <md-list>
+    <md-list-item ng-repeat="item in items">
+      <md-button class="md-list-item-content" ng-click="listItemClick($index)">
+        <md-icon md-svg-src="{{item.icon}}"></md-icon>
+        <span class="md-inline-list-icon-label">{{ item.name }}</span>
+      </md-button>
+    </md-list-item>
+  </md-list>
+</md-bottom-sheet>

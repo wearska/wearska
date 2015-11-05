@@ -42,3 +42,13 @@ md-button.md-raised.wsk-no-shadow,
     transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
 }
+.wsk-link{
+    text-decoration: none;
+    cursor: pointer;
+    &:hover{
+        text-decoration: underline;
+    }
+    &.disabled{
+        pointer-events: none;
+    }
+}

@@ -3,51 +3,66 @@
 
     angular
         .module('wearska')
-        .controller('WskController', function($scope, $mdMedia, AUTHDATA, LOGOS, wskAuth, wskScrollFactory) {
+        .controller('WskCtrl', function($scope, $rootScope, $firebaseObject, $mdMedia, FIREBASE_USERS_URL, AUTHDATA, LOGOS, wskAuth, wskItems, wskScrollFactory) {
 
-            $scope.wsk = {};
+            var wsk = this;
+
             $scope.wskScroll = wskScrollFactory;
-            var wsk = $scope.wsk;
+            wsk.LOGOS = LOGOS;
 
-
-            // --------------------------
-            // AUTH
-            // --------------------------
-
-            // initial state
+            // ---------------------------
+            // ACCOUNT
+            // ---------------------------
             wsk.account = {};
             wsk.logged = false;
 
-            // handle initial check for authdata
-            $scope.$on('users: loaded', function() {
-                if (AUTHDATA.logged) {
-                    // set logged to true
+            wskAuth.$onAuth(function(authData) {
+                var profileObj = null;
+                if (authData) {
+                    console.log("authdata is:");
+                    console.log(authData);
                     wsk.logged = true;
-                    // get and bind the user data
-                    wskAuth.bind(AUTHDATA.uid)
-                        .then(function(user) {
-                            user.$bindTo($scope, "wsk.account");
-                        });
+                    // // get user data key
+                    // var usersRef = new Firebase(FIREBASE_USERS_URL);
+                    // var usersObj = $firebaseObject(usersRef);
+                    // usersObj.$loaded(function(users) {
+                    //     console.log('usersObj : ');
+                    //     console.log(usersObj);
+                    //     angular.forEach(users, function(data, key) {
+                    //         console.log('key is ' + key);
+                    //         console.log(data);
+                    //         if (data.uid === authData.uid) {
+                    //             console.log('user found');
+                    //             console.log(key);
+                    //             var profileRef = usersRef.child(key);
+                    //             profileObj = $firebaseObject(profileRef);
+                    //             profileObj.$bindTo($scope, "account")
+                    //             .then(function(unbind) {
+                    //                 wsk.account = $scope.account;
+                    //                 console.log('user data bound');
+                    //                 console.log(wsk.account);
+                    //             })
+                    //         };
+                    //     });
+                    // });
+                    // get user data
+                    var userRef = new Firebase(FIREBASE_USERS_URL + '/' + authData.uid);
+                    var userObj = $firebaseObject(userRef);
+                    console.log(userObj);
+                    userObj.$bindTo($scope, "account")
+                        .then(function(unbind) {
+                            wsk.account = $scope.account;
+                            console.log('user data bound');
+                            console.log(wsk.account);
+                        })
+
+
+                } else {
+                    console.log("no authData");
+                    wsk.account = {};
+                    wsk.logged = false;
                 }
             });
-
-            // handle user login
-            $scope.$on('user-data: bound', function(event, obj) {
-                wsk.account = obj;
-                wsk.logged = true;
-            });
-
-            // handle user logout
-            $scope.$on('user: notlogged', function(){
-                wsk.account = {};
-                wsk.logged = false;
-                AUTHDATA.logged = false;
-                AUTHDATA.uid = null;
-            });
-                        
-            wsk.LOGOS = LOGOS;
-
-
 
             // ---------------------------
             // SIDEBAR
@@ -60,6 +75,32 @@
                 wsk.sidebarOpen = !wsk.sidebarOpen;
             }
 
+            // ------------------------
+            // ITEMS
+            // ------------------------
+
+            wsk.items = null;
+            wskItems.$loaded()
+                .then(function(data) {
+                    data.$bindTo($scope, "wsk.items")
+                        .then(function() {
+                            $rootScope.$broadcast('items: loaded', {});
+                        });
+                })
+                .catch(function(error) {
+                    console.error("Error:", error);
+                });
+
+            // ------------------------
+            // BRANDS
+            // ------------------------
+
+            wsk.brands = [
+                'Adidas',
+                'Puma',
+                'Reebok',
+                'Le Coq Sportif'
+            ];
 
         });
 

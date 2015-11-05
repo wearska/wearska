@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('wearska')
-        .controller('WskAuthController', function($scope, $http, $location, $mdToast, $firebaseObject, wskAuth, FileUploader, PLACEHOLDERS, LOGOS) {
+        .controller('WskAuthCtrl', function($scope, $http, $location, $mdToast, $firebaseObject, $firebaseArray, wskAuth, FileUploader, FIREBASE_USERS_URL, PLACEHOLDERS, LOGOS) {
 
 
             $scope.PLACEHOLDERS = PLACEHOLDERS;
@@ -17,12 +17,15 @@
             $scope.toPass = function(email) {
                 if (email) {
                     $scope.atPass = true;
-                    wskAuth.get(email)
-                        .then(function(userData) {
-                            // console.log(userData);
-                        }).catch(function(error) {
-                            // console.log(error);
+                    var usersRef = new Firebase(FIREBASE_USERS_URL);
+                    var usersObj = $firebaseObject(usersRef);
+                    usersObj.$loaded(function(users) {
+                        angular.forEach(users, function(data, key) {
+                            if (data.email === email) {
+                                $scope.credentials.user_photo = data.user_photo;
+                            };
                         });
+                    });
                 };
             };
             $scope.toCreate = function() {
@@ -49,32 +52,36 @@
                     var origPhoto = $scope.credentials.user_photo;
                     $scope.credentials.user_photo = 'uploads/user_photos/' + $scope.credentials.email + '/' + origPhoto;
                     $scope.credentials.user_photo = $scope.credentials.user_photo.replace(/\s+/g, '_');
-                    wskAuth.create(credentials)
-                        .then(function(authData) {
-                            $scope.uploadPhoto();
-                            wskAuth.login(credentials)
-                                .then(function(authData) {
-                                    wskAuth.bind(authData.uid)
-                                        .then(function(user) {
-                                            user.$bindTo($scope, "userData")
-                                                .then(function() {
-                                                    $scope.$emit('user-data: bound', $scope.userData);
-                                                    $location.path('');
-                                                });
-                                        });
-                                }).catch(function(error) {
-                                    var errorStr = error.toString();
-                                    if (errorStr.indexOf('password') > -1) {
-                                        $scope.showPwdErrorToast();
-                                    } else if (errorStr.indexOf('user') > -1) {
-                                        $scope.showUsrErrorToast();
-                                    } else {
-                                        $scope.showErrorToast();
-                                    };
-                                });
-                        });
+
+                    // create the user
+                    wskAuth.$createUser({
+                        email: $scope.credentials.email,
+                        password: $scope.credentials.password
+                    }).then(function(authData) {
+                        console.log("User " + authData.uid + " created successfully!");
+                        if (!credentials.user_photo) {
+                            credentials.user_photo = PLACEHOLDERS.user_photo;
+                        };
+                        console.log(authData);
+                        var usersRef = new Firebase(FIREBASE_USERS_URL);
+                        var usersObj = $firebaseArray(usersRef);
+                        var userData = {
+                            uid: authData.uid,
+                            email: $scope.credentials.email,
+                            first_name: $scope.credentials.first_name,
+                            last_name: $scope.credentials.last_name,
+                            user_photo: $scope.credentials.user_photo
+                        };
+                        usersRef.child(authData.uid).set(userData);
+                        usersRef.child(authData.uid).update({ created: Firebase.ServerValue.TIMESTAMP });
+                        $scope.cancelCreate;
+                        $scope.showCreateSuccessToast();
+                    }).catch(function(error) {
+                        console.error("Error: ", error);
+                        $scope.showErrorToast();
+                    });
                 } else {
-                    $scope.signupForm.submitted = true;
+                    $scope.createForm.submitted = true;
                 }
             };
 
@@ -98,16 +105,12 @@
 
             $scope.login = function(credentials) {
                 if ($scope.loginForm.$valid) {
-                    wskAuth.login(credentials)
+                    wskAuth.$authWithPassword({
+                            email: credentials.email,
+                            password: credentials.password
+                        })
                         .then(function(authData) {
-                            wskAuth.bind(authData.uid)
-                                .then(function(user) {
-                                    user.$bindTo($scope, "userData")
-                                        .then(function() {
-                                            $scope.$emit('user-data: bound', $scope.userData);
-                                            $location.path('');
-                                        });
-                                });
+                            $location.path('');
                         }).catch(function(error) {
                             var errorStr = error.toString();
                             if (errorStr.indexOf('password') > -1) {
@@ -119,6 +122,17 @@
                             };
                         });
                 }
+            };
+
+            // CREATE TOASTS
+
+            $scope.showCreateSuccessToast = function() {
+                $mdToast.show(
+                    $mdToast.simple()
+                    .content('User created succesfully. You may login now.')
+                    .action('Ok')
+                    .hideDelay(3000)
+                );
             };
 
             // LOGIN TOASTS
