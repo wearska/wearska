@@ -4,8 +4,8 @@
     angular
         .module('wearska')
         .filter('wskRandomize', function() {
-            return function(input, scope) {
-                if (input != null && input != undefined && input > 1) {
+            return function(input) {
+                if (input !== null && input !== undefined && input > 1) {
                     return Math.floor((Math.random() * input) + 1);
                 }
             };
@@ -16,11 +16,14 @@
             return function(arr, shuffled) {
                 if (arr && shuffled) {
                     var o = arr.slice(0, arr.length);
-                    if (shuffledLength == arr.length) return shuffledArr;
-                    for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-                    shuffledArr = o;
-                    shuffledLength = o.length;
-                    return o;
+                    if (shuffledLength === arr.length) {
+                        return shuffledArr;
+                    }
+                    for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x) {
+                        shuffledArr = o;
+                        shuffledLength = o.length;
+                        return o;
+                    }
                 } else {
                     return arr;
                 }
@@ -39,7 +42,7 @@
             return function(input, steps) {
                 var step = 100 / steps;
                 var halfstep = step / 2;
-                if (input != null && input != undefined) {
+                if (input !== null && input !== undefined) {
                     input = parseFloat(input);
                     while (--steps + 1 > 0) {
                         var threshold = step * steps + halfstep;
@@ -53,20 +56,20 @@
         })
         .filter('wskSerialize', function() {
             return function(input) {
-                if (input != null && input != undefined) {
+                if (input !== null && input !== undefined) {
                     var min = 10000;
                     var max = 99999;
                     var num = Math.floor(Math.random() * (max - min + 1)) + min;
                     return input + '' + num;
                 }
-            }
+            };
         })
         .filter('wskShortify', function() {
             return function(input) {
-                if (input != null && input != undefined && input !== "") {
+                if (input !== null && input !== undefined && input !== "") {
                     return angular.uppercase(input.replace(/[aeiou]/ig, '').substring(0, 3));
                 }
-            }
+            };
         })
         .filter('wskLowres', function() {
             return function(input) {

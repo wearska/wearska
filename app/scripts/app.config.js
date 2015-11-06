@@ -19,9 +19,9 @@
             .primaryPalette('wsk-blue',{
               'default': '500'
             })
-            .accentPalette('light-blue')
+            .accentPalette('light-blue');
             // .dark();
-            
+
             $mdThemingProvider
             .theme('light')
             .primaryPalette('grey',{

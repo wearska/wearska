@@ -88,7 +88,7 @@
                 <br>
                 <section>
                     <h3 class="md-headline form-section-title brand-text">Buy options</h3>
-                    <md-switch aria-label="Enable options" name="options" ng-change="getStock(); checkOptions();" ng-false-value="false" ng-model="newitem.has_options" ng-true-value="true"></md-switch>
+                    <md-switch aria-label="Enable buy options" name="buy_options" ng-change="getStock(); checkOptions();" ng-false-value="false" ng-model="newitem.has_options" ng-true-value="true"></md-switch>
                     <div class="" layout="column">
                         <div class="item-options" flex layout layout-align="start center" ng-repeat="option in newitem.options">
                             <md-input-container flex="25" ng-class="{'md-input-invalid' : option.duplicate}">
@@ -104,12 +104,57 @@
                                 <input ng-disabled="!newitem.has_options" ng-model="option.count" type="number">
                             </md-input-container>
                             <span flex></span>
-                            <md-button class="md-icon-button" type="button" ng-click="removeOption($index)" ng-disabled="!newitem.has_options">
+                            <md-button aria-label="Remove option" class="md-icon-button" type="button" ng-click="removeOption($index)" ng-disabled="!newitem.has_options">
                                 <md-icon md-svg-src="assets/icons/ic_remove_circle_outline_24px.svg"></md-icon>
                             </md-button>
                         </div>
                         <span class="add-option-link md-body-2 wsk-link brand-text" ng-class="{'disabled' : !newitem.has_options}" ng-click="addOption()">+ New</span>
                     </div>
+                </section>
+                <br>
+                <br>
+                <br>
+                <section>
+                    <h3 class="md-headline form-section-title brand-text">Colour options</h3>
+                    <md-switch aria-label="Enable color options" name="colour_options" ng-false-value="false" ng-model="newitem.has_colours" ng-true-value="true"></md-switch>
+                </section>
+                <br>
+                <br>
+                <br>
+                <section>
+                    <h3 class="md-headline form-section-title brand-text">Promo settings</h3>
+                    <md-switch aria-label="Enable promo options" name="promo_settings" ng-false-value="false" ng-model="newitem.is_promo" ng-true-value="true" ng-change="getPrice()"></md-switch>
+                    <div class="" layout>
+                        <md-input-container flex-gt-md="30" flex>
+                            <label for="">Promo Price</label>
+                            <input ng-model="newitem.promo_price" name="promo_price" type="number" ng-disabled="!newitem.is_promo">
+                        </md-input-container>
+                        <span flex-gt-md="5"></span>
+                        <div flex-gt-md="20" flex layout>
+                            <md-checkbox aria-label="Set stock count for promo" ng-model="newitem.stock_promo" ng-false-value="false" ng-true-value="true" ng-disabled="!newitem.is_promo"></md-checkbox>
+                            <md-input-container flex>
+                                <label for="">Stock</label>
+                                <input ng-model="newitem.promo_stock" name="promo_stock" type="number" ng-disabled="!newitem.is_promo || !newitem.stock_promo">
+                            </md-input-container>
+                        </div>
+                        <span flex-gt-md="5"></span>
+                        <div flex-gt-md="40" flex layout>
+                            <md-checkbox aria-label="Set promo end date" ng-model="newitem.time_promo" ng-false-value="false" ng-true-value="true" ng-disabled="!newitem.is_promo"></md-checkbox>
+                            <md-datepicker md-placeholder="Promo end" ng-model="newitem.promo_end" flex ng-disabled="!newitem.is_promo || !newitem.time_promo"></md-datepicker>
+                        </div>
+                    </div>
+                </section>
+                <br>
+                <br>
+                <section layout="column" layout-gt-md="row" layout-align="start center">
+                    <md-checkbox aria-label="Publish" ng-model="newitem.published" ng-false-value="false" ng-true-value="true">Publish item</md-checkbox>
+                    <span flex-gt-md="5"></span>
+                    <md-input-container flex-gt-md="30" flex>
+                        <label for="">Item code</label>
+                        <input ng-model="newitem.code" name="code" type="text" required>
+                    </md-input-container>
+                    <span flex-gt-md="5"></span>
+                    <md-button class="md-primary md-raised" aria-label="Save item" type="submit" flex>Add item</md-button>
                 </section>
             </div>
         </form>

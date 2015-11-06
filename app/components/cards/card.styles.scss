@@ -8,10 +8,10 @@
     -webkit-backface-visibility: hidden;
     overflow: hidden;
     .product-media {
-        
+
         // padding: 16px;
         position: relative;
-        
+
         // overflow: hidden;
         .product-img {
             background-size: cover;
@@ -20,7 +20,7 @@
         }
         .hoverlay {
             pointer-events: none;
-            
+
             // position: absolute;
             overflow: hidden;
             left: 0;
@@ -210,6 +210,7 @@
             margin-bottom: 8px;
             .price,
             .promo-price,
+            .old-price,
             .add-to-cart {
                 bottom: 0;
                 background: #fff;
@@ -222,7 +223,7 @@
                 text-transform: uppercase;
                 font-weight: normal;
                 float: left;
-                
+
                 // text-decoration: underline;
             }
             .price {
@@ -235,7 +236,7 @@
                     padding-left: 8px;
                 }
                 .promo-price {
-                    
+
                 }
             }
         }
@@ -283,10 +284,10 @@
             right: 16px;
         }
         .item-size-wrapper {
-            
+
         }
         .item-count-wrapper {
-            
+
         }
         .discard-order-button {
             position: absolute;
@@ -365,13 +366,13 @@
         .product-media {
             padding: 0 60% 0 0;
             .product-media-actions {
-                
+
                 // pointer-events: none;
                 .scrim {
                     display: none;
                 }
                 .add-to-favourites {
-                    
+
                     // display: none;
                 }
             }

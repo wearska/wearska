@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('wearska')
-        .controller('WskAddCtrl', function($scope, $timeout, $q, wskItems) {
+        .controller('WskAddCtrl', function($scope, $timeout, $q, wskItems, FIREBASE_ITEMS_URL) {
 
             // -----------------------------
             // INIT ITEM
@@ -18,27 +18,42 @@
                 tags: [],
                 excerpt: '',
                 description: '',
-                price: 0,
+                price: null,
                 stock: 0,
                 created: new Date(),
                 has_options: true,
-                options: [{
-                    type: 'Size',
-                    name: 'XS',
-                    count: 6
-                }, {
-                    type: 'Size',
-                    name: 'S',
-                    count: 12
-                }]
+                options: [],
+                has_colours : false,
+                colour : [],
+                sibling : null,
+                is_promo : false,
+                promo_price: null,
+                old_price: null,
+                stock_promo: false,
+                promo_stock : null,
+                date_promo: false,
+                promo_end : null,
+                thumb: 'file1',
+                files : {
+                    file1 : 'uploads/items/placeholder.png',
+                    file2 : 'uploads/items/placeholder.png',
+                    file3 : 'uploads/items/placeholder.png',
+                    file4 : 'uploads/items/placeholder.png',
+                    file5 : 'uploads/items/placeholder.png'
+                },
+                published: true
+
             };
+
+            // ------------------------
+            // BUY OPTIONS
+            // ------------------------
 
 
             $scope.$watch(
                 'newitem.options',
                 function(newNames, oldNames) {
                     $scope.getStock();
-                    console.log($scope.newitem.options.length);
                     if(!$scope.newitem.options.length){
                         $scope.newitem.has_options = false;
                     }
@@ -86,6 +101,39 @@
                 }else{
                     $scope.newitem.options.push(newoption);
                 }
+            };
+
+            // ------------------------
+            // COLOUR OPTIONS
+            // ------------------------
+
+
+
+
+            // ------------------------
+            // PROMO SETTINGS
+            // ------------------------
+
+            $scope.getPrice = function() {
+                if ($scope.newitem.is_promo){
+                    if(!$scope.newitem.promo_price){
+                        $scope.newitem.promo_price = 0;
+                    };
+                }else{
+                    if(!$scope.newitem.promo_price){
+                        $scope.newitem.promo_price = null;
+                    };
+                };
+            };
+
+            // -----------------------
+            // ADD ITEM
+            // -----------------------
+
+            $scope.submitItemForm = function(){
+                var itemsRef = new Firebase(FIREBASE_ITEMS_URL);
+                var itemRef = itemsRef.child($scope.newitem.code);
+                itemRef.set($scope.newitem);
             };
 
         });

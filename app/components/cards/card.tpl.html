@@ -1,7 +1,7 @@
 <div class="wsk-card paper resting slide-top" ng-cloak>
     <div class="product-media">
         <a href="/product/{{item.code}}">
-            <div class="product-img ar_1-1" md-ink-ripple ng-cloak style="background-image: url({{item.file1 | wskLowres}});"></div>
+            <div class="product-img ar_1-1" md-ink-ripple ng-cloak style="background-image: url({{item.files[item.thumb]}});"></div>
             <div class="hoverlay"></div>
         </a>
         <div class="product-media-actions">
@@ -13,7 +13,7 @@
                 <md-icon md-svg-src="assets/icons/ic_create_white_24px.svg" style="width: 24px; height: 24px;"></md-icon>
             </a>
         </div>
-        <div class="promo-badge" ng-show="item.promo">
+        <div class="promo-badge" ng-show="item.is_promo">
             <md-tooltip>
                 Produs promo
             </md-tooltip>
@@ -37,19 +37,17 @@
         <div class="card-menu">
             <md-menu md-position-mode="target-right target">
                 <md-button aria-label="Deschide meniu card" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-                    <md-icon md-menu-origin>
-                        <i class="material-icons">&#xE5D4;</i>
-                    </md-icon>
+                    <md-icon md-menu-origin md-svg-src="assets/icons/ic_more_vert_24px.svg"></md-icon>
                 </md-button>
                 <md-menu-content width="3">
                     <md-menu-item>
-                        <!-- <md-button aria-label="Adauga in cos" ng-click="addToCart(item)"> -->
+<!-- <md-button aria-label="Adauga in cos" ng-click="addToCart(item)"> -->
                         <md-button aria-label="Adauga in cos" ng-click="setOrder()">
                             <div layout="row">
-                                <md-icon class="md-icon" style="margin: auto 0;">
+                                <!-- <md-icon class="md-icon" style="margin: auto 0;">
                                     <i class="material-icons">&#xE854;</i>
-                                </md-icon>
-                                <p flex style="margin-left:8px;">Adauga in cos</p>
+                                </md-icon> -->
+                                <p flex style="margin-left:8px;">Add to cart</p>
                             </div>
                         </wsk-addtocart>
                     </md-button>
@@ -57,13 +55,13 @@
                 <md-menu-item>
                     <md-button aria-label="Adauga la favorite" ng-click="postFav(item.code, item.favourite)">
                         <div layout="row">
-                            <md-icon class="md-icon" ng-if="!item.favourite" style="margin: auto 0;">
+                            <!-- <md-icon class="md-icon" ng-if="!item.favourite" style="margin: auto 0;">
                                 <i class="material-icons">&#xE87E;</i>
                             </md-icon>
                             <md-icon class="md-icon" ng-if="item.favourite" style="margin: auto 0">
                                 <i class="material-icons">&#xE87D;</i>
-                            </md-icon>
-                            <p flex style="margin-left:8px;">Adauga la favorite</p>
+                            </md-icon> -->
+                            <p flex style="margin-left:8px;">Add to favourites</p>
                         </div>
                     </md-button>
                 </md-menu-item>
@@ -75,18 +73,18 @@
     <div class="stars-container">
         <md-icon class="tiny-star" md-svg-src="assets/icons/ic_star_tiny_14px.svg" ng-class="{'fill' : count <= item.rating}" ng-repeat="count in [1,2,3,4,5]"></md-icon>
     </div>
-    <div class="price-container" data="item" id="{{ item.code }}" name="{{ item.name }}" ng-class="{promo : item.promo}" price="{{ item.price }}" quantity="1">
-        <div class="promo-price" ng-show="item.promo">
+    <div class="price-container" ng-class="{promo : item.is_promo}">
+        <div ng-cloak class="promo-price fade" ng-show="item.is_promo">
             {{item.promo_price | number : 2  | currency : "€"}}</div>
-        <div class="price">
-            <span ng-show="!item.promo"></span>
-            {{item.price | number : 2 | currency : "€"}}</div>
+        <div ng-cloak>
+            <span ng-cloak class="price">{{item.price | number : 2 | currency : "€"}}</span>
+        </div>
     </div>
 </div>
 <div class="product-set-order" ng-class="{on : showSetOrder}"></div>
 <form class="product-order-form" name="orderForm" ng-class="{on : showSetOrder}" ng-submit="orderProduct(item, order)" novalidate>
     <md-icon class="discard-order-button" md-ink-ripple md-svg-src="assets/icons/ic_close_24px.svg" ng-click="discardOrder()"></md-icon>
-    <!-- <span>Configureaza-ti comanda</span> -->
+<!-- <span>Configureaza-ti comanda</span> -->
     <div class="input-wrapper">
         <div class="item-count-wrapper">
             <md-input-container class="item-count">
@@ -110,7 +108,7 @@
                 </md-select>
             </md-input-container>
         </div>
-        <!-- <span ng-show="item.sizes.length > 1" show-gt-sm></span> -->
+<!-- <span ng-show="item.sizes.length > 1" show-gt-sm></span> -->
         <span ng-show="item.sizes.length > 1" show-gt-sm></span>
         <button class="dak-button" md-ink-ripple md-theme="brand" ng-disabled="orderForm.$invalid" type="submit">
             <div class="icon-bg"></div>
