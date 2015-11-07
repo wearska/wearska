@@ -15,6 +15,19 @@
         }
       }
     })
+    .directive('wskCardPreview', function() {
+      return {
+        restrict: 'E',
+        controller: 'CardCtrl',
+        scope: {
+          item: '=cardResource',
+        },
+        replace: true,
+        templateUrl: 'app/components/cards/card.preview.tpl.html',
+        link: function(scope, el, attr) {
+        }
+      }
+    })
     .directive('wskTile', function() {
       return {
         restrict: 'A',

@@ -15,6 +15,7 @@
             'firebase',
             'ngColorThief',
             'angularFileUpload',
+            'ngFileUpload',
             'wskCart'
         ]);
 })();

@@ -7,13 +7,17 @@
                     <h2 class="md-display-1 form-title">Add new item</h2>
                     <span class="md-body-1 form-subtitle">Be sure to fill out every input</span>
                 </div>
-                <div class="form-card-preview l-right no-brand">
-                    <wsk-card card-resource="newitem" style="width:220px;"></wsk-card>
+                <div class="form-card-preview l-right no-brand" ng-include="'app/views/admin/admin.add.card-preview.inc.html'">
+                    <!-- <wsk-card-preview card-resource="newitem" style="width:220px;"></wsk-card-preview> -->
                 </div>
             </div>
             <div class="form-content content-padding">
                 <section>
                     <h3 class="md-headline form-section-title brand-text">Item info</h3>
+                    <md-input-container>
+                        <label for="">Item code</label>
+                        <input name="code" ng-model="newitem.code" required type="text">
+                    </md-input-container>
                     <div layout-gt-md="row" layout="column">
                         <md-input-container flex-gt-md="30">
                             <label for="">Name</label>
@@ -93,18 +97,18 @@
                         <div class="item-options" flex layout layout-align="start center" ng-repeat="option in newitem.options">
                             <md-input-container flex="25" ng-class="{'md-input-invalid' : option.duplicate}">
                                 <label>Type</label>
-                                <input wsk-capitalize-first ng-disabled="!newitem.has_options" ng-model="option.type" type="text">
+                                <input ng-disabled="!newitem.has_options" ng-model="option.type" type="text" wsk-capitalize-first>
                             </md-input-container>
                             <md-input-container flex="25">
                                 <label>Name</label>
-                                <input wsk-capitalize ng-disabled="!newitem.has_options" ng-model="option.name" type="text">
+                                <input ng-disabled="!newitem.has_options" ng-model="option.name" type="text" wsk-capitalize>
                             </md-input-container>
                             <md-input-container flex="25">
                                 <label>Count</label>
                                 <input ng-disabled="!newitem.has_options" ng-model="option.count" type="number">
                             </md-input-container>
                             <span flex></span>
-                            <md-button aria-label="Remove option" class="md-icon-button" type="button" ng-click="removeOption($index)" ng-disabled="!newitem.has_options">
+                            <md-button aria-label="Remove option" class="md-icon-button" ng-click="removeOption($index)" ng-disabled="!newitem.has_options" type="button">
                                 <md-icon md-svg-src="assets/icons/ic_remove_circle_outline_24px.svg"></md-icon>
                             </md-button>
                         </div>
@@ -123,38 +127,33 @@
                 <br>
                 <section>
                     <h3 class="md-headline form-section-title brand-text">Promo settings</h3>
-                    <md-switch aria-label="Enable promo options" name="promo_settings" ng-false-value="false" ng-model="newitem.is_promo" ng-true-value="true" ng-change="getPrice()"></md-switch>
+                    <md-switch aria-label="Enable promo options" name="promo_settings" ng-change="getPrice()" ng-false-value="false" ng-model="newitem.is_promo" ng-true-value="true"></md-switch>
                     <div class="" layout>
-                        <md-input-container flex-gt-md="30" flex>
+                        <md-input-container flex flex-gt-md="30">
                             <label for="">Promo Price</label>
-                            <input ng-model="newitem.promo_price" name="promo_price" type="number" ng-disabled="!newitem.is_promo">
+                            <input name="promo_price" ng-disabled="!newitem.is_promo" ng-model="newitem.promo_price" type="number">
                         </md-input-container>
                         <span flex-gt-md="5"></span>
-                        <div flex-gt-md="20" flex layout>
-                            <md-checkbox aria-label="Set stock count for promo" ng-model="newitem.stock_promo" ng-false-value="false" ng-true-value="true" ng-disabled="!newitem.is_promo"></md-checkbox>
+                        <div flex flex-gt-md="20" layout>
+                            <md-checkbox aria-label="Set stock count for promo" ng-disabled="!newitem.is_promo" ng-false-value="false" ng-model="newitem.stock_promo" ng-true-value="true"></md-checkbox>
                             <md-input-container flex>
                                 <label for="">Stock</label>
-                                <input ng-model="newitem.promo_stock" name="promo_stock" type="number" ng-disabled="!newitem.is_promo || !newitem.stock_promo">
+                                <input name="promo_stock" ng-disabled="!newitem.is_promo || !newitem.stock_promo" ng-model="newitem.promo_stock" type="number">
                             </md-input-container>
                         </div>
                         <span flex-gt-md="5"></span>
-                        <div flex-gt-md="40" flex layout>
-                            <md-checkbox aria-label="Set promo end date" ng-model="newitem.time_promo" ng-false-value="false" ng-true-value="true" ng-disabled="!newitem.is_promo"></md-checkbox>
-                            <md-datepicker md-placeholder="Promo end" ng-model="newitem.promo_end" flex ng-disabled="!newitem.is_promo || !newitem.time_promo"></md-datepicker>
+                        <div flex flex-gt-md="40" layout>
+                            <md-checkbox aria-label="Set promo end date" ng-disabled="!newitem.is_promo" ng-false-value="false" ng-model="newitem.time_promo" ng-true-value="true"></md-checkbox>
+                            <md-datepicker flex md-placeholder="Promo end" ng-disabled="!newitem.is_promo || !newitem.time_promo" ng-model="newitem.promo_end"></md-datepicker>
                         </div>
                     </div>
                 </section>
                 <br>
                 <br>
-                <section layout="column" layout-gt-md="row" layout-align="start center">
-                    <md-checkbox aria-label="Publish" ng-model="newitem.published" ng-false-value="false" ng-true-value="true">Publish item</md-checkbox>
-                    <span flex-gt-md="5"></span>
-                    <md-input-container flex-gt-md="30" flex>
-                        <label for="">Item code</label>
-                        <input ng-model="newitem.code" name="code" type="text" required>
-                    </md-input-container>
-                    <span flex-gt-md="5"></span>
-                    <md-button class="md-primary md-raised" aria-label="Save item" type="submit" flex>Add item</md-button>
+                <section layout-align="start center" layout-gt-md="row" layout="column">
+                    <md-checkbox aria-label="Publish" ng-false-value="false" ng-model="newitem.published" ng-true-value="true">Publish item</md-checkbox>
+                    <span flex-gt-md=""></span>
+                    <md-button aria-label="Save item" class="md-primary md-raised" type="submit">Add item</md-button>
                 </section>
             </div>
         </form>

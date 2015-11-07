@@ -27,9 +27,10 @@ $brand-third-accent: color("grey", "lighten-1") !default;
             }
         }
     }
-    
-}
 
+}
+md-button.brand-text,
+md-icon.brand-text,
 .brand-text{
     color: $brand-primary;
 }

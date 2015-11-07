@@ -1,7 +1,7 @@
 <div class="page-content c-max main-page">
     <div class="" layout>
-        <div class="wsk-cell" flex="25">
-
+        <div class="wsk-cell" flex="25" ng-repeat="item in wsk.items">
+            <wsk-card card-resource="item"></wsk-card>
         </div>
     </div>
 </div>

@@ -29,20 +29,20 @@ html {
     font-family: "Roboto Mono", "Roboto", "Noto", sans-serif;
 }
 
-// h1, h2, h3, h4, h5, h6, p, span {
-// 	font-size: 14px;
-// 	line-height: 1.1;
-// 	font-family: "Roboto","Noto", sans-serif;
-// 	font-weight: $regular;
-// 	font-kerning: auto;
-// 	font-stretch: normal;
-// 	font-style: normal;
-// 	font-variant: normal;
-// 	font-variant-ligatures: normal;
-// 	margin: 0;
-// 	padding: 0;
-//     user-select: auto;
-// }
+h1, h2, h3, h4, h5, h6 {
+	font-size: 14px;
+	line-height: 1.1;
+	font-family: "Roboto","Noto", sans-serif;
+	font-weight: $regular;
+	font-kerning: auto;
+	font-stretch: normal;
+	font-style: normal;
+	font-variant: normal;
+	font-variant-ligatures: normal;
+	margin: 0;
+	padding: 0;
+    user-select: auto;
+}
 
 .display4 {
     @extend .mono;

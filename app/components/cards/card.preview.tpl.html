@@ -1,0 +1,84 @@
+<div class="wsk-card paper resting slide-top" ng-cloak>
+    <div class="product-media">
+        <div accept="image/*" class="product-img ar_1-1" md-ink-ripple ng-cloak style="background-image: url({{item.files[item.thumb] | wskLowres}});">
+            <input nv-file-select type="file" uploader="uploader" multiple/>
+            <div class="hoverlay"></div>
+            <md-icon class="search-file">
+                <i class="material-icons">&#xE8B6;</i>
+            </md-icon>
+            <md-button class="md-icon-button remove-file" ng-click="uploader1.clearQueue(); uploader1.clearThumb();" ng-show="uploader1.queue.length > 0 || temp.photo1 != 'uploads/placeholder.png'" type="button">
+                <md-icon>
+                    <i class="material-icons">&#xE5CD;</i>
+                </md-icon>
+            </md-button>
+        </div>
+        <div class="hoverlay"></div>
+        <div class="product-media-actions">
+            <div class="scrim top"></div>
+            <a aria-label="Editeaza produs" class="md-icon-button add-to-favourites" md-button ng-href="/admin/edit/{{item.code}}" ng-if="$root.userData.admin && $root.logged">
+                <md-tooltip>
+                    Editeaza produs
+                </md-tooltip>
+                <md-icon md-svg-src="assets/icons/ic_create_white_24px.svg" style="width: 24px; height: 24px;"></md-icon>
+            </a>
+        </div>
+        <div class="promo-badge" ng-show="item.is_promo">
+            <md-tooltip>
+                Produs promo
+            </md-tooltip>
+            <md-icon class="brand-text" md-svg-src="assets/icons/recommended_badge.svg" style="width: 48px; height: 48px;"></md-icon>
+        </div>
+    </div>
+    <div class="product-info">
+        <div class="info-container">
+            <h2 class="product-title single-line">{{item.name}}</h2>
+            <div class="subtitle-container">
+                <p class="product-subtitle single-line secondary-text-color">{{item.subname}}</p>
+            </div>
+            <div class="excerpt-container">
+                <p class="product-excerpt secondary-text-color" wsk-lines-limit="2">{{item.excerpt}}</p>
+            </div>
+            <div aria-hidden="true" class="description-container is-hidden">
+                <p>{{item.excerpt}}</p>
+                <p>{{item.description}}</p>
+            </div>
+        </div>
+        <div class="card-menu">
+            <md-menu md-position-mode="target-right target">
+                <md-button aria-label="Deschide meniu card" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                    <md-icon md-menu-origin md-svg-src="assets/icons/ic_more_vert_24px.svg"></md-icon>
+                </md-button>
+                <md-menu-content width="3">
+                    <md-menu-item>
+                        <md-button aria-label="Adauga in cos" ng-click="setOrder()">
+                            <div layout="row">
+                                <p flex style="margin-left:8px;">Add to cart</p>
+                            </div>
+                        </wsk-addtocart>
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button aria-label="Adauga la favorite" ng-click="postFav(item.code, item.favourite)">
+                        <div layout="row">
+                            <p flex style="margin-left:8px;">Add to favourites</p>
+                        </div>
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
+</div>
+<div class="product-actions">
+    <div class="stars-container">
+        <md-icon class="tiny-star" md-svg-src="assets/icons/ic_star_tiny_14px.svg" ng-class="{'fill' : count <= item.rating}" ng-repeat="count in [1,2,3,4,5]"></md-icon>
+    </div>
+    <div class="price-container" ng-class="{promo : item.is_promo}">
+        <div class="promo-price fade" ng-cloak ng-show="item.is_promo">
+            {{item.promo_price | number : 2  | currency : "€"}}</div>
+        <div ng-cloak>
+            <span class="price" ng-cloak>{{item.price | number : 2 | currency : "€"}}</span>
+        </div>
+    </div>
+</div>
+<div class="product-set-order" ng-class="{on : showSetOrder}"></div>
+</div>

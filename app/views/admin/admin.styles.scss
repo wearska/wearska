@@ -29,7 +29,48 @@
             }
         }
         .add-option-link{
-            
+
+        }
+    }
+}
+
+.file-upload {
+    cursor: pointer;
+    .search-file {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        pointer-events: none;
+        user-select: none;
+        opacity: 0;
+        will-change: opacity;
+        transition: opacity 0.2s ease;
+    }
+    .remove-file {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    input[type="file"] {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        outline: none;
+        opacity: 0;
+        cursor: pointer;
+    }
+    &:hover {.search-file {
+            opacity: .87;
+        }
+        .wsk-hoverlay {
+            opacity: 1;
         }
     }
 }
