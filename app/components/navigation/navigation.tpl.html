@@ -17,7 +17,9 @@
             <div class="nav-items-list" style="max-height:{{6 * list.size}}px;">
                 <!-- ADMIN SECTION START -->
                 <section ng-if="wsk.logged && wsk.account.admin">
-                    <div class="nav-section" ng-cloak ng-include="'app/components/navigation/navigation.admin.inc.html'"></div>
+                    <div class="nav-section" ng-cloak>
+                        <a class="nav-item-container" href="{{item.ref}}" md-ink-ripple ng-repeat="item in wskNav.adminItems">
+                            <md-icon md-svg-src="{{item.icon}}"></md-icon>{{item.title}}</a>
                 </section>
                 <!-- ADMIN SECTION END -->
                 <!-- USER SECTION START -->

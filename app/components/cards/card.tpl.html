@@ -15,7 +15,13 @@
         </div>
         <div class="promo-badge" ng-show="item.is_promo">
             <md-tooltip>
-                Produs promo
+                Discount
+            </md-tooltip>
+            <md-icon md-svg-src="assets/icons/promo_badge.svg" style="width: 48px; height: 48px;"></md-icon>
+        </div>
+        <div class="promo-badge" ng-show="!item.is_promo && item.is_recommended">
+            <md-tooltip>
+                Recommended
             </md-tooltip>
             <md-icon class="brand-text" md-svg-src="assets/icons/recommended_badge.svg" style="width: 48px; height: 48px;"></md-icon>
         </div>
@@ -29,10 +35,6 @@
             <div class="excerpt-container">
                 <p class="product-excerpt secondary-text-color" wsk-lines-limit="2">{{item.excerpt}}</p>
             </div>
-            <div aria-hidden="true" class="description-container is-hidden">
-                <p>{{item.excerpt}}</p>
-                <p>{{item.description}}</p>
-            </div>
         </div>
         <div class="card-menu">
             <md-menu md-position-mode="target-right target">
@@ -41,12 +43,8 @@
                 </md-button>
                 <md-menu-content width="3">
                     <md-menu-item>
-                        <!-- <md-button aria-label="Adauga in cos" ng-click="addToCart(item)"> -->
                         <md-button aria-label="Adauga in cos" ng-click="setOrder()">
                             <div layout="row">
-                                <!-- <md-icon class="md-icon" style="margin: auto 0;">
-                                    <i class="material-icons">&#xE854;</i>
-                                </md-icon> -->
                                 <p flex style="margin-left:8px;">Add to cart</p>
                             </div>
                         </md-button>
@@ -54,12 +52,6 @@
                     <md-menu-item>
                         <md-button aria-label="Adauga la favorite" ng-click="postFav(item.code, item.favourite)">
                             <div layout="row">
-                                <!-- <md-icon class="md-icon" ng-if="!item.favourite" style="margin: auto 0;">
-                                <i class="material-icons">&#xE87E;</i>
-                            </md-icon>
-                            <md-icon class="md-icon" ng-if="item.favourite" style="margin: auto 0">
-                                <i class="material-icons">&#xE87D;</i>
-                            </md-icon> -->
                                 <p flex style="margin-left:8px;">Add to favourites</p>
                             </div>
                         </md-button>

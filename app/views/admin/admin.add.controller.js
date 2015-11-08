@@ -9,14 +9,14 @@
             // -----------------------------
 
             $scope.newitem = {
-                name: 'Jacket',
-                subname: 'Puma training',
-                brand: 'Puma',
+                name: '',
+                subname: '',
+                brand: '',
                 dep: '',
                 type: '',
                 kind: '',
-                tags: ['puma', 'jacheta'],
-                excerpt: 'This is the bestest jacket!',
+                tags: [],
+                excerpt: '',
                 description: '',
                 price: null,
                 stock: 0,

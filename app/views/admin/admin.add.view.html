@@ -62,15 +62,19 @@
                         <md-chips class="tags-input" delete-button-label="Remove Tag" delete-hint="Press delete to remove tag" flex ng-model="newitem.tags" placeholder="Enter a tag" secondary-placeholder="+Tag"></md-chips>
                     </div>
                     <br>
-                    <div layout-gt-md="row">
+                    <div layout-gt-md="column">
                         <md-input-container flex>
                             <label>Excerpt</label>
-                            <input md-maxlength="80" name="excerpt" ng-model="item.excerpt">
+                            <input md-maxlength="80" name="excerpt" ng-model="newitem.excerpt">
                             <div multiple ng-messages="addItemForm.excerpt.$error" role="alert">
                                 <div class="my-message" ng-message="md-maxlength">
                                     Don't use the long version silly...we don't need to be that specific...
                                 </div>
                             </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Description</label>
+                            <textarea columns="1" ng-model="newitem.description"></textarea>
                         </md-input-container>
                     </div>
                     <div layout-gt-md="row" layout="column">

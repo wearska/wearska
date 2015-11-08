@@ -5,6 +5,24 @@
         .factory('wskNav', function() {
             var obj = {};
 
+            obj.adminItems = [{
+                title: 'Items list',
+                icon: 'assets/icons/ic_view_list_24px.svg',
+                ref: '/admin/list',
+            }, {
+                title: 'Add item',
+                icon: 'assets/icons/ic_playlist_add_24px.svg',
+                ref: '/admin/add',
+            }, {
+                title: 'Orders',
+                icon: 'assets/icons/ic_shopping_basket_24px.svg',
+                ref: '/admin/orders',
+            }, {
+                title: 'Settings',
+                icon: 'assets/icons/ic_settings_24px.svg',
+                ref: '/admin/settings',
+            }];
+
             obj.accountItems = [{
                 title: 'Shopping lists',
                 icon: 'assets/icons/ic_view_list_24px.svg',
@@ -32,7 +50,7 @@
                 icon: 'assets/icons/ic_store_24px.svg',
                 ref: '/store'
             }];
-            
+
             obj.bottomItems = [{
                 title: 'View Cart',
                 icon: 'assets/icons/ic_shopping_cart_24px.svg',
