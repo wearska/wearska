@@ -32,6 +32,11 @@
                     url: '/add',
                     templateUrl: 'app/views/admin/admin.add.view.html',
                     controller: 'WskAddCtrl'
+                })
+                .state('admin.settings', {
+                    url: '/settings',
+                    templateUrl: 'app/views/admin/settings/admin.settings.view.html',
+                    controller: 'WskAdminSettingsCtrl'
                 });
             $locationProvider.html5Mode(true);
         });

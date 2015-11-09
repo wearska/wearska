@@ -3,7 +3,7 @@
 
     angular
         .module('wearska')
-        .controller('WskCtrl', function($scope, $rootScope, $firebaseObject, $mdMedia, FIREBASE_USERS_URL, AUTHDATA, LOGOS, wskAuth, wskItems, wskScrollFactory) {
+        .controller('WskCtrl', function($scope, $rootScope, $firebaseArray, $firebaseObject, $mdMedia, FIREBASE_USERS_URL, AUTHDATA, LOGOS, wskAuth, wskItems, wskScrollFactory, wskStoreStructure) {
 
             var wsk = this;
 
@@ -62,15 +62,22 @@
                 });
 
             // ------------------------
-            // BRANDS
+            // STRUCTURE
             // ------------------------
 
-            wsk.brands = [
-                'Adidas',
-                'Puma',
-                'Reebok',
-                'Le Coq Sportif'
-            ];
+            wsk.structure = {
+                departments : []
+            };
+
+            var structureRef = wskStoreStructure.$ref();
+            var departmentsRef = structureRef.child('departments');
+            var departments = $firebaseArray(departmentsRef);
+
+
+            departments.$watch(function(event) {
+                var value = departments.$getRecord(event.key);
+                wsk.structure.departments.push(value);
+            });
 
         });
 

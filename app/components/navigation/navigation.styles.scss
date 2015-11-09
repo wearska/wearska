@@ -37,6 +37,9 @@ nav {
             -webkit-font-smoothing: antialiased;
             text-overflow: ellipsis;
             opacity: 0.87;
+            &.no-icon{
+                padding: 10px 0 10px 24px;
+            }
             &:hover{
                 opacity: 1;
             }
@@ -84,13 +87,13 @@ nav {
             &.button {
                 height: auto;
             }
-            
+
             //sub
             &.sub {
                 color: rgba(0,0,0,.54);
                 fill: rgba(0,0,0,.54);
             }
-            
+
             //sub
             &.active {
                 md-icon {
@@ -100,7 +103,7 @@ nav {
             &:hover {
                 background-color: rgb(240, 240, 240);
                 md-icon {
-                    
+
                     // fill: #e12a2a;
                 }
             }
@@ -115,7 +118,7 @@ nav {
             position: relative;
             will-change: max-height, height;
             transition: max-height 0.18s cubic-bezier(0.25, 0.8, 0.25, 1), height 0.18s cubic-bezier(0.25, 0.8, 0.25, 1);
-            
+
             // margin: 4px 0;
             md-checkbox,
             md-radio-button {
@@ -176,13 +179,13 @@ nav {
             }
         }
     }
-    
+
     //nav-section
     .nav-section-divider {
         margin: 12px 0;
         border-bottom: 1px solid #eee;
     }
-    
+
     // nav-section-divider
     //user section
     .user-section {

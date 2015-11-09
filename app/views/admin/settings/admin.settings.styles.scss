@@ -1,0 +1,119 @@
+.settings-card {
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    box-sizing: border-box;
+    font-weight: 400;
+    // font-size: 13px;
+    line-height: 20px;
+    border-radius: 2px;
+    margin: 16px auto;
+    overflow: hidden;
+    position: relative;
+    input {
+        font-size: 14px;
+    }
+    h1.settings-card-title {
+        font-size: 20px;
+        font-weight: 500;
+        margin: 0 0 12px;
+    }
+    h2.settings-card-subtitle {
+        font-size: 16px;
+        font-weight: 500;
+        margin: 0 0 6px;
+        color: rgba(0,0,0,.87);
+    }
+    .label {
+        font-weight: 500;
+    }
+    .footer {
+        margin: 12px 0 0;
+    }
+    .picture-bubble {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        position: absolute;
+        top: 24px;
+        right: 24px;
+    }
+    .add-business-link {
+        font-size: 12px;
+        cursor: pointer;
+        position: absolute;
+        color: rgba(0,0,0,.54);
+        margin-left: 48px;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+.address-block,
+.business-block {
+    position: relative;
+    .address-remove {
+        color: rgba(0,0,0,.54);
+        cursor: pointer;
+        &:hover {
+            color: rgba(0,0,0,.87);
+        }
+    }
+}
+.business-block {
+    margin-top: -16px;
+    padding-left: 32px;
+}
+.form {
+    position: relative;
+    .save-form-button {
+        margin: 0;
+    }
+    .disclaimer {
+        color: rgba(0,0,0,.54);
+        font-size: 11px;
+        font-weight: 400;
+        &.primary {
+            color: rgba(0,0,0,.87);
+        }
+    }
+}
+.settings-footer {
+    margin: 32px auto;
+    width: 440px;
+    text-align: center;
+    a.footer-link {
+        font-size: 14px;
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    .separator {
+        color: #212121;
+        margin: 0 12px;
+    }
+    p {
+        margin: 16px 0 0;
+        font-size: 10px;
+        color: #616161;
+    }
+}
+// departments add
+.hero-upload{
+    input[type="file"]{
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        outline: none;
+        opacity: 0;
+        cursor: pointer;
+    }
+}
