@@ -1,4 +1,5 @@
 <div class="page-content c-max main-page">
+    <wsk-hero ng-if="department.hero" data-file="{{department.hero}}"></wsk-hero>
     <div class="" layout>
         <div class="wsk-cell" flex="25" ng-repeat="item in wsk.items">
             <wsk-card card-resource="item"></wsk-card>

@@ -16,6 +16,7 @@
                 .state('store', {
                     url: '/store',
                     templateUrl: 'app/views/store/store.view.html',
+                    params: {department: null},
                     controller: 'WskStoreCtrl'
                 })
                 .state('auth', {

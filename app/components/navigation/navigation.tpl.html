@@ -43,7 +43,7 @@
 
 <section>
     <div class="nav-section" ng-cloak>
-        <a class="nav-item-container no-icon" href="{{item.ref}}" md-ink-ripple ng-repeat="item in wsk.structure.departments">
+        <a class="nav-item-container no-icon" ui-sref="store({department : item})" md-ink-ripple ng-repeat="item in wsk.structure.departments">
             {{item.name}}
             <md-icon class="right-icon l-right" md-svg-src="assets/icons/ic_navigate_next_24px.svg" ng-click="list.expand();" style="width:20px;"></md-icon>
         </a>

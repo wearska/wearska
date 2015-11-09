@@ -31,6 +31,12 @@
 
             $scope.addDep = function(newdep){
                 departments.$add(newdep);
+                uploader.uploadAll();
+                $scope.newdep = {
+                    name: '',
+                    hero: '',
+                    icon: ''
+                };
             };
 
             // hero uploader
@@ -39,14 +45,9 @@
             // -----------------------
 
             var uploader = $scope.uploader = new FileUploader({
-                url: 'api/items/uploadtemp.php',
+                url: 'api/structure/uploaddeps.php',
                 formData: [],
                 autoUpload: true
-            });
-
-            var postuploader = $scope.postuploader = new FileUploader({
-                url: 'api/items/upload.php',
-                formData: []
             });
 
             // FILTERS
@@ -60,42 +61,12 @@
             });
 
             // METHODS
-            uploader.onAfterAddingAll = function(addedFileItems) {
-                // console.info('onAfterAddingAll', addedFileItems);
-            };
-
-            uploader.onBeforeUploadItem = function(item) {
-                // console.info('onBeforeUploadItem', item);
-            };
-
-            postuploader.onBeforeUploadItem = function(item) {
-                console.info('onBeforeUploadItem with postuploader', item);
-            };
-
-            uploader.onCompleteAll = function() {
-                uploader.url = 'api/items/upload.php';
-                angular.forEach(uploader.queue, function(file) {
-                    file.url = 'api/items/upload.php';
-                    file.progress = 0;
-                    file.isSuccess = false;
-                    file.isUploaded = false;
-                    // preview files
-                    var filename = file.file.name,
-                        value = 'uploads/temp/' + file.formData[0].code + '/' + filename;
-                    value = value.replace(/\s+/g, '_');
-                    $scope.updateFiles(value, false);
-
-                    postuploader.queue.push(file);
-                });
-            };
 
             uploader.onAfterAddingFile = function(fileItem) {
-                var added = Date.now();
-                var rnd = '';
-                rnd = $filter('wskSerialize')(rnd);
-                fileItem.formData = [{
-                    code: rnd
-                }];
+                var filename = fileItem.file.name,
+                    value = 'uploads/structure/departments/' + filename;
+                value = value.replace(/\s+/g, '_');
+                $scope.newdep.hero = value;
             };
 
         });
