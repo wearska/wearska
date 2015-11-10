@@ -6,6 +6,11 @@
     display: block;
     text-align: left;
     outline: none;
+    &.with-hero{
+        #main{
+            padding-top: 300px;
+        }
+    }
 }
 .frontpage-content {
     display: block;
@@ -136,7 +141,7 @@ nav {
     margin-right: auto;
     position: relative;
     box-sizing: border-box;
-    
+
     // display: block;
 }
 @media #{$small-and-up} {
@@ -187,10 +192,10 @@ md-dialog {
 
 //Sidenav
 aside {
-    
+
 }
 
 // Footer
 footer {
-    
+
 }

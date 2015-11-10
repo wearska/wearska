@@ -66,18 +66,38 @@
             // ------------------------
 
             wsk.structure = {
-                departments : []
+                departments : [
+                    {
+                        name: 'Smart Tech',
+                        icon: '',
+                        hero: 'uploads/structure/departments/cool-gadgets-to-buy.jpg',
+                    }
+                ]
             };
+
+            var types = wsk.structure.types;
+            var kinds = wsk.structure.kinds;
 
             var structureRef = wskStoreStructure.$ref();
             var departmentsRef = structureRef.child('departments');
-            var departments = $firebaseArray(departmentsRef);
+            var departments = $firebaseObject(departmentsRef);
+
+            departments.$loaded()
+                .then(function(data) {
+                    // console.log(data);
+                    data.$bindTo($scope, "wsk.structure.departments")
+                    .then(function() {
+                    });
+                })
+                .catch(function(error) {
+                    console.log("Error:", error);
+                });
 
 
-            departments.$watch(function(event) {
-                var value = departments.$getRecord(event.key);
-                wsk.structure.departments.push(value);
-            });
+            // departments.$watch(function(event) {
+            //     var value = departments.$getRecord(event.key);
+            //     wsk.structure.departments.push(value);
+            // });
 
         });
 

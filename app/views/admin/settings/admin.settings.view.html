@@ -9,19 +9,19 @@
         <md-divider></md-divider>
         <div class="content content-padding">
             <div class="departments-list">
-                <div class="" layout layout-align="start center" ng-repeat="dep in structure.departments">
+                <div class="" layout layout-align="start center" ng-repeat="(key, value) in structure.departments">
                     <md-input-container>
                         <label for="">Name</label>
-                        <input ng-model="dep.name" type="text"/>
+                        <input ng-model="value.name" type="text"/>
                     </md-input-container>
                     <span flex></span>
-                    <md-button class="md-icon-button hero-upload">
-                        <md-icon ng-if="!dep.hero" md-svg-src="assets/icons/ic_cloud_upload_24px.svg" ng-class="{'brand-text' : dep.hero}"></md-icon>
-                        <md-icon class="brand-text" ng-if="dep.hero" md-svg-src="assets/icons/ic_cloud_done_24px.svg"></md-icon>
+                    <md-button aria-label="Hero upload" class="md-icon-button hero-upload">
+                        <md-icon ng-if="!value.hero" md-svg-src="assets/icons/ic_cloud_upload_24px.svg" ng-class="{'brand-text' : value.hero}"></md-icon>
+                        <md-icon class="brand-text" ng-if="value.hero" md-svg-src="assets/icons/ic_cloud_done_24px.svg"></md-icon>
                         <input nv-file-select type="file" uploader="uploader"/>
                     </md-button>
-                    <!-- <span flex="40">{{dep.hero}}</span> -->
-                    <md-button aria-label="Add department" class="md-icon-button" ng-click="addDep(newdep)" type="button">
+                    <!-- <span flex="40">{{value.hero}}</span> -->
+                    <md-button aria-label="Add department" class="md-icon-button" ng-click="removeDep(key)" type="button">
                         <md-icon md-svg-src="assets/icons/ic_remove_circle_outline_24px.svg"></md-icon>
                     </md-button>
                 </div>
@@ -33,7 +33,7 @@
                     <input ng-model="newdep.name" type="text"/>
                 </md-input-container>
                 <span flex></span>
-                <md-button class="md-icon-button hero-upload">
+                <md-button aria-label="Hero upload" class="md-icon-button hero-upload">
                     <md-icon md-svg-src="assets/icons/ic_cloud_upload_24px.svg"></md-icon>
                     <input nv-file-select type="file" uploader="uploader"/>
                 </md-button>

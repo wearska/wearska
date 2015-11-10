@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('wearska')
-        .controller('WskAdminSettingsCtrl', function($scope, $firebaseObject, $firebaseArray, FileUploader, wskStoreStructure) {
+        .controller('WskAdminSettingsCtrl', function($scope, $rootScope, $firebaseObject, $firebaseArray, FileUploader, wskStoreStructure) {
 
             $scope.wskStoreStructure = wskStoreStructure;
             var structureRef = wskStoreStructure.$ref();
@@ -11,7 +11,7 @@
 
             wskStoreStructure.$loaded()
                 .then(function(data) {
-                    wskStoreStructure.$bindTo($scope, "structure").then(function() {
+                    data.$bindTo($scope, "structure").then(function() {
                         console.log($scope.structure);
                     });
                 })
@@ -37,6 +37,12 @@
                     hero: '',
                     icon: ''
                 };
+            };
+
+            $scope.removeDep = function(key){
+                // $scope.structure.departments.splice(idx, 1);
+                console.log(key);
+                delete $scope.structure.departments[key];
             };
 
             // hero uploader

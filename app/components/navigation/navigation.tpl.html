@@ -20,20 +20,21 @@
                     <div class="nav-section" ng-cloak>
                         <a class="nav-item-container" href="{{item.ref}}" md-ink-ripple ng-repeat="item in wskNav.adminItems">
                             <md-icon md-svg-src="{{item.icon}}"></md-icon>{{item.title}}</a>
-                </section>
-                <!-- ADMIN SECTION END -->
-                <!-- USER SECTION START -->
-                <section ng-if="wsk.logged && !wsk.account.admin">
-                    <div class="nav-section" ng-cloak>
-                        <a class="nav-item-container" href="{{item.ref}}" md-ink-ripple ng-repeat="item in wskNav.accountItems">
-                            <md-icon md-svg-src="{{item.icon}}"></md-icon>{{item.title}}</a>
-                    </div>
-                </section>
-                <!-- USER SECTION END -->
-                <a class="nav-item-container sub" md-ink-ripple ng-click="nav.logout()" ng-show="wsk.logged">
-                    <md-icon md-svg-src=""></md-icon>Logout</a>
+                    </section>
+                    <!-- ADMIN SECTION END -->
+                    <!-- USER SECTION START -->
+                    <section ng-if="wsk.logged && !wsk.account.admin">
+                        <div class="nav-section" ng-cloak>
+                            <a class="nav-item-container" href="{{item.ref}}" md-ink-ripple ng-repeat="item in wskNav.accountItems">
+                                <md-icon md-svg-src="{{item.icon}}"></md-icon>{{item.title}}</a>
+                        </div>
+                    </section>
+                    <!-- USER SECTION END -->
+                    <a class="nav-item-container sub" md-ink-ripple ng-click="nav.logout()" ng-show="wsk.logged">
+                        <md-icon md-svg-src=""></md-icon>Logout</a>
 
-                <div class="nav-section-divider" ng-if="wsk.logged"></div>
+                    <div class="nav-section-divider" ng-if="wsk.logged"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -43,10 +44,10 @@
 
 <section>
     <div class="nav-section" ng-cloak>
-        <a class="nav-item-container no-icon" ui-sref="store({department : item})" md-ink-ripple ng-repeat="item in wsk.structure.departments">
+        <a class="nav-item-container no-icon" md-ink-ripple ng-repeat="item in wsk.structure.departments" ui-sref="store({department : item})">
             {{item.name}}
-            <md-icon class="right-icon l-right" md-svg-src="assets/icons/ic_navigate_next_24px.svg" ng-click="list.expand();" style="width:20px;"></md-icon>
         </a>
+        <div class="nav-section-divider" ng-if="wsk.logged"></div>
     </div>
 </section>
 
