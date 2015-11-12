@@ -40,21 +40,21 @@
                         <md-input-container flex-gt-md="30">
                             <label>Department</label>
                             <md-select ng-model="newitem.dep">
-                                <md-option ng-repeat="dep in wsk.deps" value="{{dep}}">{{dep}}</md-option>
+                                <md-option ng-repeat="dep in wsk.structure.departments" value="{{dep}}">{{dep.name}}</md-option>
                             </md-select>
                         </md-input-container>
                         <span flex=""></span>
                         <md-input-container flex-gt-md="30">
                             <label>Type</label>
                             <md-select ng-model="newitem.type">
-                                <md-option ng-repeat="type in wsk.types" value="{{type}}">{{type}}</md-option>
+                                <md-option ng-repeat="type in wsk.structure.types" value="{{type}}">{{type.name}}</md-option>
                             </md-select>
                         </md-input-container>
                         <span flex=""></span>
                         <md-input-container flex-gt-md="30">
                             <label>Kind</label>
                             <md-select ng-model="newitem.kind">
-                                <md-option ng-repeat="kind in wsk.kinds" value="{{kind}}">{{kind}}</md-option>
+                                <md-option ng-repeat="kind in wsk.structure.kinds" value="{{kind}}">{{kind.name}}</md-option>
                             </md-select>
                         </md-input-container>
                     </div>

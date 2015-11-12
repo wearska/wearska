@@ -7,7 +7,11 @@
             $scope.wskStoreStructure = wskStoreStructure;
             var structureRef = wskStoreStructure.$ref();
             var departmentsRef = structureRef.child('departments');
+            var typesRef = structureRef.child('types');
+            var kindsRef = structureRef.child('kinds');
             var departments = $firebaseArray(departmentsRef);
+            var types = $firebaseArray(typesRef);
+            var kinds = $firebaseArray(kindsRef);
 
             wskStoreStructure.$loaded()
                 .then(function(data) {
@@ -73,6 +77,22 @@
                     value = 'uploads/structure/departments/' + filename;
                 value = value.replace(/\s+/g, '_');
                 $scope.newdep.hero = value;
+            };
+
+            // --------------------------
+            // TYPES
+            // --------------------------
+            $scope.newtype = '';
+            $scope.addType = function(newtype){
+                types.$add(newtype);
+                uploader.uploadAll();
+                $scope.newtype = '';
+            };
+
+            $scope.removeType = function(key){
+                // $scope.structure.departments.splice(idx, 1);
+                console.log(key);
+                delete $scope.structure.types[key];
             };
 
         });

@@ -3,7 +3,7 @@
 
     angular
         .module('wearska')
-        .controller('WskCtrl', function($scope, $rootScope, $firebaseArray, $firebaseObject, $mdMedia, FIREBASE_USERS_URL, AUTHDATA, LOGOS, wskAuth, wskItems, wskScrollFactory, wskStoreStructure) {
+        .controller('WskCtrl', function($scope, $rootScope, $log, $firebaseArray, $firebaseObject, $mdMedia, FIREBASE_USERS_URL, AUTHDATA, LOGOS, wskAuth, wskItems, wskScrollFactory, wskStoreStructure) {
 
             var wsk = this;
 
@@ -65,15 +65,9 @@
             // STRUCTURE
             // ------------------------
 
-            wsk.structure = {
-                departments : [
-                    {
-                        name: 'Smart Tech',
-                        icon: '',
-                        hero: 'uploads/structure/departments/cool-gadgets-to-buy.jpg',
-                    }
-                ]
-            };
+            // DEPARTMENTS
+
+            wsk.structure = {};
 
             var types = wsk.structure.types;
             var kinds = wsk.structure.kinds;
@@ -81,23 +75,30 @@
             var structureRef = wskStoreStructure.$ref();
             var departmentsRef = structureRef.child('departments');
             var departments = $firebaseObject(departmentsRef);
+            var typesRef = structureRef.child('types');
+            var types = $firebaseObject(typesRef);
 
             departments.$loaded()
                 .then(function(data) {
-                    // console.log(data);
                     data.$bindTo($scope, "wsk.structure.departments")
-                    .then(function() {
-                    });
+                        .then(function() {
+
+                        });
                 })
                 .catch(function(error) {
                     console.log("Error:", error);
                 });
 
+            types.$loaded()
+                .then(function(data) {
+                    data.$bindTo($scope, "wsk.structure.types")
+                        .then(function() {
 
-            // departments.$watch(function(event) {
-            //     var value = departments.$getRecord(event.key);
-            //     wsk.structure.departments.push(value);
-            // });
+                        });
+                })
+                .catch(function(error) {
+                    console.log("Error:", error);
+                });
 
         });
 

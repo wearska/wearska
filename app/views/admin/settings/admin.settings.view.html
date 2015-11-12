@@ -1,4 +1,5 @@
 <div class="page-content c-max">
+    <!-- DEPARTMENTS START -->
     <div class="paper resting admin-settings-card settings-card">
         <div class="header content-padding">
             <h1 class="settings-card-title">Store departments</h1>
@@ -20,8 +21,8 @@
                         <md-icon class="brand-text" ng-if="value.hero" md-svg-src="assets/icons/ic_cloud_done_24px.svg"></md-icon>
                         <input nv-file-select type="file" uploader="uploader"/>
                     </md-button>
-                    <!-- <span flex="40">{{value.hero}}</span> -->
-                    <md-button aria-label="Add department" class="md-icon-button" ng-click="removeDep(key)" type="button">
+                    <span flex="40" class="department-filename">{{value.hero | wskFilename}}</span>
+                    <md-button aria-label="Remove department" class="md-icon-button" ng-click="removeDep(key)" type="button">
                         <md-icon md-svg-src="assets/icons/ic_remove_circle_outline_24px.svg"></md-icon>
                     </md-button>
                 </div>
@@ -37,8 +38,50 @@
                     <md-icon md-svg-src="assets/icons/ic_cloud_upload_24px.svg"></md-icon>
                     <input nv-file-select type="file" uploader="uploader"/>
                 </md-button>
-                <!-- <span flex="40">{{newdep.hero}}</span> -->
+                <span flex="40" class="department-filename">{{newdep.hero | wskFilename}}</span>
                 <md-button aria-label="Add department" class="md-icon-button" ng-click="addDep(newdep)" type="button">
+                    <md-icon md-svg-src="assets/icons/ic_add_circle_outline_24px.svg"></md-icon>
+                </md-button>
+            </div>
+        </div>
+    </div>
+    <!-- DEPARTMENTS END -->
+    <!-- TYPES START -->
+    <div class="paper resting admin-settings-card settings-card">
+        <div class="header content-padding">
+            <h1 class="settings-card-title">Item types</h1>
+            <div>Add some predefined types
+                <br>
+                Departments contain types which, in turn, have multiple "Kinds"</div>
+        </div>
+        <md-divider></md-divider>
+        <div class="content content-padding">
+            <div class="departments-list">
+                <div class="" layout layout-align="start center" ng-repeat="(key, value) in structure.types">
+                    <md-input-container>
+                        <label for="">Name</label>
+                        <input ng-model="value.name" type="text"/>
+                    </md-input-container>
+                    <span flex></span>
+                    <md-button aria-label="Hero upload" class="md-icon-button hero-upload">
+                        <md-icon ng-if="!value.hero" md-svg-src="assets/icons/ic_cloud_upload_24px.svg" ng-class="{'brand-text' : value.hero}"></md-icon>
+                        <md-icon class="brand-text" ng-if="value.hero" md-svg-src="assets/icons/ic_cloud_done_24px.svg"></md-icon>
+                        <input nv-file-select type="file" uploader="uploader"/>
+                    </md-button>
+                    <span flex="40" class="department-filename">{{value.hero | wskFilename}}</span>
+                    <md-button aria-label="Remove type" class="md-icon-button" ng-click="removeType(key)" type="button">
+                        <md-icon md-svg-src="assets/icons/ic_remove_circle_outline_24px.svg"></md-icon>
+                    </md-button>
+                </div>
+            </div>
+            <!-- New type -->
+            <div class="" layout layout-align="start center">
+                <md-input-container>
+                    <label for="">New type</label>
+                    <input ng-model="newtype.name" type="text"/>
+                </md-input-container>
+                <span flex></span>
+                <md-button aria-label="Add type" class="md-icon-button" ng-click="addType(newtype)" type="button">
                     <md-icon md-svg-src="assets/icons/ic_add_circle_outline_24px.svg"></md-icon>
                 </md-button>
             </div>

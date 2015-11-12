@@ -71,6 +71,13 @@
                 }
             };
         })
+        .filter('wskFilename', function() {
+            return function(input) {
+                if (input !== null && input !== undefined && input !== "") {
+                    return input.substring(input.lastIndexOf('/')+1);
+                }
+            };
+        })
         .filter('wskLowres', function() {
             return function(input) {
                 // return input ? input.replace(/(\.[\w\d_-]+)$/i, '_low$1') : input;
