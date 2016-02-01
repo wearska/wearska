@@ -68,6 +68,8 @@
             return function(input) {
                 if (input !== null && input !== undefined && input !== "") {
                     return angular.uppercase(input.replace(/[aeiou]/ig, '').substring(0, 3));
+                }else{
+                    return input;
                 }
             };
         })

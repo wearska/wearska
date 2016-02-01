@@ -2,52 +2,35 @@
     'use strict';
 
     angular.module('daksports')
-        .controller('DakAdminSettingsCtrl', function($scope, $rootScope, $firebaseObject, $firebaseArray, FileUploader, dakStoreStructure) {
+        .controller('DakAdminSettingsCtrl', function($scope, $filter, $rootScope, $firebaseObject, $firebaseArray, FileUploader, dakStoreStructure) {
 
-            $scope.dakStoreStructure = dakStoreStructure;
-            var structureRef = dakStoreStructure.$ref();
-            var departmentsRef = structureRef.child('departments');
-            var typesRef = structureRef.child('types');
-            var kindsRef = structureRef.child('kinds');
-            var departments = $firebaseArray(departmentsRef);
-            var types = $firebaseArray(typesRef);
-            var kinds = $firebaseArray(kindsRef);
-
-            dakStoreStructure.$loaded()
-                .then(function(data) {
-                    data.$bindTo($scope, "structure").then(function() {
-                        console.log($scope.structure);
-                    });
-                })
-                .catch(function(error) {
-                    console.log("Error:", error);
-                });
 
             // --------------------------
             // DEPARTMENTS
             // --------------------------
 
-            $scope.newdep = {
-                name: '',
-                hero: '',
-                icon: ''
-            };
+            $scope.depsExpand = false;
 
-            $scope.addDep = function(newdep){
-                departments.$add(newdep);
-                uploader.uploadAll();
-                $scope.newdep = {
-                    name: '',
-                    hero: '',
-                    icon: ''
-                };
-            };
+            $scope.depsExpandFactor = 0;
 
-            $scope.removeDep = function(key){
-                // $scope.structure.departments.splice(idx, 1);
-                console.log(key);
-                delete $scope.structure.departments[key];
-            };
+            $scope.depsToggle = function() {
+                $scope.depsExpand = !$scope.depsExpand;
+                $scope.depsExpandFactor = $scope.depsExpand ? 1 : 0;
+            }
+
+
+            // --------------------------
+            // BRANDS
+            // --------------------------
+
+            $scope.brandsExpand = false;
+
+            $scope.brandsExpandFactor = 0;
+
+            $scope.brandsToggle = function() {
+                $scope.brandsExpand = !$scope.brandsExpand;
+                $scope.brandsExpandFactor = $scope.brandsExpand ? 1 : 0;
+            }
 
             // hero uploader
             // -----------------------
@@ -82,18 +65,21 @@
             // --------------------------
             // TYPES
             // --------------------------
-            $scope.newtype = '';
-            $scope.addType = function(newtype){
-                types.$add(newtype);
-                uploader.uploadAll();
-                $scope.newtype = '';
-            };
 
-            $scope.removeType = function(key){
-                // $scope.structure.departments.splice(idx, 1);
-                console.log(key);
-                delete $scope.structure.types[key];
-            };
+            $scope.shortify = function() {
+                if ($scope.newtype.name) {
+                    $scope.newtype.short = $filter('dakShortify')($scope.newtype.name);
+                }
+            }
+
+            $scope.typesExpand = false;
+
+            $scope.typesExpandFactor = 0;
+            
+            $scope.typesToggle = function() {
+                $scope.typesExpand = !$scope.typesExpand;
+                $scope.typesExpandFactor = $scope.typesExpand ? 1 : 0;
+            }
 
         });
 

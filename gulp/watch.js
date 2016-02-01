@@ -56,7 +56,7 @@ gulp.task('watch', ['inject'], function() {
 
     watch([
         path.join(conf.paths.app, '/**/*.js'),
-        path.join(conf.paths.app, 'scripts/**/*.js'),
+        path.join(conf.paths.app, 'scripts/*.js'),
         path.join(conf.paths.app, 'views/**/*.js'),
         path.join(conf.paths.app, 'components/**/*.js')
     ], function(event) {

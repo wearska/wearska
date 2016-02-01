@@ -8,10 +8,10 @@
         <md-icon class="reset-icon" md-svg-src="assets/icons/ic_close_24px.svg" ng-click="BrandFilter.reset()" ng-show="BrandFilter.selected.length" style="margin-left: 8px; width:16px;"></md-icon>
         <md-icon class="right-icon l-right" md-svg-src="assets/icons/ic_keyboard_arrow_down_black_24px.svg" ng-click="list.expand();" style="width:20px;"></md-icon>
     </div>
-    <div class="nav-items-list" style="max-height:{{results.length * list.size}}px;">
-        <md-checkbox ng-checked="BrandFilter.exists(brand)" ng-class="{selected : BrandFilter.exists(brand)}" ng-click="BrandFilter.toggle(brand)" ng-disabled="!Counter.count(brand, 'brands')" ng-repeat="brand in $root.brands | filter: q as results">
-            {{ brand}}
-            <span style="color: rgba(0,0,0,.54)">• ({{ Counter.count(brand, 'brands')}})</span>
+    <div class="nav-items-list" style="max-height:{{results.length * list.size}}px;" layout="column">
+        <md-checkbox ng-checked="BrandFilter.exists(brand)" ng-class="{selected : BrandFilter.exists(brand)}" ng-click="BrandFilter.toggle(brand)" ng-disabled="!Counter.count(brand, 'brands')" ng-repeat="brand in dak.structure.brands | filter: q as results">
+            {{ brand.name}}
+            <span style="color: rgba(0,0,0,.54)">• ({{ Counter.count(brand.name, 'brands')}})</span>
         </md-checkbox>
     </div>
 </div>
@@ -22,10 +22,10 @@
         <md-icon class="reset-icon" md-svg-src="assets/icons/ic_close_24px.svg" ng-click="TypeFilter.reset()" ng-show="TypeFilter.selected.length" style="margin-left: 8px; width:16px;"></md-icon>
         <md-icon class="right-icon l-right" md-svg-src="assets/icons/ic_keyboard_arrow_down_black_24px.svg" ng-click="list.expand();" style="width:20px;"></md-icon>
     </div>
-    <div class="nav-items-list" style="max-height:{{results.length * list.size}}px;">
-        <md-checkbox ng-checked="TypeFilter.exists(type.type)" ng-class="{selected : TypeFilter.exists(type.type)}" ng-click="TypeFilter.toggle(type.type)" ng-disabled="!Counter.count(type.type, 'types')" ng-repeat="type in dak.structure.types | filter: q as results">
-            {{ type.type }}
-            <span style="color: rgba(0,0,0,.54)">• ({{ Counter.count(type.type, 'types')}})</span>
+    <div class="nav-items-list" style="max-height:{{results.length * list.size}}px;" layout="column">
+        <md-checkbox ng-checked="TypeFilter.exists(type.name)" ng-class="{selected : TypeFilter.exists(type.name)}" ng-click="TypeFilter.toggle(type.name)" ng-disabled="!Counter.count(type.name, 'types')" ng-repeat="type in dak.structure.types | filter: q as results">
+            {{ type.name }}
+            <span style="color: rgba(0,0,0,.54)">• ({{ Counter.count(type.name, 'types')}})</span>
         </md-checkbox>
     </div>
 </div>
@@ -36,7 +36,7 @@
         <md-icon class="reset-icon" md-svg-src="assets/icons/ic_close_24px.svg" ng-click="KindFilter.reset()" ng-show="KindFilter.selected.length" style="margin-left: 8px; width:16px;"></md-icon>
         <md-icon class="right-icon l-right" md-svg-src="assets/icons/ic_keyboard_arrow_down_black_24px.svg" ng-click="list.expand();" style="width:20px;"></md-icon>
     </div>
-    <div class="nav-items-list" style="max-height:{{results.length * list.size}}px;">
+    <div class="nav-items-list" style="max-height:{{results.length * list.size}}px;" layout="column">
         <md-checkbox ng-checked="KindFilter.exists(kind)" ng-class="{selected : KindFilter.exists(kind)}" ng-click="KindFilter.toggle(kind)" ng-disabled="!Counter.count(kind, 'kinds')" ng-repeat="kind in $root.kinds | filter: q as results">
             {{ kind }}
             <span style="color: rgba(0,0,0,.54)">• ({{ Counter.count(kind, 'kinds')}})</span>

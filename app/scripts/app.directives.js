@@ -11,7 +11,7 @@
                             inputValue = '';
                         }
                         var capitalized = inputValue.charAt(0).toUpperCase() +
-                            inputValue.substring(1);
+                            inputValue.substring(1).toLowerCase();
                         if (capitalized !== inputValue) {
                             modelCtrl.$setViewValue(capitalized);
                             modelCtrl.$render();

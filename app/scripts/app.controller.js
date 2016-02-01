@@ -1,9 +1,9 @@
-(function () {
+(function() {
     'use strict';
 
     angular
         .module('daksports')
-        .controller('DakCtrl', function ($scope, $rootScope, $log, $firebaseArray, $firebaseObject, $mdMedia, FIREBASE_USERS_URL, AUTHDATA, LOGOS, dakAuth, dakItems, dakScrollFactory, dakStoreStructure) {
+        .controller('DakCtrl', function($scope, $rootScope, $log, $firebaseArray, $firebaseObject, $mdMedia, FIREBASE_USERS_URL, FIREBASE_URL, AUTHDATA, LOGOS, dakAuth, dakItems, dakScrollFactory, dakStoreStructure) {
 
             var dak = this;
 
@@ -16,14 +16,14 @@
             dak.account = {};
             dak.logged = false;
 
-            dakAuth.$onAuth(function (authData) {
+            dakAuth.$onAuth(function(authData) {
                 if (authData) {
                     dak.logged = true;
                     // get user data
                     var userRef = new Firebase(FIREBASE_USERS_URL + '/' + authData.uid);
                     var userObj = $firebaseObject(userRef);
                     userObj.$bindTo($scope, "account")
-                        .then(function () {
+                        .then(function() {
                             dak.account = $scope.account;
                         });
 
@@ -41,7 +41,7 @@
             // sidebar toggle
 
             dak.sidebarOpen = $mdMedia('gt-sm');
-            dak.toggleSidebar = function () {
+            dak.toggleSidebar = function() {
                 dak.sidebarOpen = !dak.sidebarOpen;
             };
 
@@ -51,13 +51,13 @@
 
             dak.items = null;
             dakItems.$loaded()
-                .then(function (data) {
+                .then(function(data) {
                     data.$bindTo($scope, "dak.items")
-                        .then(function () {
+                        .then(function() {
                             $rootScope.$broadcast('items: loaded', {});
                         });
                 })
-                .catch(function (error) {
+                .catch(function(error) {
                     console.error("Error:", error);
                 });
 
@@ -67,36 +67,56 @@
 
             // DEPARTMENTS
 
+            var structureRef = new Firebase(FIREBASE_URL + '/structure');
+            var departmentsRef = structureRef.child('departments');
+            var departments = $firebaseArray(departmentsRef);
+            var brandsRef = structureRef.child('brands');
+            var brands = $firebaseArray(brandsRef);
+            var typesRef = structureRef.child('types');
+            var types = $firebaseArray(typesRef);
+            var kindsRef = structureRef.child('kinds');
+            var kinds = $firebaseArray(kindsRef);
+
             dak.structure = {};
 
-            var types = dak.structure.types;
-            var kinds = dak.structure.kinds;
 
-            var structureRef = dakStoreStructure.$ref();
-            var departmentsRef = structureRef.child('departments');
-            var departments = $firebaseObject(departmentsRef);
-            var typesRef = structureRef.child('types');
-            var types = $firebaseObject(typesRef);
-
+            // load departments
             departments.$loaded()
-                .then(function (data) {
-                    data.$bindTo($scope, "dak.structure.departments")
-                        .then(function () {
-
-                        });
+                .then(function(data) {
+                    dak.structure.departments = data;
+                    $rootScope.$broadcast('departments: bound', {});
                 })
-                .catch(function (error) {
+                .catch(function(error) {
                     console.log("Error:", error);
                 });
 
-            types.$loaded()
-                .then(function (data) {
-                    data.$bindTo($scope, "dak.structure.types")
-                        .then(function () {
-
-                        });
+            // load brands
+            brands.$loaded()
+                .then(function(data) {
+                    dak.structure.brands = data;
+                    $rootScope.$broadcast('brands: bound', {});
                 })
-                .catch(function (error) {
+                .catch(function(error) {
+                    console.log("Error:", error);
+                });
+
+            // load types
+            types.$loaded()
+                .then(function(data) {
+                    dak.structure.types = data;
+                    $rootScope.$broadcast('types: bound', {});
+                })
+                .catch(function(error) {
+                    console.log("Error:", error);
+                });
+
+            // load kinds
+            kinds.$loaded()
+                .then(function(data) {
+                    dak.structure.kinds = data;
+                    $rootScope.$broadcast('kinds: bound', {});
+                })
+                .catch(function(error) {
                     console.log("Error:", error);
                 });
 

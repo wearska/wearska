@@ -102,6 +102,26 @@
         color: #616161;
     }
 }
+.settings-card{
+    .toggle-button {
+        md-icon {
+            transition: transform 0.27s ease-in-out;
+            transform: rotate(0);
+        }
+        &.open {
+            md-icon {
+                transform: rotate(180deg);
+            }
+        }
+    }
+    .content{
+        transition: height 0.27s ease-in-out, padding 0s linear 0.27s;
+        &.delayed{
+            transition: height 0.27s ease-in-out, padding 0s linear;
+        }
+    }
+}
+
 // departments add
 .hero-upload {
     input[type="file"] {
@@ -118,7 +138,8 @@
     }
 }
 .admin-settings-card {
-    .md-button.md-icon-button, .department-filename {
+    .md-button.md-icon-button,
+    .department-filename {
         margin-bottom: 26px;
     }
     .department-filename {
