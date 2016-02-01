@@ -1,8 +1,8 @@
 (function() {
     'use strict';
 
-    angular.module('wearska')
-        .controller('WskAddCtrl', function($scope, $timeout, $filter, $q, FileUploader, wskItems, FIREBASE_ITEMS_URL) {
+    angular.module('daksports')
+        .controller('DakAddCtrl', function($scope, $timeout, $filter, $q, FileUploader, dakItems, FIREBASE_ITEMS_URL) {
 
             // -----------------------------
             // INIT ITEM
@@ -223,7 +223,7 @@
             uploader.onAfterAddingFile = function(fileItem) {
                 var added = Date.now();
                 var rnd = '';
-                rnd = $filter('wskSerialize')(rnd);
+                rnd = $filter('dakSerialize')(rnd);
                 fileItem.formData = [{
                     code: rnd
                 }];

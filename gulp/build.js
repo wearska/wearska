@@ -13,13 +13,13 @@ gulp.task('partials', function() {
     return gulp.src([
             path.join(conf.paths.app, '/**/*.html')
         ])
-        .pipe($.minifyHtml({
+        .pipe($.htmlmin({
             empty: true,
             spare: true,
             quotes: true
         }))
         .pipe($.angularTemplatecache('templateCacheHtml.js', {
-            module: 'wearska',
+            module: 'daksports',
             root: 'app'
         }))
         .pipe(gulp.dest(conf.paths.tmp + '/partials/'));
@@ -52,14 +52,14 @@ gulp.task('html', ['inject', 'partials'], function() {
         .pipe(cssFilter)
         // .pipe($.csso())
         .pipe($.sourcemaps.init())
-        .pipe($.minifyCss())
+        .pipe($.cssnano())
         .pipe($.sourcemaps.write())
         .pipe(cssFilter.restore)
         .pipe(assets.restore())
         .pipe($.useref())
         // .pipe($.revReplace())
         .pipe(htmlFilter)
-        .pipe($.minifyHtml({
+        .pipe($.htmlmin({
             empty: true,
             spare: true,
             quotes: true,

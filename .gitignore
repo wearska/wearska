@@ -3,7 +3,7 @@ bower_components/
 *.log
 
 _dak/
-_wsk/
+_dak/
 build/
 dist/
 resources/

@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('wearska')
+    angular.module('daksports')
         .factory('Counter', function($rootScope, $filter, BrandFilter, TypeFilter, KindFilter, PriceFilter, PromoFilter, FitFilter){
             var obj = {};
             var res = {};

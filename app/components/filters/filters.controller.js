@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('wearska')
+  angular.module('daksports')
     .controller('FilterBlockCtrl', function($scope) {
 
     })

@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('wskCart', [])
-        .run(['$rootScope', 'wskAuth', 'wskShoppingLists', function($rootScope, wskAuth, wskShoppingLists) {
+        .module('dakCart', [])
+        .run(['$rootScope', 'dakAuth', 'dakShoppingLists', function($rootScope, dakAuth, dakShoppingLists) {
 
         }])
 

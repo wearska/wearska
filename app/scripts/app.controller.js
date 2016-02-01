@@ -1,36 +1,36 @@
-(function() {
+(function () {
     'use strict';
 
     angular
-        .module('wearska')
-        .controller('WskCtrl', function($scope, $rootScope, $log, $firebaseArray, $firebaseObject, $mdMedia, FIREBASE_USERS_URL, AUTHDATA, LOGOS, wskAuth, wskItems, wskScrollFactory, wskStoreStructure) {
+        .module('daksports')
+        .controller('DakCtrl', function ($scope, $rootScope, $log, $firebaseArray, $firebaseObject, $mdMedia, FIREBASE_USERS_URL, AUTHDATA, LOGOS, dakAuth, dakItems, dakScrollFactory, dakStoreStructure) {
 
-            var wsk = this;
+            var dak = this;
 
-            $scope.wskScroll = wskScrollFactory;
-            wsk.LOGOS = LOGOS;
+            $scope.dakScroll = dakScrollFactory;
+            dak.LOGOS = LOGOS;
 
             // ---------------------------
             // ACCOUNT
             // ---------------------------
-            wsk.account = {};
-            wsk.logged = false;
+            dak.account = {};
+            dak.logged = false;
 
-            wskAuth.$onAuth(function(authData) {
+            dakAuth.$onAuth(function (authData) {
                 if (authData) {
-                    wsk.logged = true;
+                    dak.logged = true;
                     // get user data
                     var userRef = new Firebase(FIREBASE_USERS_URL + '/' + authData.uid);
                     var userObj = $firebaseObject(userRef);
                     userObj.$bindTo($scope, "account")
-                        .then(function() {
-                            wsk.account = $scope.account;
+                        .then(function () {
+                            dak.account = $scope.account;
                         });
 
 
                 } else {
-                    wsk.account = {};
-                    wsk.logged = false;
+                    dak.account = {};
+                    dak.logged = false;
                 }
             });
 
@@ -40,24 +40,24 @@
 
             // sidebar toggle
 
-            wsk.sidebarOpen = $mdMedia('gt-sm');
-            wsk.toggleSidebar = function() {
-                wsk.sidebarOpen = !wsk.sidebarOpen;
+            dak.sidebarOpen = $mdMedia('gt-sm');
+            dak.toggleSidebar = function () {
+                dak.sidebarOpen = !dak.sidebarOpen;
             };
 
             // ------------------------
             // ITEMS
             // ------------------------
 
-            wsk.items = null;
-            wskItems.$loaded()
-                .then(function(data) {
-                    data.$bindTo($scope, "wsk.items")
-                        .then(function() {
+            dak.items = null;
+            dakItems.$loaded()
+                .then(function (data) {
+                    data.$bindTo($scope, "dak.items")
+                        .then(function () {
                             $rootScope.$broadcast('items: loaded', {});
                         });
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.error("Error:", error);
                 });
 
@@ -67,36 +67,36 @@
 
             // DEPARTMENTS
 
-            wsk.structure = {};
+            dak.structure = {};
 
-            var types = wsk.structure.types;
-            var kinds = wsk.structure.kinds;
+            var types = dak.structure.types;
+            var kinds = dak.structure.kinds;
 
-            var structureRef = wskStoreStructure.$ref();
+            var structureRef = dakStoreStructure.$ref();
             var departmentsRef = structureRef.child('departments');
             var departments = $firebaseObject(departmentsRef);
             var typesRef = structureRef.child('types');
             var types = $firebaseObject(typesRef);
 
             departments.$loaded()
-                .then(function(data) {
-                    data.$bindTo($scope, "wsk.structure.departments")
-                        .then(function() {
+                .then(function (data) {
+                    data.$bindTo($scope, "dak.structure.departments")
+                        .then(function () {
 
                         });
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.log("Error:", error);
                 });
 
             types.$loaded()
-                .then(function(data) {
-                    data.$bindTo($scope, "wsk.structure.types")
-                        .then(function() {
+                .then(function (data) {
+                    data.$bindTo($scope, "dak.structure.types")
+                        .then(function () {
 
                         });
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.log("Error:", error);
                 });
 

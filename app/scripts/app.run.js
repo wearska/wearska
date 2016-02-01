@@ -1,8 +1,8 @@
-(function() {
+(function () {
     'use strict';
 
     angular
-        .module('wearska')
+        .module('daksports')
         .run(runBlock);
 
     /** @ngInject */
@@ -13,7 +13,7 @@
 
         var authData = authObj.$getAuth();
         $log.debug("checking if session exists");
-        
+
         if (authData) {
             $log.debug("Session exists");
             AUTHDATA.logged = true;
@@ -24,6 +24,7 @@
             AUTHDATA.uid = null;
         }
         $log.debug('runBlock end');
+
     }
 
 })();

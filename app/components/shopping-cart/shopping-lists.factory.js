@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('wskCart')
-        .factory('wskShoppingLists', function($rootScope, $http, $q, $filter, wskAuth, wskShoppingCart) {
+        .module('dakCart')
+        .factory('dakShoppingLists', function($rootScope, $http, $q, $filter, dakAuth, dakShoppingCart) {
             var obj = {};
             var api = 'api/shopping-lists/';
             var restoring = false;
@@ -24,8 +24,8 @@
             };
 
             obj.post = function(list) {
-                if (wskAuth.$getwskAuth()) {
-                    var uid = wskAuth.$getwskAuth().uid;
+                if (dakAuth.$getdakAuth()) {
+                    var uid = dakAuth.$getdakAuth().uid;
                     var data = {};
                     data.userid = uid
                     data.listid = parseFloat(list.id);
@@ -50,10 +50,10 @@
             };
 
             obj.put = function(list) {
-                if (wskAuth.$getwskAuth()) {
-                    var uid = wskAuth.$getwskAuth().uid;
+                if (dakAuth.$getdakAuth()) {
+                    var uid = dakAuth.$getdakAuth().uid;
                     var data = {};
-                    data.userid = wskAuth.$getwskAuth().uid;
+                    data.userid = dakAuth.$getdakAuth().uid;
                     data.listid = parseFloat(list.id);
                     data.added = list.added;
                     data.listname = list.name;
@@ -77,7 +77,7 @@
             obj.remove = function(list) {
                 var data = {};
                 data.listid = parseFloat(list.id);
-                if (wskAuth.$getwskAuth()) {
+                if (dakAuth.$getdakAuth()) {
                     return $http.post(api + 'remove.php', data).then(function(results) {
                         var idx = obj.lists.indexOf(list);
                         obj.lists.splice(idx, 1);
@@ -88,7 +88,7 @@
                 };
             };
 
-            $rootScope.$on('wskCart: changed', function() {
+            $rootScope.$on('dakCart: changed', function() {
                 angular.forEach(obj.lists, function(list) {
                     if (list.items.length > 0) {
                         list.update();
@@ -99,8 +99,8 @@
             });
 
             $rootScope.$on('products:filled', function() {
-                if (wskAuth.$getwskAuth()) {
-                    var uid = wskAuth.$getwskAuth().uid;
+                if (dakAuth.$getdakAuth()) {
+                    var uid = dakAuth.$getdakAuth().uid;
                     obj.query(uid)
                         .then(function(lists) {
                             if (lists.length) {
@@ -122,14 +122,14 @@
                 };
             });
 
-            $rootScope.$on('wskCart: emptied', function() {
+            $rootScope.$on('dakCart: emptied', function() {
                 angular.forEach(obj.lists, function(list) {
                     list.unSyncToCart(false);
                     list.update();
                 });
             });
 
-            $rootScope.$on('wskShoppingLists: item-changed', function() {
+            $rootScope.$on('dakShoppingLists: item-changed', function() {
                 if (!restoring) {
                     angular.forEach(obj.lists, function(list) {
                         list.update();
@@ -161,16 +161,16 @@
                         items: [],
                         syncToCart: function() {
                             this.inCart = 1;
-                            wskShoppingCart.lists.push(this);
-                            $rootScope.$broadcast('wskShoppingLists: list-synced', {});
+                            dakShoppingCart.lists.push(this);
+                            $rootScope.$broadcast('dakShoppingLists: list-synced', {});
                             this.update();
                         },
                         unSyncToCart: function(broadcast) {
                             this.inCart = 0;
-                            var idx = wskShoppingCart.lists.indexOf(this);
-                            wskShoppingCart.lists.splice(idx, 1);
+                            var idx = dakShoppingCart.lists.indexOf(this);
+                            dakShoppingCart.lists.splice(idx, 1);
                             if (broadcast) {
-                                $rootScope.$broadcast('wskShoppingLists: list-unsynced', {});
+                                $rootScope.$broadcast('dakShoppingLists: list-unsynced', {});
                             }
                             this.update();
                         },
@@ -219,7 +219,7 @@
                                 });
                             }).then(function() {
                                 obj.put(list);
-                                $rootScope.$broadcast('wskShoppingLists: list-changed', {});
+                                $rootScope.$broadcast('dakShoppingLists: list-changed', {});
                             });
                             deferred.resolve();
                         }
@@ -234,7 +234,7 @@
                 obj.lists.push(list);
 
                 // broadcast the creation of the new list
-                $rootScope.$broadcast('wskShoppingLists: list-added', list);
+                $rootScope.$broadcast('dakShoppingLists: list-added', list);
                 obj.post(list);
             };
             obj.restoreList = function(data) {
@@ -248,15 +248,15 @@
                     items: [],
                     syncToCart: function() {
                         this.inCart = 1;
-                        wskShoppingCart.lists.push(this);
-                        $rootScope.$broadcast('wskShoppingLists: list-synced', {});
+                        dakShoppingCart.lists.push(this);
+                        $rootScope.$broadcast('dakShoppingLists: list-synced', {});
                     },
                     unSyncToCart: function(broadcast) {
                         this.inCart = 0;
-                        var idx = wskShoppingCart.lists.indexOf(this);
-                        wskShoppingCart.lists.splice(idx, 1);
+                        var idx = dakShoppingCart.lists.indexOf(this);
+                        dakShoppingCart.lists.splice(idx, 1);
                         if (broadcast) {
-                            $rootScope.$broadcast('wskShoppingLists: list-unsynced', {});
+                            $rootScope.$broadcast('dakShoppingLists: list-unsynced', {});
                         }
                     },
                     count: function() {
@@ -304,7 +304,7 @@
                             });
                         }).then(function() {
                             obj.put(list);
-                            $rootScope.$broadcast('wskShoppingLists: list-changed', {});
+                            $rootScope.$broadcast('dakShoppingLists: list-changed', {});
                         });
                         deferred.resolve();
                     }
@@ -328,7 +328,7 @@
                     };
 
                     // broadcast the creation of the new list
-                    $rootScope.$broadcast('wskShoppingLists: list-added', list);
+                    $rootScope.$broadcast('dakShoppingLists: list-added', list);
                 });
                 deferred.resolve();
 
@@ -379,7 +379,7 @@
                 if (angular.isObject(inList)) {
                     //Update quantity of an item if it's already in the list
                     inList.setCount(count, false);
-                    $rootScope.$broadcast('wskShoppingLists: item-changed', {});
+                    $rootScope.$broadcast('dakShoppingLists: item-changed', {});
                 } else {
                     var item = {};
                     item.product = angular.copy(product);
@@ -406,12 +406,12 @@
 
                         list.items.push(item);
 
-                    $rootScope.$broadcast('wskShoppingCart: item-added', {});
-                    $rootScope.$broadcast('wskShoppingCart: cart-changed', {});
-                    $rootScope.$broadcast('wskShoppingLists: item-added', {});
-                    $rootScope.$broadcast('wskShoppingLists: item-changed', {});
+                    $rootScope.$broadcast('dakShoppingCart: item-added', {});
+                    $rootScope.$broadcast('dakShoppingCart: cart-changed', {});
+                    $rootScope.$broadcast('dakShoppingLists: item-added', {});
+                    $rootScope.$broadcast('dakShoppingLists: item-changed', {});
                 }
-                $rootScope.$broadcast('wskShoppingLists: list-changed', {});
+                $rootScope.$broadcast('dakShoppingLists: list-changed', {});
             };
 
             obj.getListItem = function(code, size, list) {
@@ -427,7 +427,7 @@
             };
 
             obj.getCartItemByCode = function(code) {
-                var items = wskShoppingCart.items;
+                var items = dakShoppingCart.items;
                 var item = false;
 
                 angular.forEach(items, function(d) {
@@ -455,7 +455,7 @@
                         });
                     });
                 }).then(function() {
-                    $rootScope.$broadcast('wskCart: changed', {});
+                    $rootScope.$broadcast('dakCart: changed', {});
                 });
                 deferred.resolve();
             };

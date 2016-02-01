@@ -2,11 +2,14 @@
     'use strict';
 
     angular
-        .module('wearska')
-        .controller('MainCtrl', function($scope, wskScrollFactory, wskItems) {
-            $scope.wskScroll = wskScrollFactory;
-            
-            $scope.wskItems = wskItems;
+        .module('daksports')
+        .controller('MainCtrl', function($scope, dakScrollFactory, heroService, dakItems) {
+            $scope.dakScroll = dakScrollFactory;
+
+            $scope.dakItems = dakItems;
+
+            heroService.src = 'uploads/heroes/grand_opening.jpg';
+            heroService.position = 'center';
         });
 
 })();

@@ -1,8 +1,8 @@
 (function() {
     'use strict';
 
-    angular.module('wearska')
-        .factory('wskNav', function() {
+    angular.module('daksports')
+        .factory('dakNav', function() {
             var obj = {};
 
             obj.adminItems = [{

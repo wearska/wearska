@@ -1,11 +1,11 @@
 (function() {
     'use strict';
 
-    angular.module('wearska')
-        .controller('WskAdminSettingsCtrl', function($scope, $rootScope, $firebaseObject, $firebaseArray, FileUploader, wskStoreStructure) {
+    angular.module('daksports')
+        .controller('DakAdminSettingsCtrl', function($scope, $rootScope, $firebaseObject, $firebaseArray, FileUploader, dakStoreStructure) {
 
-            $scope.wskStoreStructure = wskStoreStructure;
-            var structureRef = wskStoreStructure.$ref();
+            $scope.dakStoreStructure = dakStoreStructure;
+            var structureRef = dakStoreStructure.$ref();
             var departmentsRef = structureRef.child('departments');
             var typesRef = structureRef.child('types');
             var kindsRef = structureRef.child('kinds');
@@ -13,7 +13,7 @@
             var types = $firebaseArray(typesRef);
             var kinds = $firebaseArray(kindsRef);
 
-            wskStoreStructure.$loaded()
+            dakStoreStructure.$loaded()
                 .then(function(data) {
                     data.$bindTo($scope, "structure").then(function() {
                         console.log($scope.structure);

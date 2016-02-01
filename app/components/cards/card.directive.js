@@ -1,8 +1,8 @@
 (function() {
   'use strict';
 
-  angular.module('wearska')
-    .directive('wskCard', function() {
+  angular.module('daksports')
+    .directive('dakCard', function() {
       return {
         restrict: 'E',
         controller: 'CardCtrl',
@@ -15,7 +15,7 @@
         }
       }
     })
-    .directive('wskCardPreview', function() {
+    .directive('dakCardPreview', function() {
       return {
         restrict: 'E',
         controller: 'CardCtrl',
@@ -28,12 +28,12 @@
         }
       }
     })
-    .directive('wskTile', function() {
+    .directive('dakTile', function() {
       return {
         restrict: 'A',
         scope: false,
         link: function(scope, el, attr) {
-          el.addClass('wsk-tile');
+          el.addClass('dak-tile');
         }
       }
     });

@@ -1,17 +1,17 @@
 (function() {
     'use strict';
 
-    angular.module('wearska')
-        .controller('NavCtrl', function($rootScope, $scope, $state, $location, wskAuth, wskNav, wskShoppingCart ,Counter, BrandFilter, TypeFilter, KindFilter, PriceFilter, PromoFilter, FitFilter) {
+    angular.module('daksports')
+        .controller('NavCtrl', function($rootScope, $scope, $state, $location, dakAuth, dakNav, dakShoppingCart ,Counter, BrandFilter, TypeFilter, KindFilter, PriceFilter, PromoFilter, FitFilter) {
 
             // LOGOUT
             this.logout = function() {
-                wskAuth.$unauth();
+                dakAuth.$unauth();
                 $location.path('');
             };
 
             // FILTERS
-            $scope.wskShoppingCart = wskShoppingCart;
+            $scope.dakShoppingCart = dakShoppingCart;
             $scope.Counter = Counter;
             $scope.BrandFilter = BrandFilter;
             $scope.TypeFilter = TypeFilter;
@@ -21,7 +21,7 @@
             $scope.FitFilter = FitFilter;
 
             $scope.state = $state;
-            $scope.wskNav = wskNav;
+            $scope.dakNav = dakNav;
 
 
         })

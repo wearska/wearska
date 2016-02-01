@@ -1,8 +1,8 @@
 (function() {
   'use strict';
 
-  angular.module('wearska')
-    .directive('wskShoppingList', function() {
+  angular.module('daksports')
+    .directive('dakShoppingList', function() {
       return {
         restrict: 'E',
         scope: {

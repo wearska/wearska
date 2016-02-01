@@ -21,7 +21,7 @@
                         <md-icon class="brand-text" ng-if="value.hero" md-svg-src="assets/icons/ic_cloud_done_24px.svg"></md-icon>
                         <input nv-file-select type="file" uploader="uploader"/>
                     </md-button>
-                    <span flex="40" class="department-filename">{{value.hero | wskFilename}}</span>
+                    <span flex="40" class="department-filename">{{value.hero | dakFilename}}</span>
                     <md-button aria-label="Remove department" class="md-icon-button" ng-click="removeDep(key)" type="button">
                         <md-icon md-svg-src="assets/icons/ic_remove_circle_outline_24px.svg"></md-icon>
                     </md-button>
@@ -38,7 +38,7 @@
                     <md-icon md-svg-src="assets/icons/ic_cloud_upload_24px.svg"></md-icon>
                     <input nv-file-select type="file" uploader="uploader"/>
                 </md-button>
-                <span flex="40" class="department-filename">{{newdep.hero | wskFilename}}</span>
+                <span flex="40" class="department-filename">{{newdep.hero | dakFilename}}</span>
                 <md-button aria-label="Add department" class="md-icon-button" ng-click="addDep(newdep)" type="button">
                     <md-icon md-svg-src="assets/icons/ic_add_circle_outline_24px.svg"></md-icon>
                 </md-button>
@@ -68,7 +68,7 @@
                         <md-icon class="brand-text" ng-if="value.hero" md-svg-src="assets/icons/ic_cloud_done_24px.svg"></md-icon>
                         <input nv-file-select type="file" uploader="uploader"/>
                     </md-button>
-                    <span flex="40" class="department-filename">{{value.hero | wskFilename}}</span>
+                    <span flex="40" class="department-filename">{{value.hero | dakFilename}}</span>
                     <md-button aria-label="Remove type" class="md-icon-button" ng-click="removeType(key)" type="button">
                         <md-icon md-svg-src="assets/icons/ic_remove_circle_outline_24px.svg"></md-icon>
                     </md-button>

@@ -1,16 +1,20 @@
 (function() {
     'use strict';
 
-    angular.module('wearska')
-        .controller('WskHeroCtrl', function($rootScope, $scope, wskScrollFactory) {
+    angular.module('daksports')
+        .controller('DakHeroCtrl', function($rootScope, $scope, dakScrollFactory, heroService) {
 
             $rootScope.$broadcast('hero: on', {});
-            
-            $scope.wskScroll = wskScrollFactory;
 
-            $scope.$on('$destroy', function() {
+            $scope.$on('$destroy', function () {
                 $rootScope.$broadcast('hero: off', {});
             });
+
+            var hero = this;
+
+            hero.dakScroll = dakScrollFactory;
+            hero.heroService = heroService;
+            hero.src = heroService.src;
         });
 
 })();

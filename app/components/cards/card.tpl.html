@@ -1,7 +1,7 @@
-<div class="wsk-card paper resting slide-top" ng-cloak>
+<div class="dak-card paper resting slide-top" ng-cloak>
     <div class="product-media">
         <a href="/product/{{item.code}}">
-            <div class="product-img ar_1-1" md-ink-ripple ng-cloak style="background-image: url({{item.files[item.thumb] | wskLowres}});"></div>
+            <div class="product-img ar_1-1" md-ink-ripple ng-cloak style="background-image: url({{item.files[item.thumb] | dakLowres}});"></div>
             <div class="hoverlay"></div>
         </a>
         <div class="product-media-actions">
@@ -33,7 +33,7 @@
                 <p class="product-subtitle single-line secondary-text-color">{{item.subname}}</p>
             </div>
             <div class="excerpt-container">
-                <p class="product-excerpt secondary-text-color" wsk-lines-limit="2">{{item.excerpt}}</p>
+                <p class="product-excerpt secondary-text-color" dak-lines-limit="2">{{item.excerpt}}</p>
             </div>
         </div>
         <div class="card-menu">
@@ -101,7 +101,7 @@
             </div>
             <!-- <span ng-show="item.sizes.length > 1" show-gt-sm></span> -->
             <span ng-show="item.sizes.length > 1" show-gt-sm></span>
-            <button class="dak-button" md-ink-ripple md-theme="brand" ng-disabled="orderForm.$invalid" type="submit">
+            <button class="dak-button" md-ink-ripple md-theme="brand-black" ng-disabled="orderForm.$invalid" type="submit">
                 <div class="icon-bg"></div>
                 <md-icon md-svg-src="assets/icons/ic_playlist_add_24px.svg" style="position: relative; margin-right: 16px; color: #fff"></md-icon>
                 Adauga in lista

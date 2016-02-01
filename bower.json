@@ -1,47 +1,41 @@
 {
-  "name": "wearska",
-  "version": "0.0.0",
-  "authors": [
-    "wearska <wearska@gmail.com>"
-  ],
+  "name": "daksports",
   "description": "online sports shop",
-  "main": "index.html",
+  "main": "index.js",
+  "authors": [
+    "Ionut Achim"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "sports",
+    "shop",
+    "online"
+  ],
   "moduleType": [
     "globals"
   ],
-  "keywords": [
-    "online",
-    "sports",
-    "shop"
-  ],
-  "license": "MIT",
-  "homepage": "http://wearska.com",
+  "homepage": "http://daksports.com",
+  "private": true,
   "ignore": [
     "**/.*",
-    "node_partials",
+    "node_modules",
     "bower_components",
     "test",
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.5.0",
-    "angular-animate": "~1.5.0",
-    "angular-aria": "~1.5.0",
-    "angular-cookies": "~1.5.0",
+    "angular": "1.5.0-rc.2",
+    "angular-animate": "1.5.0-rc.2",
+    "angular-aria": "1.5.0-rc.2",
+    "angular-cookies": "1.5.0-rc.2",
+    "angular-messages": "1.5.0-rc.2",
+    "angular-ui-router": "^0.2.17",
+    "angularfire": "^1.1.3",
+    "firebase": "^2.4.0",
+    "ngColorThief": "angular-colorthief#^0.1.0",
     "angular-material": "master",
-    "angular-messages": "~1.5.0",
-    "angular-resource": "~1.5.0",
-    "angular-sanitize": "~1.5.0",
-    "angular-touch": "~1.5.0",
-    "angular-ui-router": "~0.2.15",
-    "angularfire": "~1.1.3",
-    "firebase": "~2.3.1",
-    "jquery": "~2.1.4",
-    "ngColorThief": "angular-colorthief#~0.1.0",
-    "angular-file-upload": "~2.2.0",
-    "ng-file-upload": "~9.1.2"
-  },
-  "devDependencies": {
-    "angular-mocks": "~1.5.0"
+    "angular-sanitize": "1.5.0-rc.2",
+    "jquery": "^2.2.0",
+    "angular-file-upload": "^2.2.0"
   }
 }

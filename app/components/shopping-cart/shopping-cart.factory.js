@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('wskCart')
-        .factory('wskShoppingCart', function($http, wskAuth, $rootScope, $q, $filter) {
+        .module('dakCart')
+        .factory('dakShoppingCart', function($http, dakAuth, $rootScope, $q, $filter) {
             var obj = {};
             var api = 'api/shopping-lists/';
 
@@ -42,14 +42,14 @@
                         });
                     });
                 }).then(function() {
-                    $rootScope.$broadcast('wskCart: changed', {});
+                    $rootScope.$broadcast('dakCart: changed', {});
                 });
                 deferred.resolve();
             };
 
             obj.empty = function() {
                 obj.lists=[];
-                $rootScope.$broadcast('wskCart: emptied', {});
+                $rootScope.$broadcast('dakCart: emptied', {});
             };
 
             obj.getTotal = function() {
@@ -73,13 +73,13 @@
 
 
             // watchers
-            $rootScope.$on('wskShoppingLists: list-changed', function() {
+            $rootScope.$on('dakShoppingLists: list-changed', function() {
                 obj.getItems();
             });
-            $rootScope.$on('wskShoppingLists: list-synced', function() {
+            $rootScope.$on('dakShoppingLists: list-synced', function() {
                 obj.getItems();
             });
-            $rootScope.$on('wskShoppingLists: list-unsynced', function() {
+            $rootScope.$on('dakShoppingLists: list-unsynced', function() {
                 obj.getItems();
             });
 

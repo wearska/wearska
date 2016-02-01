@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('wearska')
+        .module('daksports')
         .filter('brandFilter', function($rootScope) {
             return function(items, brand) {
                 var filtered = [];

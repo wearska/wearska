@@ -1,8 +1,8 @@
-<div class="wsk-card paper resting slide-top" ng-cloak style="width:220px;">
+<div class="dak-card paper resting slide-top" ng-cloak style="width:220px;">
     <div class="product-media">
-        <div class="product-img ar_1-1 file-upload" md-ink-ripple ng-cloak style="background-image: url({{newitem.files[newitem.thumb] | wskLowres}});">
+        <div class="product-img ar_1-1 file-upload" md-ink-ripple ng-cloak style="background-image: url({{newitem.files[newitem.thumb] | dakLowres}});">
             <input multiple nv-file-select type="file" uploader="uploader"/>
-            <div class="wsk-hoverlay"></div>
+            <div class="dak-hoverlay"></div>
             <md-icon class="search-file" md-svg-src="assets/icons/ic_search_24px.svg"></md-icon>
             <md-button class="md-icon-button remove-file" ng-click="uploader.clearQueue(); uploader.clearThumb();" ng-show="uploader.queue.length > 0" type="button">
                 <md-icon md-svg-src="assets/icons/ic_close_24px.svg"></md-icon>
@@ -32,7 +32,7 @@
                 <p class="product-subtitle single-line secondary-text-color">{{newitem.subname}}</p>
             </div>
             <div class="excerpt-container">
-                <p class="product-excerpt secondary-text-color" wsk-lines-limit="2">{{newitem.excerpt}}</p>
+                <p class="product-excerpt secondary-text-color" dak-lines-limit="2">{{newitem.excerpt}}</p>
             </div>
         </div>
         <div class="card-menu">

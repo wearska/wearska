@@ -1,8 +1,8 @@
 (function() {
     'use strict';
 
-    angular.module('wearska')
-        .controller('CardCtrl', function($http, $rootScope, $scope, $mdDialog, $cookies, $mdBottomSheet, wskShoppingLists, wskShoppingCart) {
+    angular.module('daksports')
+        .controller('CardCtrl', function($http, $rootScope, $scope, $mdDialog, $cookies, $mdBottomSheet, dakShoppingLists, dakShoppingCart) {
 
             // ADD TO CART
             $scope.order = {
@@ -15,7 +15,7 @@
                 $scope.showSetOrder = !$scope.showSetOrder;
             };
             $scope.orderProduct = function(item, order){
-                wskShoppingLists.addItem(wskShoppingLists.activeList(), item, order.size.name, order.quantity);
+                dakShoppingLists.addItem(dakShoppingLists.activeList(), item, order.size.name, order.quantity);
                 $scope.discardOrder();
             };
             $scope.discardOrder = function(){
@@ -28,9 +28,9 @@
                 $scope.orderForm.$setUntouched();
                 $scope.showSetOrder = false;
             };
-            $scope.wskShoppingLists = wskShoppingLists;
+            $scope.dakShoppingLists = dakShoppingLists;
             $scope.addToCart = function(item) {
-                wskShoppingLists.addItem(wskShoppingLists.activeList(), item, '', 1);
+                dakShoppingLists.addItem(dakShoppingLists.activeList(), item, '', 1);
             };
 
             // CARD MENU

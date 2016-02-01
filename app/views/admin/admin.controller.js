@@ -1,8 +1,8 @@
 (function() {
     'use strict';
 
-    angular.module('wearska')
-        .controller('WskAdminCtrl', function($scope) {
+    angular.module('daksports')
+        .controller('DakAdminCtrl', function($scope) {
 
         });
 

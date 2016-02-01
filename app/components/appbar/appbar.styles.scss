@@ -1,4 +1,4 @@
-#frontpage .wsk-appbar {
+#frontpage .dak-appbar {
     height: 56px;
     width: 100%;
     transition: background .27s ease-in-out;
@@ -29,7 +29,7 @@
 }
 
 @media #{$small-and-up} {
-    .wsk-appbar {
+    .dak-appbar {
         height: 64px;
         min-height: 64px;
 

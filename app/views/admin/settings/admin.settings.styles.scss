@@ -103,8 +103,8 @@
     }
 }
 // departments add
-.hero-upload{
-    input[type="file"]{
+.hero-upload {
+    input[type="file"] {
         position: absolute;
         width: 100%;
         top: 0;
@@ -117,8 +117,13 @@
         cursor: pointer;
     }
 }
-.department-filename{
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+.admin-settings-card {
+    .md-button.md-icon-button, .department-filename {
+        margin-bottom: 26px;
+    }
+    .department-filename {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
 }

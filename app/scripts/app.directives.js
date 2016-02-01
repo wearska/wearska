@@ -1,8 +1,8 @@
 (function() {
     'use strict';
 
-    angular.module('wearska')
-        .directive('wskCapitalizeFirst', function($parse) {
+    angular.module('daksports')
+        .directive('dakCapitalizeFirst', function($parse) {
             return {
                 require: 'ngModel',
                 link: function(scope, element, attrs, modelCtrl) {
@@ -23,7 +23,7 @@
                 }
             };
         })
-        .directive('wskCapitalize', function($parse) {
+        .directive('dakCapitalize', function($parse) {
             return {
                 require: 'ngModel',
                 link: function(scope, element, attrs, modelCtrl) {

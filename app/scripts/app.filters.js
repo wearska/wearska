@@ -2,15 +2,15 @@
     'use strict';
 
     angular
-        .module('wearska')
-        .filter('wskRandomize', function() {
+        .module('daksports')
+        .filter('dakRandomize', function() {
             return function(input) {
                 if (input !== null && input !== undefined && input > 1) {
                     return Math.floor((Math.random() * input) + 1);
                 }
             };
         })
-        .filter('wskShuffle', function() {
+        .filter('dakShuffle', function() {
             var shuffledArr = [],
                 shuffledLength = 0;
             return function(arr, shuffled) {
@@ -29,7 +29,7 @@
                 }
             };
         })
-        .filter('wskReverse', function() {
+        .filter('dakReverse', function() {
             return function(items) {
                 if (items) {
                     return items.slice().reverse();
@@ -38,7 +38,7 @@
                 }
             };
         })
-        .filter('wskQuantize', function() {
+        .filter('dakQuantize', function() {
             return function(input, steps) {
                 var step = 100 / steps;
                 var halfstep = step / 2;
@@ -54,7 +54,7 @@
                 }
             };
         })
-        .filter('wskSerialize', function() {
+        .filter('dakSerialize', function() {
             return function(input) {
                 if (input !== null && input !== undefined) {
                     var min = 10000;
@@ -64,21 +64,21 @@
                 }
             };
         })
-        .filter('wskShortify', function() {
+        .filter('dakShortify', function() {
             return function(input) {
                 if (input !== null && input !== undefined && input !== "") {
                     return angular.uppercase(input.replace(/[aeiou]/ig, '').substring(0, 3));
                 }
             };
         })
-        .filter('wskFilename', function() {
+        .filter('dakFilename', function() {
             return function(input) {
                 if (input !== null && input !== undefined && input !== "") {
                     return input.substring(input.lastIndexOf('/')+1);
                 }
             };
         })
-        .filter('wskLowres', function() {
+        .filter('dakLowres', function() {
             return function(input) {
                 // return input ? input.replace(/(\.[\w\d_-]+)$/i, '_low$1') : input;
                 var checkFile = input.replace(/(\.[\w\d_-]+)$/i, '_low$1');
@@ -91,7 +91,7 @@
                 }
             };
         })
-        .filter('wskMedres', function() {
+        .filter('dakMedres', function() {
             return function(input) {
                 // return input ? input.replace(/(\.[\w\d_-]+)$/i, '_medium$1') : input;
                 var checkFile = input.replace(/(\.[\w\d_-]+)$/i, '_medium$1');
@@ -104,7 +104,7 @@
                 }
             };
         })
-        .filter('wskHighres', function() {
+        .filter('dakHighres', function() {
             return function(input) {
                 // return input ? input.replace(/(\.[\w\d_-]+)$/i, '_high$1') : input;
                 var checkFile = input.replace(/(\.[\w\d_-]+)$/i, '_high$1');

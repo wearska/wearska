@@ -1,8 +1,8 @@
 (function() {
     'use strict';
 
-    angular.module('wearska')
-        .factory('wskScrollFactory', function() {
+    angular.module('daksports')
+        .factory('dakScrollFactory', function() {
             var obj = {};
             
             // is element scrolled or not

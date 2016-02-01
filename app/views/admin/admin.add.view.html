@@ -1,6 +1,6 @@
 <div class="wrapper l-offset-nav">
     <md-content class="paper resting add-item-form">
-        <form layout="column" md-theme="brand" name="addItemForm" ng-submit="submitItemForm()" novalidate>
+        <form layout="column" md-theme="brand-black" name="addItemForm" ng-submit="submitItemForm()" novalidate>
             <div class="form-header content-padding brand-bg dark" layout-gt-md="row" layout="column">
                 <div flex layout="column">
                     <span flex></span>
@@ -8,7 +8,7 @@
                     <span class="md-body-1 form-subtitle">Be sure to fill out every input</span>
                 </div>
                 <div class="form-card-preview l-right no-brand" ng-include="'app/views/admin/admin.add.card-preview.inc.html'">
-                    <!-- <wsk-card-preview card-resource="newitem" style="width:220px;"></wsk-card-preview> -->
+                    <!-- <dak-card-preview card-resource="newitem" style="width:220px;"></dak-card-preview> -->
                 </div>
             </div>
             <div class="form-content content-padding">
@@ -32,7 +32,7 @@
                         <md-input-container flex-gt-md="30">
                             <label>Brand</label>
                             <md-select ng-model="newitem.brand">
-                                <md-option ng-repeat="brand in wsk.brands" value="{{brand}}">{{brand}}</md-option>
+                                <md-option ng-repeat="brand in dak.brands" value="{{brand}}">{{brand}}</md-option>
                             </md-select>
                         </md-input-container>
                     </div>
@@ -40,21 +40,21 @@
                         <md-input-container flex-gt-md="30">
                             <label>Department</label>
                             <md-select ng-model="newitem.dep">
-                                <md-option ng-repeat="dep in wsk.structure.departments" value="{{dep}}">{{dep.name}}</md-option>
+                                <md-option ng-repeat="dep in dak.structure.departments" value="{{dep}}">{{dep.name}}</md-option>
                             </md-select>
                         </md-input-container>
                         <span flex=""></span>
                         <md-input-container flex-gt-md="30">
                             <label>Type</label>
                             <md-select ng-model="newitem.type">
-                                <md-option ng-repeat="type in wsk.structure.types" value="{{type}}">{{type.name}}</md-option>
+                                <md-option ng-repeat="type in dak.structure.types" value="{{type}}">{{type.name}}</md-option>
                             </md-select>
                         </md-input-container>
                         <span flex=""></span>
                         <md-input-container flex-gt-md="30">
                             <label>Kind</label>
                             <md-select ng-model="newitem.kind">
-                                <md-option ng-repeat="kind in wsk.structure.kinds" value="{{kind}}">{{kind.name}}</md-option>
+                                <md-option ng-repeat="kind in dak.structure.kinds" value="{{kind}}">{{kind.name}}</md-option>
                             </md-select>
                         </md-input-container>
                     </div>
@@ -101,11 +101,11 @@
                         <div class="item-options" flex layout layout-align="start center" ng-repeat="option in newitem.options">
                             <md-input-container flex="25" ng-class="{'md-input-invalid' : option.duplicate}">
                                 <label>Type</label>
-                                <input ng-disabled="!newitem.has_options" ng-model="option.type" type="text" wsk-capitalize-first>
+                                <input ng-disabled="!newitem.has_options" ng-model="option.type" type="text" dak-capitalize-first>
                             </md-input-container>
                             <md-input-container flex="25">
                                 <label>Name</label>
-                                <input ng-disabled="!newitem.has_options" ng-model="option.name" type="text" wsk-capitalize>
+                                <input ng-disabled="!newitem.has_options" ng-model="option.name" type="text" dak-capitalize>
                             </md-input-container>
                             <md-input-container flex="25">
                                 <label>Count</label>
@@ -116,7 +116,7 @@
                                 <md-icon md-svg-src="assets/icons/ic_remove_circle_outline_24px.svg"></md-icon>
                             </md-button>
                         </div>
-                        <span class="add-option-link md-body-2 wsk-link brand-text" ng-class="{'disabled' : !newitem.has_options}" ng-click="addOption()">+ New</span>
+                        <span class="add-option-link md-body-2 dak-link brand-text" ng-class="{'disabled' : !newitem.has_options}" ng-click="addOption()">+ New</span>
                     </div>
                 </section>
                 <br>

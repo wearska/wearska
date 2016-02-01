@@ -1,13 +1,13 @@
 (function() {
     'use strict';
 
-    angular.module('wearska')
-        .controller('WskAuthCtrl', function($scope, $http, $location, $mdToast, $firebaseObject, $firebaseArray, wskAuth, FileUploader, FIREBASE_USERS_URL, PLACEHOLDERS, LOGOS) {
+    angular.module('daksports')
+        .controller('DakAuthCtrl', function($scope, $http, $location, $mdToast, $firebaseObject, $firebaseArray, dakAuth, FileUploader, FIREBASE_USERS_URL, PLACEHOLDERS, LOGOS) {
 
 
             $scope.PLACEHOLDERS = PLACEHOLDERS;
             $scope.LOGOS = LOGOS;
-            $scope.wskAuth = wskAuth;
+            $scope.dakAuth = dakAuth;
             $scope.credentials = {};
 
             $scope.atPass = false;
@@ -54,7 +54,7 @@
                     $scope.credentials.user_photo = $scope.credentials.user_photo.replace(/\s+/g, '_');
 
                     // create the user
-                    wskAuth.$createUser({
+                    dakAuth.$createUser({
                         email: $scope.credentials.email,
                         password: $scope.credentials.password
                     }).then(function(authData) {
@@ -91,7 +91,7 @@
 
 
             $scope.removeUser = function(credentials) {
-                wskAuth.remove(credentials)
+                dakAuth.remove(credentials)
                     .then(function() {
                         $scope.message = 'User removed';
                     }).catch(function(error) {
@@ -105,7 +105,7 @@
 
             $scope.login = function(credentials) {
                 if ($scope.loginForm.$valid) {
-                    wskAuth.$authWithPassword({
+                    dakAuth.$authWithPassword({
                             email: credentials.email,
                             password: credentials.password
                         })

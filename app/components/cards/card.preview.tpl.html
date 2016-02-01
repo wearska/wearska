@@ -1,6 +1,6 @@
-<div class="wsk-card paper resting slide-top" ng-cloak>
+<div class="dak-card paper resting slide-top" ng-cloak>
     <div class="product-media">
-        <div accept="image/*" class="product-img ar_1-1" md-ink-ripple ng-cloak style="background-image: url({{item.files[item.thumb] | wskLowres}});">
+        <div accept="image/*" class="product-img ar_1-1" md-ink-ripple ng-cloak style="background-image: url({{item.files[item.thumb] | dakLowres}});">
             <input nv-file-select type="file" uploader="uploader" multiple/>
             <div class="hoverlay"></div>
             <md-icon class="search-file">
@@ -36,7 +36,7 @@
                 <p class="product-subtitle single-line secondary-text-color">{{item.subname}}</p>
             </div>
             <div class="excerpt-container">
-                <p class="product-excerpt secondary-text-color" wsk-lines-limit="2">{{item.excerpt}}</p>
+                <p class="product-excerpt secondary-text-color" dak-lines-limit="2">{{item.excerpt}}</p>
             </div>
             <div aria-hidden="true" class="description-container is-hidden">
                 <p>{{item.excerpt}}</p>
@@ -54,7 +54,7 @@
                             <div layout="row">
                                 <p flex style="margin-left:8px;">Add to cart</p>
                             </div>
-                        </wsk-addtocart>
+                        </dak-addtocart>
                     </md-button>
                 </md-menu-item>
                 <md-menu-item>

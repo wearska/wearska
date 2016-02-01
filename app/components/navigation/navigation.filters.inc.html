@@ -23,7 +23,7 @@
         <md-icon class="right-icon l-right" md-svg-src="assets/icons/ic_keyboard_arrow_down_black_24px.svg" ng-click="list.expand();" style="width:20px;"></md-icon>
     </div>
     <div class="nav-items-list" style="max-height:{{results.length * list.size}}px;">
-        <md-checkbox ng-checked="TypeFilter.exists(type.type)" ng-class="{selected : TypeFilter.exists(type.type)}" ng-click="TypeFilter.toggle(type.type)" ng-disabled="!Counter.count(type.type, 'types')" ng-repeat="type in $root.types | filter: q as results">
+        <md-checkbox ng-checked="TypeFilter.exists(type.type)" ng-class="{selected : TypeFilter.exists(type.type)}" ng-click="TypeFilter.toggle(type.type)" ng-disabled="!Counter.count(type.type, 'types')" ng-repeat="type in dak.structure.types | filter: q as results">
             {{ type.type }}
             <span style="color: rgba(0,0,0,.54)">• ({{ Counter.count(type.type, 'types')}})</span>
         </md-checkbox>

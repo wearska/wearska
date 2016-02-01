@@ -1,4 +1,4 @@
-.wsk-card {
+.dak-card {
     width: 100%;
     display: inline-block;
     position: relative;
@@ -347,7 +347,7 @@
     }
 }
 @media #{$medium-and-up} {
-    .wsk-card {
+    .dak-card {
         .product-actions {
             .stars-container {
                 clear: none;
@@ -361,8 +361,8 @@
 }
 
 // Card tiles
-.wsk-card {
-    &.wsk-tile {
+.dak-card {
+    &.dak-tile {
         .product-media {
             padding: 0 60% 0 0;
             .product-media-actions {
