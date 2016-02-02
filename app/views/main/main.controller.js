@@ -3,11 +3,7 @@
 
     angular
         .module('daksports')
-        .controller('MainCtrl', function($scope, dakScrollFactory, heroService, dakItems) {
-            $scope.dakScroll = dakScrollFactory;
-
-            $scope.dakItems = dakItems;
-
+        .controller('MainCtrl', function($scope, heroService) {
             heroService.src = 'uploads/heroes/grand_opening.jpg';
             heroService.position = 'center';
         });

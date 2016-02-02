@@ -3,7 +3,7 @@
 
     angular
         .module('daksports')
-        .controller('DakCtrl', function($scope, $rootScope, $timeout, $log, $firebaseArray, $firebaseObject, $mdMedia, FIREBASE_USERS_URL, FIREBASE_URL, AUTHDATA, LOGOS, dakAuth, dakItems, dakScrollFactory, depsFactory, typesFactory, kindsFactory, brandsFactory) {
+        .controller('DakCtrl', function($scope, $rootScope, $timeout, $log, $firebaseArray, $firebaseObject, $mdMedia, FIREBASE_USERS_URL, FIREBASE_URL, AUTHDATA, LOGOS, dakAuth, dakItems, dakScrollFactory, depsFactory, gridFactory, typesFactory, kindsFactory, brandsFactory) {
 
             var dak = this;
 
@@ -70,6 +70,8 @@
             var structureRef = new Firebase(FIREBASE_URL + '/structure');
             var departmentsRef = structureRef.child('departments');
             var departments = $firebaseArray(departmentsRef);
+            var gridRef = structureRef.child('grid');
+            var grid = $firebaseArray(gridRef);
             var brandsRef = structureRef.child('brands');
             var brands = $firebaseArray(brandsRef);
             var typesRef = structureRef.child('types');
@@ -91,9 +93,16 @@
                     console.log("Error:", error);
                 });
 
-            dak.saveDeps = function(newdep) {
-                departments.$add(newdep);
-            }
+            // load departments
+            grid.$loaded()
+                .then(function(data) {
+                    dak.structure.grid = data;
+                    gridFactory.grid = dak.structure.grid;
+                    $rootScope.$broadcast('grid: bound', {});
+                })
+                .catch(function(error) {
+                    console.log("Error:", error);
+                });
 
             // load brands
             brands.$loaded()

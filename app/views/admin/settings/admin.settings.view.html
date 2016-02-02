@@ -193,4 +193,62 @@
         </div>
     </div>
     <!-- KINDS END -->
+
+
+    <!-- GRID START -->
+
+    <div class="paper resting admin-settings-card settings-card">
+        <div class="header content-padding" layout>
+            <div>
+                <h1 class="settings-card-title">Store grid</h1>
+                <div>This is where you add shop departments
+                    <br> These sit on the top level in the navbar menu</div>
+            </div>
+            <span flex></span>
+            <div>
+                <md-button aria-label="Expand card" class="md-icon-button toggle-button" ng-class="{open: gridExpand}" ng-click="gridToggle();">
+                    <md-icon md-svg-src="assets/icons/ic_expand_more_black_24px.svg"></md-icon>
+                </md-button>
+            </div>
+        </div>
+        <md-divider></md-divider>
+        <div class="content" ng-class="{'content-padding delayed' : gridExpand}" style="height: {{getGridHeight()}}px">
+            <div class="departments-list">
+                <div class="" layout layout-align="start center" ng-repeat="(key, value) in dak.structure.grid">
+                    <md-input-container>
+                        <label for="">Name</label>
+                        <input dak-capitalize-first ng-model="value.name" type="text" />
+                    </md-input-container>
+                    <span flex></span>
+                    <md-button aria-label="Hero upload" class="md-icon-button hero-upload">
+                        <md-icon ng-if="!value.hero" md-svg-src="assets/icons/ic_cloud_upload_24px.svg" ng-class="{'brand-text' : value.hero}"></md-icon>
+                        <md-icon class="brand-text" ng-if="value.hero" md-svg-src="assets/icons/ic_cloud_done_24px.svg"></md-icon>
+                        <input nv-file-select type="file" uploader="uploader" />
+                    </md-button>
+                    <span flex="40" class="department-filename">{{value.hero | dakFilename}}</span>
+                    <md-button aria-label="Remove grid tile" class="md-icon-button" ng-click="removeTile(key);" type="button">
+                        <md-icon md-svg-src="assets/icons/ic_remove_circle_outline_24px.svg"></md-icon>
+                    </md-button>
+                </div>
+            </div>
+            <!-- New tile -->
+            <div class="" layout layout-align="start center">
+                <md-input-container>
+                    <label for="">New tile</label>
+                    <input dak-capitalize-first ng-model="newtile.name" type="text" />
+                </md-input-container>
+                <span flex></span>
+                <md-button aria-label="Hero upload" class="md-icon-button hero-upload">
+                    <md-icon md-svg-src="assets/icons/ic_cloud_upload_24px.svg"></md-icon>
+                    <input nv-file-select type="file" uploader="uploader" />
+                </md-button>
+                <span flex="40" class="department-filename">{{newtile.hero | dakFilename}}</span>
+                <md-button aria-label="Add grid tile" class="md-icon-button" ng-click="addTile(newtile)" type="button">
+                    <md-icon md-svg-src="assets/icons/ic_add_circle_outline_24px.svg"></md-icon>
+                </md-button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GRID END -->
 </div>

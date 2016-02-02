@@ -144,6 +144,9 @@ nav {
     height: 2500px;
 
     // display: block;
+    &.has-hero {
+        padding-top: 300px;
+    }
 }
 @media #{$small-and-up} {
     .c-max {

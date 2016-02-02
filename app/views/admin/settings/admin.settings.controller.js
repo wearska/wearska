@@ -2,22 +2,28 @@
     'use strict';
 
     angular.module('daksports')
-        .controller('DakAdminSettingsCtrl', function($scope, $filter, $rootScope, $firebaseArray, FIREBASE_URL, FileUploader, depsFactory, brandsFactory, typesFactory, kindsFactory) {
+        .controller('DakAdminSettingsCtrl', function($scope, $filter, $rootScope, $firebaseArray, FIREBASE_URL, FileUploader, depsFactory, gridFactory, brandsFactory, typesFactory, kindsFactory) {
 
 
             // --------------------------
-            // DEPARTMENTS
+            // FIREBASE ARRAYS
             // --------------------------
 
             var structureRef = new Firebase(FIREBASE_URL + '/structure');
             var departmentsRef = structureRef.child('departments');
             var departments = $firebaseArray(departmentsRef);
+            var gridRef = structureRef.child('grid');
+            var grid = $firebaseArray(gridRef);
             var brandsRef = structureRef.child('brands');
             var brands = $firebaseArray(brandsRef);
             var typesRef = structureRef.child('types');
             var types = $firebaseArray(typesRef);
             var kindsRef = structureRef.child('kinds');
             var kinds = $firebaseArray(kindsRef);
+
+            // --------------------------
+            // DEPARTMENTS
+            // --------------------------
 
             $scope.newdep = {
                 name: '',
@@ -39,6 +45,7 @@
             }
 
             $scope.addDep = function(newdep) {
+                newdep.hero = 'uploads/structure/departments/' + newdep.hero;
                 // depsFactory.deps.push(newdep);
                 departments.$add(newdep);
                 uploader.uploadAll();
@@ -50,6 +57,48 @@
             }
 
             $scope.removeDep = function(key) {
+                departments.$remove(key);
+            }
+
+
+            // --------------------------
+            // GRID
+            // --------------------------
+
+            $scope.newtile = {
+                name: '',
+                hero: '',
+                rowspan: '',
+                colspan: ''
+            };
+
+            $scope.gridExpand = false;
+
+            $scope.gridExpandFactor = 0;
+
+            $scope.gridToggle = function() {
+                $scope.gridExpand = !$scope.gridExpand;
+                $scope.gridExpandFactor = $scope.gridExpand ? 1 : 0;
+            }
+
+            $scope.getGridHeight = function() {
+                return ((gridFactory.length() + 1) * 94 * $scope.gridExpandFactor);
+            }
+
+            $scope.addTile = function(newtile) {
+                newtile.hero = 'uploads/structure/grid/' + newtile.hero;
+                // depsFactory.deps.push(newtile);
+                grid.$add(newtile);
+                uploader.uploadAll();
+                $scope.newtile = {
+                    name: '',
+                    hero: '',
+                    rowspan: '',
+                    colspan: ''
+                };
+            }
+
+            $scope.removeTile = function(key) {
                 departments.$remove(key);
             }
 
