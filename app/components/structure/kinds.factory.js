@@ -2,13 +2,13 @@
     'use strict';
 
     angular.module('daksports')
-        .factory('depsFactory', function() {
+        .factory('kindsFactory', function() {
             var obj = {};
 
-            obj.deps = [];
+            obj.kinds = [];
 
             obj.length = function(){
-                return obj.deps.length;
+                return obj.kinds.length;
             }
 
             return obj;

@@ -37,9 +37,9 @@
         <md-icon class="right-icon l-right" md-svg-src="assets/icons/ic_keyboard_arrow_down_black_24px.svg" ng-click="list.expand();" style="width:20px;"></md-icon>
     </div>
     <div class="nav-items-list" style="max-height:{{results.length * list.size}}px;" layout="column">
-        <md-checkbox ng-checked="KindFilter.exists(kind)" ng-class="{selected : KindFilter.exists(kind)}" ng-click="KindFilter.toggle(kind)" ng-disabled="!Counter.count(kind, 'kinds')" ng-repeat="kind in $root.kinds | filter: q as results">
-            {{ kind }}
-            <span style="color: rgba(0,0,0,.54)">• ({{ Counter.count(kind, 'kinds')}})</span>
+        <md-checkbox ng-checked="KindFilter.exists(kind)" ng-class="{selected : KindFilter.exists(kind)}" ng-click="KindFilter.toggle(kind)" ng-disabled="!Counter.count(kind, 'kinds')" ng-repeat="kind in dak.structure.kinds | filter: q as results">
+            {{ kind.name }}
+            <span style="color: rgba(0,0,0,.54)">• ({{ Counter.count(kind.name, 'kinds')}})</span>
         </md-checkbox>
     </div>
 </div>

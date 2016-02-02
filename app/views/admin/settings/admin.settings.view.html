@@ -5,8 +5,7 @@
             <div>
                 <h1 class="settings-card-title">Store departments</h1>
                 <div>This is where you add shop departments
-                    <br>
-                    These sit on the top level in the navbar menu</div>
+                    <br> These sit on the top level in the navbar menu</div>
             </div>
             <span flex></span>
             <div>
@@ -18,16 +17,16 @@
         <md-divider></md-divider>
         <div class="content" ng-class="{'content-padding delayed' : depsExpand}" style="height: {{getDepsHeight()}}px">
             <div class="departments-list">
-                <div class="" layout layout-align="start center" ng-repeat="(key, value) in structure.departments">
+                <div class="" layout layout-align="start center" ng-repeat="(key, value) in dak.structure.departments">
                     <md-input-container>
                         <label for="">Name</label>
-                        <input ng-model="value.name" type="text"/>
+                        <input ng-model="value.name" type="text" />
                     </md-input-container>
                     <span flex></span>
                     <md-button aria-label="Hero upload" class="md-icon-button hero-upload">
                         <md-icon ng-if="!value.hero" md-svg-src="assets/icons/ic_cloud_upload_24px.svg" ng-class="{'brand-text' : value.hero}"></md-icon>
                         <md-icon class="brand-text" ng-if="value.hero" md-svg-src="assets/icons/ic_cloud_done_24px.svg"></md-icon>
-                        <input nv-file-select type="file" uploader="uploader"/>
+                        <input nv-file-select type="file" uploader="uploader" />
                     </md-button>
                     <span flex="40" class="department-filename">{{value.hero | dakFilename}}</span>
                     <md-button aria-label="Remove department" class="md-icon-button" ng-click="removeDep(key); dak.lengths.deps = dak.lengths.deps + 1" type="button">
@@ -39,12 +38,12 @@
             <div class="" layout layout-align="start center">
                 <md-input-container>
                     <label for="">New department</label>
-                    <input dak-capitalize ng-model="newdep.name" type="text"/>
+                    <input dak-capitalize ng-model="newdep.name" type="text" />
                 </md-input-container>
                 <span flex></span>
                 <md-button aria-label="Hero upload" class="md-icon-button hero-upload">
                     <md-icon md-svg-src="assets/icons/ic_cloud_upload_24px.svg"></md-icon>
-                    <input nv-file-select type="file" uploader="uploader"/>
+                    <input nv-file-select type="file" uploader="uploader" />
                 </md-button>
                 <span flex="40" class="department-filename">{{newdep.hero | dakFilename}}</span>
                 <md-button aria-label="Add department" class="md-icon-button" ng-click="addDep(newdep)" type="button">
@@ -61,8 +60,7 @@
             <div>
                 <h1 class="settings-card-title">Store brands</h1>
                 <div>This is where you add shop brands
-                    <br>
-                    These sit on the top level in the navbar menu</div>
+                    <br> These sit on the top level in the navbar menu</div>
             </div>
             <span flex></span>
             <div>
@@ -72,20 +70,14 @@
             </div>
         </div>
         <md-divider></md-divider>
-        <div class="content" ng-class="{'content-padding delayed' : brandsExpand}" style="height: {{dak.heights.brand * brandsExpandFactor}}px">
+        <div class="content" ng-class="{'content-padding delayed' : brandsExpand}" style="height: {{getBrandsHeight()}}px">
             <div class="brands-list">
-                <div class="" layout layout-align="start center" ng-repeat="(key, value) in structure.brands">
+                <div class="" layout layout-align="start center" ng-repeat="(key, value) in dak.structure.brands">
                     <md-input-container>
                         <label for="">Name</label>
-                        <input ng-model="value.name" type="text"/>
+                        <input dak-capitalize-first ng-model="value.name" type="text" />
                     </md-input-container>
                     <span flex></span>
-                    <md-button aria-label="Hero upload" class="md-icon-button hero-upload">
-                        <md-icon ng-if="!value.hero" md-svg-src="assets/icons/ic_cloud_upload_24px.svg" ng-class="{'brand-text' : value.hero}"></md-icon>
-                        <md-icon class="brand-text" ng-if="value.hero" md-svg-src="assets/icons/ic_cloud_done_24px.svg"></md-icon>
-                        <input nv-file-select type="file" uploader="uploader"/>
-                    </md-button>
-                    <span flex="40" class="brand-filename">{{value.hero | dakFilename}}</span>
                     <md-button aria-label="Remove brand" class="md-icon-button" ng-click="removeBrand(key); dak.lengths.brands = dak.lengths.brands - 1" type="button">
                         <md-icon md-svg-src="assets/icons/ic_remove_circle_outline_24px.svg"></md-icon>
                     </md-button>
@@ -95,14 +87,9 @@
             <div class="" layout layout-align="start center">
                 <md-input-container>
                     <label for="">New brand</label>
-                    <input ng-model="newbrand.name" type="text"/>
+                    <input dak-capitalize-first ng-model="newbrand.name" type="text" />
                 </md-input-container>
                 <span flex></span>
-                <md-button aria-label="Hero upload" class="md-icon-button hero-upload">
-                    <md-icon md-svg-src="assets/icons/ic_cloud_upload_24px.svg"></md-icon>
-                    <input nv-file-select type="file" uploader="uploader"/>
-                </md-button>
-                <span flex="40" class="brand-filename">{{newbrand.hero | dakFilename}}</span>
                 <md-button aria-label="Add brand" class="md-icon-button" ng-click="addBrand(newbrand); dak.lengths.brands = dak.lengths.brands + 1" type="button">
                     <md-icon md-svg-src="assets/icons/ic_add_circle_outline_24px.svg"></md-icon>
                 </md-button>
@@ -117,8 +104,7 @@
             <div>
                 <h1 class="settings-card-title">Item types</h1>
                 <div>Add some predefined types
-                    <br>
-                    Departments contain types which, in turn, have multiple "Kinds"</div>
+                    <br> Departments contain types which, in turn, have multiple "Kinds"</div>
             </div>
             <span flex></span>
             <div>
@@ -128,16 +114,16 @@
             </div>
         </div>
         <md-divider></md-divider>
-        <div class="content" ng-class="{'content-padding delayed' : typesExpand}" style="height: {{dak.heights.type * typesExpandFactor}}px">
+        <div class="content" ng-class="{'content-padding delayed' : typesExpand}" style="height: {{getTypesHeight()}}px">
             <div class="departments-list">
-                <div class="" layout layout-align="start center" ng-repeat="(key, value) in structure.types">
+                <div class="" layout layout-align="start center" ng-repeat="(key, value) in dak.structure.types">
                     <md-input-container>
                         <label for="">Name</label>
-                        <input ng-model="value.name" type="text"/>
+                        <input ng-model="value.name" type="text" />
                     </md-input-container>
                     <md-input-container style="margin-left: 8px; max-width:56px;">
                         <label for="">Type ID</label>
-                        <input dak-capitalize ng-model="value.short" type="text"/>
+                        <input dak-capitalize ng-model="value.short" type="text" />
                     </md-input-container>
                     <span flex></span>
                     <md-button aria-label="Remove type" class="md-icon-button" ng-click="removeType(key)" type="button">
@@ -149,11 +135,11 @@
             <div class="" layout layout-align="start center">
                 <md-input-container>
                     <label for="">New type</label>
-                    <input dak-capitalize-first ng-blur="shortify()" ng-model="newtype.name" type="text"/>
+                    <input dak-capitalize-first ng-blur="shortify()" ng-model="newtype.name" type="text" />
                 </md-input-container>
                 <md-input-container style="margin-left: 8px; max-width:56px;">
                     <label for="">ID</label>
-                    <input dak-capitalize ng-model="newtype.short" type="text"/>
+                    <input dak-capitalize ng-model="newtype.short" type="text" />
                 </md-input-container>
                 <span flex></span>
                 <md-button aria-label="Add type" class="md-icon-button" ng-click="addType(newtype)" type="button">
@@ -162,4 +148,49 @@
             </div>
         </div>
     </div>
+    <!-- TYPES END -->
+
+    <!-- KINDS START -->
+    <div class="paper resting admin-settings-card settings-card">
+        <div class="header content-padding" layout>
+            <div>
+                <h1 class="settings-card-title">Store kinds</h1>
+                <div>This is where you add shop kinds
+                    <br> These sit on the top level in the navbar menu</div>
+            </div>
+            <span flex></span>
+            <div>
+                <md-button aria-label="Expand card" class="md-icon-button toggle-button" ng-class="{open: kindsExpand}" ng-click="kindsToggle()">
+                    <md-icon md-svg-src="assets/icons/ic_expand_more_black_24px.svg"></md-icon>
+                </md-button>
+            </div>
+        </div>
+        <md-divider></md-divider>
+        <div class="content" ng-class="{'content-padding delayed' : kindsExpand}" style="height: {{getKindsHeight()}}px">
+            <div class="kinds-list">
+                <div class="" layout layout-align="start center" ng-repeat="(key, value) in dak.structure.kinds">
+                    <md-input-container>
+                        <label for="">Name</label>
+                        <input dak-capitalize-first ng-model="value.name" type="text" />
+                    </md-input-container>
+                    <span flex></span>
+                    <md-button aria-label="Remove kind" class="md-icon-button" ng-click="removeKind(key); dak.lengths.kinds = dak.lengths.kinds - 1" type="button">
+                        <md-icon md-svg-src="assets/icons/ic_remove_circle_outline_24px.svg"></md-icon>
+                    </md-button>
+                </div>
+            </div>
+            <!-- New kind -->
+            <div class="" layout layout-align="start center">
+                <md-input-container>
+                    <label for="">New kind</label>
+                    <input dak-capitalize-first ng-model="newkind.name" type="text" />
+                </md-input-container>
+                <span flex></span>
+                <md-button aria-label="Add kind" class="md-icon-button" ng-click="addKind(newkind); dak.lengths.kinds = dak.lengths.kinds + 1" type="button">
+                    <md-icon md-svg-src="assets/icons/ic_add_circle_outline_24px.svg"></md-icon>
+                </md-button>
+            </div>
+        </div>
+    </div>
+    <!-- KINDS END -->
 </div>

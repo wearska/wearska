@@ -3,7 +3,7 @@
 
     angular
         .module('daksports')
-        .controller('DakCtrl', function($scope, $rootScope, $log, $firebaseArray, $firebaseObject, $mdMedia, FIREBASE_USERS_URL, FIREBASE_URL, AUTHDATA, LOGOS, dakAuth, dakItems, dakScrollFactory, dakStoreStructure) {
+        .controller('DakCtrl', function($scope, $rootScope, $timeout, $log, $firebaseArray, $firebaseObject, $mdMedia, FIREBASE_USERS_URL, FIREBASE_URL, AUTHDATA, LOGOS, dakAuth, dakItems, dakScrollFactory, depsFactory, typesFactory, kindsFactory, brandsFactory) {
 
             var dak = this;
 
@@ -84,16 +84,22 @@
             departments.$loaded()
                 .then(function(data) {
                     dak.structure.departments = data;
+                    depsFactory.deps = dak.structure.departments;
                     $rootScope.$broadcast('departments: bound', {});
                 })
                 .catch(function(error) {
                     console.log("Error:", error);
                 });
 
+            dak.saveDeps = function(newdep) {
+                departments.$add(newdep);
+            }
+
             // load brands
             brands.$loaded()
                 .then(function(data) {
                     dak.structure.brands = data;
+                    brandsFactory.brands = dak.structure.brands;
                     $rootScope.$broadcast('brands: bound', {});
                 })
                 .catch(function(error) {
@@ -104,6 +110,7 @@
             types.$loaded()
                 .then(function(data) {
                     dak.structure.types = data;
+                    typesFactory.types = dak.structure.types;
                     $rootScope.$broadcast('types: bound', {});
                 })
                 .catch(function(error) {
@@ -114,6 +121,7 @@
             kinds.$loaded()
                 .then(function(data) {
                     dak.structure.kinds = data;
+                    kindsFactory.kinds = dak.structure.kinds;
                     $rootScope.$broadcast('kinds: bound', {});
                 })
                 .catch(function(error) {
