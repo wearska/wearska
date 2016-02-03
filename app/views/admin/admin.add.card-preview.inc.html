@@ -1,10 +1,11 @@
 <div class="dak-card paper resting slide-top" ng-cloak style="width:220px;">
     <div class="product-media">
-        <div class="product-img ar_1-1 file-upload" md-ink-ripple ng-cloak style="background-image: url({{newitem.files[newitem.thumb] | dakLowres}});">
-            <input multiple nv-file-select type="file" uploader="uploader"/>
+        <div class="product-img ar_1-1 file-upload" md-ink-ripple ng-cloak style="background-image: url({{fileprev}});">
+            <!-- <input multiple type="file" accept="image/*" name="file" dak-file-poster/> -->
+            <input multiple type="file" accept="image/*" name="file" dak-file-poster onchange="angular.element(this).scope().selectFile(this)"/>
             <div class="dak-hoverlay"></div>
             <md-icon class="search-file" md-svg-src="assets/icons/ic_search_24px.svg"></md-icon>
-            <md-button class="md-icon-button remove-file" ng-click="uploader.clearQueue(); uploader.clearThumb();" ng-show="uploader.queue.length > 0" type="button">
+            <md-button aria-label="Remove file" class="md-icon-button remove-file" ng-click="uploader.clearQueue(); uploader.clearThumb();" ng-show="uploader.queue.length > 0" type="button">
                 <md-icon md-svg-src="assets/icons/ic_close_24px.svg"></md-icon>
             </md-button>
         </div>

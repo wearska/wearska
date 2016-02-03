@@ -68,8 +68,8 @@
             $scope.newtile = {
                 name: '',
                 hero: '',
-                rowspan: '',
-                colspan: ''
+                rowspan: '1',
+                colspan: '1'
             };
 
             $scope.gridExpand = false;
@@ -93,8 +93,8 @@
                 $scope.newtile = {
                     name: '',
                     hero: '',
-                    rowspan: '',
-                    colspan: ''
+                    rowspan: '1',
+                    colspan: '1'
                 };
             }
 

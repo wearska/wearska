@@ -1,8 +1,8 @@
-(function() {
+(function () {
     'use strict';
 
     angular.module('daksports')
-        .controller('DakAddCtrl', function($scope, $timeout, $filter, $q, FileUploader, dakItems, FIREBASE_ITEMS_URL) {
+        .controller('DakAddCtrl', function ($scope, $timeout, $filter, $q, FileUploader, dakItems, FIREBASE_ITEMS_URL, FilePoster) {
 
             // -----------------------------
             // INIT ITEM
@@ -41,13 +41,29 @@
             };
 
             // ------------------------
+            // FILE-READER
+            // ------------------------
+
+            $scope.postFile = function (files) {
+            }
+            $scope.files = [];
+
+            $scope.selectFile = function (element) {
+                $scope.$apply(function ($scope) {
+                    $scope.files = element.files;
+                    $scope.postFile(element.files);
+                });
+            }
+
+
+            // ------------------------
             // BUY OPTIONS
             // ------------------------
 
 
             $scope.$watch(
                 'newitem.options',
-                function(newNames, oldNames) {
+                function (newNames, oldNames) {
                     $scope.getStock();
                     if (!$scope.newitem.options.length) {
                         $scope.newitem.has_options = false;
@@ -55,19 +71,19 @@
                 },
                 true);
 
-            $scope.getStock = function() {
+            $scope.getStock = function () {
                 var stock = 0;
-                angular.forEach($scope.newitem.options, function(option) {
+                angular.forEach($scope.newitem.options, function (option) {
                     stock = parseInt(stock + option.count);
                 });
                 $scope.newitem.stock = stock;
             };
 
-            $scope.checkOptions = function() {
+            $scope.checkOptions = function () {
                 if (!$scope.newitem.options.length) {
                     $scope.addOption();
                 } else {
-                    angular.forEach($scope.newitem.options, function(option) {
+                    angular.forEach($scope.newitem.options, function (option) {
                         if (option.type == '' && option.name == '') {
                             var idx = $scope.newitem.options.indexOf(option);
                             $scope.newitem.options.splice(idx, 1);
@@ -76,11 +92,11 @@
                 }
             };
 
-            $scope.removeOption = function(idx) {
+            $scope.removeOption = function (idx) {
                 $scope.newitem.options.splice(idx, 1);
             };
 
-            $scope.addOption = function(idx) {
+            $scope.addOption = function (idx) {
                 var newoption = {
                     type: '',
                     name: '',
@@ -109,7 +125,7 @@
             // PROMO SETTINGS
             // ------------------------
 
-            $scope.getPrice = function() {
+            $scope.getPrice = function () {
                 if ($scope.newitem.is_promo) {
                     if (!$scope.newitem.promo_price) {
                         $scope.newitem.promo_price = 0;
@@ -125,31 +141,32 @@
             // ADD ITEM
             // -----------------------
 
-            $scope.submitItemForm = function() {
-                if ($scope.addItemForm.$valid) {
-                    $scope.newitem.files = [];
-                    angular.forEach(postuploader.queue, function(file) {
-                        // sanitize file name
-                        var filename = file.file.name,
-                            value = 'uploads/items/' + $scope.newitem.code + '/' + filename;
-                        value = value.replace(/\s+/g, '_');
-                        $scope.updateFiles(value, true);
-
-                        // send item code with post request
-                        file.formData = [{
-                            code: $scope.newitem.code
-                        }];
-                    });
-                    console.log($scope.newitem);
-                    postuploader.uploadAll();
-                    var itemsRef = new Firebase(FIREBASE_ITEMS_URL);
-                    var itemRef = itemsRef.child($scope.newitem.code);
-                    var newitem = angular.copy($scope.newitem);
-                    itemRef.set(newitem);
-                }
+            $scope.submitItemForm = function () {
+                FilePoster.post($scope.files, $scope.newitem.code);
+                // if ($scope.addItemForm.$valid) {
+                //     $scope.newitem.files = [];
+                //     angular.forEach(postuploader.queue, function (file) {
+                //         // sanitize file name
+                //         var filename = file.file.name,
+                //             value = 'uploads/items/' + $scope.newitem.code + '/' + filename;
+                //         value = value.replace(/\s+/g, '_');
+                //         $scope.updateFiles(value, true);
+                //
+                //         // send item code with post request
+                //         file.formData = [{
+                //             code: $scope.newitem.code
+                //         }];
+                //     });
+                //     console.log($scope.newitem);
+                //     postuploader.uploadAll();
+                //     var itemsRef = new Firebase(FIREBASE_ITEMS_URL);
+                //     var itemRef = itemsRef.child($scope.newitem.code);
+                //     var newitem = angular.copy($scope.newitem);
+                //     itemRef.set(newitem);
+                // }
             };
 
-            $scope.updateFiles = function(value, reset) {
+            $scope.updateFiles = function (value, reset) {
                 if (!$scope.newitem.files.length) {
                     $scope.newitem.files = [];
                     $scope.newitem.files.push(value);
@@ -184,28 +201,28 @@
 
             uploader.filters.push({
                 name: 'imageFilter',
-                fn: function(item /*{File|FileLikeObject}*/ , options) {
+                fn: function (item /*{File|FileLikeObject}*/ , options) {
                     var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
                     return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
                 }
             });
 
             // METHODS
-            uploader.onAfterAddingAll = function(addedFileItems) {
+            uploader.onAfterAddingAll = function (addedFileItems) {
                 // console.info('onAfterAddingAll', addedFileItems);
             };
 
-            uploader.onBeforeUploadItem = function(item) {
+            uploader.onBeforeUploadItem = function (item) {
                 // console.info('onBeforeUploadItem', item);
             };
 
-            postuploader.onBeforeUploadItem = function(item) {
+            postuploader.onBeforeUploadItem = function (item) {
                 console.info('onBeforeUploadItem with postuploader', item);
             };
 
-            uploader.onCompleteAll = function() {
+            uploader.onCompleteAll = function () {
                 uploader.url = 'api/items/upload.php';
-                angular.forEach(uploader.queue, function(file) {
+                angular.forEach(uploader.queue, function (file) {
                     file.url = 'api/items/upload.php';
                     file.progress = 0;
                     file.isSuccess = false;
@@ -220,7 +237,7 @@
                 });
             };
 
-            uploader.onAfterAddingFile = function(fileItem) {
+            uploader.onAfterAddingFile = function (fileItem) {
                 var added = Date.now();
                 var rnd = '';
                 rnd = $filter('dakSerialize')(rnd);

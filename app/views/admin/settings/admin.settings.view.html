@@ -226,6 +226,22 @@
                         <input nv-file-select type="file" uploader="uploader" />
                     </md-button>
                     <span flex="40" class="department-filename">{{value.hero | dakFilename}}</span>
+                    <span flex></span>
+                    <md-input-container style="margin-bottom: 38px">
+                        <md-select ng-model="value.colspan">
+                            <md-option ng-repeat="size in ['1', '2', '3']" value="{{size}}">
+                                {{size}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <span style="margin-bottom: 16px">:</span>
+                    <md-input-container style="margin-bottom: 38px">
+                        <md-select ng-model="value.rowspan">
+                            <md-option ng-repeat="size in ['1', '2', '3']" value="{{size}}">
+                                {{size}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
                     <md-button aria-label="Remove grid tile" class="md-icon-button" ng-click="removeTile(key);" type="button">
                         <md-icon md-svg-src="assets/icons/ic_remove_circle_outline_24px.svg"></md-icon>
                     </md-button>
@@ -243,6 +259,22 @@
                     <input nv-file-select type="file" uploader="uploader" />
                 </md-button>
                 <span flex="40" class="department-filename">{{newtile.hero | dakFilename}}</span>
+                <span flex></span>
+                <md-input-container style="margin-bottom: 38px">
+                    <md-select ng-model="newtile.colspan">
+                        <md-option ng-repeat="size in ['1', '2', '3']" value="{{size}}">
+                            {{size}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <span style="margin-bottom: 16px">:</span>
+                <md-input-container style="margin-bottom: 38px">
+                    <md-select ng-model="newtile.rowspan">
+                        <md-option ng-repeat="size in ['1', '2', '3']" value="{{size}}">
+                            {{size}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
                 <md-button aria-label="Add grid tile" class="md-icon-button" ng-click="addTile(newtile)" type="button">
                     <md-icon md-svg-src="assets/icons/ic_add_circle_outline_24px.svg"></md-icon>
                 </md-button>

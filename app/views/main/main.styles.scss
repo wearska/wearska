@@ -1,0 +1,9 @@
+.store-grid-tile{
+    filter: grayscale(1);
+    cursor: pointer;
+    transition: filter 2s ease-in-out;
+    &:hover{
+        filter: grayscale(0);
+        transition: filter .2s ease-in-out;
+    }
+}
