@@ -5,6 +5,8 @@ bower_components/
 _dak/
 .tmp/
 build/
+deploy/
+deploy/*
 dist/
 resources/
 test
