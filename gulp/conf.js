@@ -16,6 +16,7 @@ exports.paths = {
   app: 'app',
   upl: 'uploads',
   dist: 'dist',
+  deploy: 'deploy',
   tmp: '.tmp',
   e2e: 'e2e'
 };

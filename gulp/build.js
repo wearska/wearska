@@ -34,9 +34,15 @@ gulp.task('html', ['inject', 'partials'], function() {
         addRootSlash: false
     };
 
-    var htmlFilter = $.filter('*.html' ,{restore: true});
-    var jsFilter = $.filter('**/*.js' ,{restore: true});
-    var cssFilter = $.filter('**/*.css' ,{restore: true});
+    var htmlFilter = $.filter('*.html', {
+        restore: true
+    });
+    var jsFilter = $.filter('**/*.js', {
+        restore: true
+    });
+    var cssFilter = $.filter('**/*.css', {
+        restore: true
+    });
     var assets;
 
     return gulp.src(path.join(conf.paths.root, 'index.html'))
@@ -114,11 +120,15 @@ gulp.task('jpgs', function() {
             path.join(conf.paths.dist, '/uploads/**/*.png')
         ])
         .pipe($.imagemin({
-                progressive: true,
-                svgoPlugins: [{removeViewBox: false}],
-                use: [imageminOptipng({optimizationLevel: 3})]
-            }))
-    .pipe(gulp.dest(path.join(conf.paths.dist, '/uploads/processed')));
+            progressive: true,
+            svgoPlugins: [{
+                removeViewBox: false
+            }],
+            use: [imageminOptipng({
+                optimizationLevel: 3
+            })]
+        }))
+        .pipe(gulp.dest(path.join(conf.paths.dist, '/uploads/processed')));
 });
 
 gulp.task('uploads', function() {
@@ -130,10 +140,14 @@ gulp.task('uploads', function() {
             path.join('uploads/**/*.png')
         ])
         .pipe($.imagemin({
-                progressive: true,
-                svgoPlugins: [{removeViewBox: false}],
-                use: [imageminOptipng({optimizationLevel: 3})]
-            }))
+            progressive: true,
+            svgoPlugins: [{
+                removeViewBox: false
+            }],
+            use: [imageminOptipng({
+                optimizationLevel: 3
+            })]
+        }))
         .pipe(gulp.dest(path.join(conf.paths.dist, '/uploads/')));
 });
 
@@ -142,3 +156,43 @@ gulp.task('clean', function(done) {
 });
 
 gulp.task('build', ['html', 'fonts', 'other', 'api', 'uploads', 'assets']);
+
+gulp.task('deploy-public', ['build'], function() {
+    // return gulp.src(['dist/*'], {read:false})
+    return gulp.src([
+            path.join(conf.paths.dist, '/**/*.*'),
+            path.join('!' + conf.paths.dist, 'index.html')
+        ])
+        .pipe(gulp.dest(path.join(conf.paths.deploy, '/public')))
+});
+
+gulp.task('deploy-views', ['deploy-public'], function() {
+    // return gulp.src(['dist/*'], {read:false})
+    return gulp.src([
+            path.join(conf.paths.dist, 'index.html')
+        ])
+        .pipe($.rename({
+            extname: ".ejs"
+        }))
+        .pipe(gulp.dest(path.join(conf.paths.deploy, '/views')))
+});
+
+gulp.task('git', ['deploy-views'], function() {
+
+    // return gulp.src([
+    //         path.join(conf.paths.deploy, '/')
+    //     ])
+    //     .pipe($.git.init(function(err) {
+    //         if (err) throw err;
+    //     }))
+});
+
+gulp.task('deploy', ['git']);
+
+//
+// gulp.task('deploy', ['empty'], function() {
+//     return gulp.src([
+//             path.join(conf.paths.dist, '/**/*')
+//         ])
+//         .pipe(gulp.dest(path.join(conf.paths.dist, '/moved')))
+// });
