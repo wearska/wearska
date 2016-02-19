@@ -22,6 +22,7 @@
 
             $scope.hasHero = false;
             $scope.$on('hero: on', function() {
+                dakScrollFactory.scrollTop = true;
                 $log.warn('hero is on');
                 if (dakScrollFactory.scrollTop) {
                     $scope.hasHero = true;

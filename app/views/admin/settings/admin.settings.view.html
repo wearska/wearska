@@ -228,7 +228,7 @@
                     <span flex="40" class="department-filename">{{value.hero | dakFilename}}</span>
                     <span flex></span>
                     <md-input-container style="margin-bottom: 38px">
-                        <md-select ng-model="value.colspan">
+                        <md-select ng-model="value.colspan" aria-label="select cell width">
                             <md-option ng-repeat="size in ['1', '2', '3']" value="{{size}}">
                                 {{size}}
                             </md-option>
@@ -236,7 +236,7 @@
                     </md-input-container>
                     <span style="margin-bottom: 16px">:</span>
                     <md-input-container style="margin-bottom: 38px">
-                        <md-select ng-model="value.rowspan">
+                        <md-select ng-model="value.rowspan" aria-label="select cell height">
                             <md-option ng-repeat="size in ['1', '2', '3']" value="{{size}}">
                                 {{size}}
                             </md-option>
@@ -261,7 +261,7 @@
                 <span flex="40" class="department-filename">{{newtile.hero | dakFilename}}</span>
                 <span flex></span>
                 <md-input-container style="margin-bottom: 38px">
-                    <md-select ng-model="newtile.colspan">
+                    <md-select ng-model="newtile.colspan" aria-label="select new cell width">
                         <md-option ng-repeat="size in ['1', '2', '3']" value="{{size}}">
                             {{size}}
                         </md-option>
@@ -269,7 +269,7 @@
                 </md-input-container>
                 <span style="margin-bottom: 16px">:</span>
                 <md-input-container style="margin-bottom: 38px">
-                    <md-select ng-model="newtile.rowspan">
+                    <md-select ng-model="newtile.rowspan" aria-label="select new cell height">
                         <md-option ng-repeat="size in ['1', '2', '3']" value="{{size}}">
                             {{size}}
                         </md-option>
